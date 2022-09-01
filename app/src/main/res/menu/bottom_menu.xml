@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Home"
+        android:id="@+id/Home_button"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:title="Library"
+        android:id="@+id/library_button"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="Profile"
+        android:id="@+id/Profile_button"
+        app:showAsAction="ifRoom"
+        />
+</menu>
