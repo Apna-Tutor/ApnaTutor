@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/appBar"><androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
-        app:menu="@menu/toolbar_menu"
-        android:background="#9CEDED">
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="@string/app_name" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Apna Tutor"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:id="@+id/app_nameid"/>
-</androidx.appcompat.widget.Toolbar>
-
-</com.google.android.material.appbar.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/frame_layout"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mainViewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_menu"
-        android:layout_below="@+id/appBar" />
+        android:layout_weight="1" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/mainTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        app:itemTextColor="@color/black"
-        app:menu="@menu/bottom_menu"
-        android:id="@+id/bottom_menu"
-       />
+        android:elevation="8dp"
+        app:tabIndicatorGravity="top">
 
-</RelativeLayout>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_home" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_subscriptions" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_profile" />
+    </com.google.android.material.tabs.TabLayout>
+
+</LinearLayout>

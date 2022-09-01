@@ -1,4 +1,4 @@
-package com.debuggers.apna_tutor.fragments;
+package com.debuggers.apna_tutor.Fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
