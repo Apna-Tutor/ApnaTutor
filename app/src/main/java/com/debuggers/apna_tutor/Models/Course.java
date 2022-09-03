@@ -13,14 +13,14 @@ public class Course {
     private ArrayList<String> followedBy;
     private HashMap<String, String> leaderBoard;
 
-    public Course(String author, String title, String description, String thumbnail, ArrayList<Video> videos, ArrayList<String> followedBy, HashMap<String, String> leaderBoard) {
+    public Course(String author, String title, String description, String thumbnail) {
         this.author = author;
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
-        this.videos = videos;
-        this.followedBy = followedBy;
-        this.leaderBoard = leaderBoard;
+        this.videos = new ArrayList<>();
+        this.followedBy = new ArrayList<>();
+        this.leaderBoard = new HashMap<>();
     }
 
     public String get_id() {
