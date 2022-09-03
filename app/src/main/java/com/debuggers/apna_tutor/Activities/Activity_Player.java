@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.debuggers.apna_tutor.R;
+
 public class Activity_Player extends AppCompatActivity {
 
     @Override
