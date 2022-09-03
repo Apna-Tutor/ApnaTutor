@@ -7,16 +7,16 @@ public class Comment {
     private String _id;
     private String userId;
     private String comment;
-    private Date date;
+    private Long date;
     private ArrayList<String> likedBy;
     private ArrayList<Comment> replies;
 
-    public Comment(String _id, String userId, String comment, Date date, ArrayList<String> likedBy, ArrayList<Comment> replies) {
+    public Comment(String userId, String comment) {
         this.userId = userId;
         this.comment = comment;
-        this.date = date;
-        this.likedBy = likedBy;
-        this.replies = replies;
+        this.date = System.currentTimeMillis();
+        this.likedBy = new ArrayList<>();
+        this.replies = new ArrayList<>();
     }
 
     public String get_id() {
@@ -43,11 +43,11 @@ public class Comment {
         this.comment = comment;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 

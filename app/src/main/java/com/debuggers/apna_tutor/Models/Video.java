@@ -9,24 +9,24 @@ public class Video {
     private String description;
     private String thumbnail;
     private String videoUrl;
-    private Date date;
+    private Long date;
     private ArrayList<String> likedBy;
     private ArrayList<String> viewedBy;
     private ArrayList<Comment> comments;
     private ArrayList<Note> notes;
     private ArrayList<Quiz> quiz;
 
-    public Video(String _id, String title, String description, String thumbnail, String videoUrl, Date date, ArrayList<String> likedBy, ArrayList<String> viewedBy, ArrayList<Comment> comments, ArrayList<Note> notes, ArrayList<Quiz> quiz) {
+    public Video(String title, String description, String thumbnail, String videoUrl) {
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
         this.videoUrl = videoUrl;
-        this.date = date;
-        this.likedBy = likedBy;
-        this.viewedBy = viewedBy;
-        this.comments = comments;
-        this.notes = notes;
-        this.quiz = quiz;
+        this.date = System.currentTimeMillis();
+        this.likedBy = new ArrayList<>();
+        this.viewedBy = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.notes = new ArrayList<>();
+        this.quiz = new ArrayList<>();
     }
 
     public String get_id() {
@@ -69,11 +69,11 @@ public class Video {
         this.videoUrl = videoUrl;
     }
 
-    public Date getDate() {
+    public Long getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Long date) {
         this.date = date;
     }
 
