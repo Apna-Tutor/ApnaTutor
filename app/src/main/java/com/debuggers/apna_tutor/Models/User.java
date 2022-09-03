@@ -1,18 +1,30 @@
-package com.debuggers.apna_tutor.Model;
+package com.debuggers.apna_tutor.Models;
 
 public class User {
+    public static final String USER = "USER";
+    public static final String TEACHER = "TEACHER";
+
+    private String _id;
     private String name;
     private String email;
     private String avatar;
     private String password;
     private String type;
 
-    public User(String name, String email, String avatar, String password, String type) {
+    public User(String name, String email, String avatar, String password) {
         this.name = name;
         this.email = email;
         this.avatar = avatar;
         this.password = password;
-        this.type = type;
+        this.type = USER;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
     public String getName() {
