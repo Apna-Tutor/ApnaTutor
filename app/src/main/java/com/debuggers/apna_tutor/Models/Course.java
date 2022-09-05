@@ -2,7 +2,9 @@ package com.debuggers.apna_tutor.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.parceler.Parcel;
 
+@Parcel
 public class Course {
     private String _id;
     private String author;

@@ -1,5 +1,8 @@
 package com.debuggers.apna_tutor.Models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Note {
     private String _id;
     private String userId;

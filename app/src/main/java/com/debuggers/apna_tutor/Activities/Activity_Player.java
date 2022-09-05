@@ -5,12 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.debuggers.apna_tutor.R;
+import com.debuggers.apna_tutor.databinding.ActivityPlayerBinding;
 
 public class Activity_Player extends AppCompatActivity {
+    ActivityPlayerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player);
+        binding = ActivityPlayerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+
     }
 }
