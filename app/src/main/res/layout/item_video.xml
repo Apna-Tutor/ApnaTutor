@@ -1,52 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="8dp">
 
-    <ImageView
-        android:id="@+id/thumbnail"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@color/grey"
-        android:minHeight="160dp" />
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/thumbnail"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
+        android:layout_weight="1">
 
         <ImageView
-            android:id="@+id/userProfileImage"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:id="@+id/videoThumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_launcher_background" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/videoName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
-            android:text="Video Playlist Topic"
-            android:textSize="20dp"
-            android:id="@+id/video_topicId"/>
+            android:layout_marginBottom="4dp"
+            android:text="Video Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:layout_conversion_absoluteHeight="33dp"
+            tools:layout_conversion_absoluteWidth="300dp"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="26dp" />
 
+        <TextView
+            android:id="@+id/uploadDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="Upload Date"
+            android:textSize="10sp" />
 
-
-
-
+        <TextView
+            android:id="@+id/viewersCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Viewers Count"
+            android:textSize="10sp" />
 
     </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>
