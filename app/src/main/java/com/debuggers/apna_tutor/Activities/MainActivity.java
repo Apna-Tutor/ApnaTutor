@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-// Quiz
-// Video Layout
-// Leaderboard
+// Quiz -- done
+// Video Layout -- done
+// Leaderboard -- done
 // Teacher upload -- Pritam design
-//Library UI
+//Library UI 
 

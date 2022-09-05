@@ -5,45 +5,159 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.Activity_Player"
-    android:nestedScrollingEnabled="false">
+    android:nestedScrollingEnabled="false"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-
+        android:layout_marginTop="8dp"
         >
-        <VideoView
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/ep_video_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/player_View"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:show_timeout="3000"
+            app:hide_on_touch="true"
             />
-        <SeekBar
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="All the description of the video will appear here"
-            android:textSize="15dp"
-            android:textStyle="bold"
+            android:text="Descrption of the video will be here"
+            android:textSize="18dp"
+            android:padding="8dp"
+            android:id="@+id/descrption_videoTitle"
             />
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="5dp">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 Views"
+                android:textSize="12dp"
+                android:layout_marginLeft="6dp"
+                android:id="@+id/views_count"
+                android:padding="5dp"
+                />
 
             <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
+                android:id="@+id/date_ofUpload"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Comments(100)"/>
+                android:layout_marginLeft="8dp"
+                android:layout_toEndOf="@+id/views_count"
+                android:includeFontPadding="false"
+                android:text="Date"
+                android:textSize="12dp"
+                android:padding="5dp"/>
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="400dp"
+            android:layout_height="67dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:padding="7dp">
+
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="88dp"
+                android:layout_height="51dp"
+                android:src="@drawable/like"/>
+
+            <ImageView
+                android:id="@+id/share_video"
+                android:layout_width="88dp"
+                android:layout_height="51dp"
+
+                android:src="@drawable/share" />
+
+            <ImageView
+                android:id="@+id/download_video"
+                android:layout_width="88dp"
+                android:layout_height="51dp"
+                android:src="@drawable/download" />
+
+            <ImageView
+                android:id="@+id/save"
+                android:layout_width="88dp"
+                android:layout_height="51dp"
+                android:src="@drawable/save" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:orientation="horizontal"
+            android:weightSum="4"
+            >
+
+            <TextView
+                android:id="@+id/no_ofLikes"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="1000"
+                android:layout_marginStart="20dp"/>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_profile"
+                android:id="@+id/teacher_dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name of Teacher"
+                android:layout_marginStart="@android:dimen/app_icon_size"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No of Comments"
+            android:textSize="12dp"
+            />
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
 
 
 
 
     </LinearLayout>
+
+
 </ScrollView>
