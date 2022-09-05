@@ -1,67 +1,66 @@
 package com.debuggers.apna_tutor.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager2.widget.ViewPager2;
+import static com.debuggers.apna_tutor.App.ME;
+import static com.debuggers.apna_tutor.App.PREFERENCES;
+import static com.debuggers.apna_tutor.App.QUEUE;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.os.Handler;
+import android.widget.Toast;
 
-import com.debuggers.apna_tutor.Adapters.PagerAdapter;
-import com.debuggers.apna_tutor.Fragments.HomeFragment;
-import com.debuggers.apna_tutor.Fragments.LibraryFragment;
-import com.debuggers.apna_tutor.Fragments.ProfileFragment;
-import com.debuggers.apna_tutor.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.debuggers.apna_tutor.Helpers.API;
+import com.debuggers.apna_tutor.Models.User;
 import com.debuggers.apna_tutor.databinding.ActivityMainBinding;
-import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.mainToolbar);// down 3 option
 
-        ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
-        fragments.add(new LibraryFragment());
-        fragments.add(new ProfileFragment());
-
-        binding.mainTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                binding.mainViewpager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-        binding.mainViewpager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                binding.mainTabs.selectTab(binding.mainTabs.getTabAt(position));
-            }
-        });
-        binding.mainViewpager.setAdapter(new PagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
-        binding.mainViewpager.setOffscreenPageLimit(fragments.size());
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(@NonNull Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
-        return super.onPrepareOptionsMenu(menu);
+        if (PREFERENCES.contains("EMAIL") && PREFERENCES.contains("PASSWORD")) {
+            QUEUE.add(new JsonObjectRequest(Request.Method.POST, API.LOGIN, null, response -> {
+                ME = new Gson().fromJson(response.toString(), User.class);
+                if (ME.getType().equals(User.TEACHER)) {
+                    startActivity(new Intent(this, MainTeacherActivity.class));
+                } else {
+                    startActivity(new Intent(this, MainStudentsActivity.class));
+                }
+                finish();
+            }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show()) {
+                @Override
+                public byte[] getBody() {
+                    Map<String, String> body = new HashMap<>();
+                    body.put("email", PREFERENCES.getString("EMAIL", ""));
+                    body.put("password", PREFERENCES.getString("PASSWORD", ""));
+                    return new JSONObject(body).toString().getBytes(StandardCharsets.UTF_8);
+                }
+            }).setRetryPolicy(new DefaultRetryPolicy());
+        } else {
+            new Handler().postDelayed(() -> startActivity(new Intent(this, AuthenticationActivity.class)), 2000);
+        }
     }
 }
+
+// Quiz
+// Video Layout
+// Leaderboard
+// Teacher upload -- Pritam design
+//Library UI
+

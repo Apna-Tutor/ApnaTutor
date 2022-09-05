@@ -17,7 +17,16 @@
         android:theme="@style/Theme.Apna_Tutor"
         tools:targetApi="31">
         <activity
-            android:name=".Activity_Player"
+            android:name=".Activities.Activity_Player"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.MainStudentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.MainTeacherActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.AuthenticationActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"

@@ -1,5 +1,10 @@
 package com.debuggers.apna_tutor.Helpers;
 
+import com.android.volley.VolleyError;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+
 public class API {
     private static final String BASE_URL = "";
 
@@ -22,4 +27,23 @@ public class API {
     public static final String COMMENT_ADD = String.format("%s/courses/add/comment", BASE_URL);
     public static final String QUIZ_ADD = String.format("%s/courses/add/quiz", BASE_URL);
     public static final String NOTES_ADD = String.format("%s/courses/add/notes", BASE_URL);
+
+    public static String getQuery(Map<String, String> params) {
+        StringBuilder queryBuilder = new StringBuilder();
+        queryBuilder.append("?");
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            queryBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
+        }
+        return queryBuilder.deleteCharAt(queryBuilder.length() - 1).toString();
+    }
+
+    //            return new JSONObject(new String(error.networkResponse.data, StandardCharsets.UTF_8)).getJSONArray("errors").getJSONObject(0).getString("message");
+    public static String parseVolleyError(VolleyError error) {
+        try {
+            return new String(error.networkResponse.data, StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }
