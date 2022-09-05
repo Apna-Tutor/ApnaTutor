@@ -1,5 +1,7 @@
 package com.debuggers.apna_tutor.Fragments;
 
+import static com.debuggers.apna_tutor.App.ME;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +31,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         FragmentProfileBinding binding = FragmentProfileBinding.inflate(inflater, container, false);
+        binding.userName.setText(ME.getName());
+        binding.userEmail.setText(ME.getEmail());
+        binding.userType.setText(ME.getType());
+
 
         return binding.getRoot();
     }
