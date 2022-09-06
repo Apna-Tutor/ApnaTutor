@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Apna_Tutor"
         tools:targetApi="31">
         <activity
+            android:name=".PlaylistActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity_Leaderboard"
             android:exported="false" />
         <activity
