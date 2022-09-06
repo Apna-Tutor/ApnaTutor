@@ -1,5 +1,8 @@
 package com.debuggers.apna_tutor.Models;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
     public static final String USER = "USER";
     public static final String TEACHER = "TEACHER";

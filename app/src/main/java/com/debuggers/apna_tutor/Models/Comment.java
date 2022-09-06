@@ -1,8 +1,10 @@
 package com.debuggers.apna_tutor.Models;
 
-import java.util.ArrayList;
-import java.util.Date;
 
+import java.util.ArrayList;
+import org.parceler.Parcel;
+
+@Parcel
 public class Comment {
     private String _id;
     private String userId;

@@ -1,163 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.Activity_Player"
     android:nestedScrollingEnabled="false"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    tools:context=".Activities.Activity_Player">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="8dp"
-        >
+        android:layout_height="wrap_content">
+
         <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/ep_video_view"
+            android:id="@+id/videoView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="0dp"
+            android:keepScreenOn="true"
+            app:hide_on_touch="true"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:show_timeout="3000"
-            app:hide_on_touch="true"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descrption of the video will be here"
-            android:textSize="18dp"
-            android:padding="8dp"
-            android:id="@+id/descrption_videoTitle"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="6dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="100 Views"
-                android:textSize="12dp"
-                android:layout_marginLeft="6dp"
-                android:id="@+id/views_count"
-                android:padding="5dp"
-                />
+            app:show_timeout="3000" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/date_ofUpload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@+id/views_count"
-                android:includeFontPadding="false"
-                android:text="Date"
-                android:textSize="12dp"
-                android:padding="5dp"/>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="400dp"
-            android:layout_height="67dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:padding="7dp">
-
-            <ImageView
-                android:id="@+id/like"
-                android:layout_width="88dp"
-                android:layout_height="51dp"
-                android:src="@drawable/like"/>
-
-            <ImageView
-                android:id="@+id/share_video"
-                android:layout_width="88dp"
-                android:layout_height="51dp"
-
-                android:src="@drawable/share" />
-
-            <ImageView
-                android:id="@+id/download_video"
-                android:layout_width="88dp"
-                android:layout_height="51dp"
-                android:src="@drawable/download" />
-
-            <ImageView
-                android:id="@+id/save"
-                android:layout_width="88dp"
-                android:layout_height="51dp"
-                android:src="@drawable/save" />
-        </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            >
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
 
             <TextView
-                android:id="@+id/no_ofLikes"
-                android:layout_width="1dp"
+                android:id="@+id/videoTitle"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="1000"
-                android:layout_marginStart="20dp"/>
+                android:layout_marginBottom="4dp"
+                android:text="Name of the video will be here"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:padding="5dp"
-            >
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_profile"
-                android:id="@+id/teacher_dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name of Teacher"
-                android:layout_marginStart="@android:dimen/app_icon_size"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                />
-
-        </RelativeLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No of Comments"
-            android:textSize="12dp"
-            />
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/authorName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:text="Name of Teacher"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/views_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100 Views"
+                            android:textSize="12dp" />
 
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="5dp"
+                            android:layout_height="5dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            app:cardBackgroundColor="@android:color/darker_gray"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="0dp" />
 
+                        <TextView
+                            android:id="@+id/date_ofUpload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:includeFontPadding="false"
+                            android:text="Date"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/likeBtn"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:padding="6dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_like_outlined"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <EditText
+                android:id="@+id/editTextTextPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/input_bg"
+                android:ems="10"
+                android:hint="Add a comment..."
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:textSize="16sp"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/post"
+                style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:minWidth="0dp"
+                app:cardBackgroundColor="?attr/colorPrimary"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="0dp"
+                app:contentPadding="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:minWidth="0dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_send"
+                    app:tint="?attr/colorOnPrimary" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
     </LinearLayout>
 
 
-</ScrollView>
+</LinearLayout>

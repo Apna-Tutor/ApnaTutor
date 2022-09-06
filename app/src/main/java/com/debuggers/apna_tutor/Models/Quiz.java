@@ -2,6 +2,9 @@ package com.debuggers.apna_tutor.Models;
 
 import java.util.ArrayList;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Quiz {
     private String _id;
     private String question;

@@ -79,10 +79,10 @@
                     android:textStyle="italic" />
 
                 <TextView
-                    android:id="@+id/userPhone"
+                    android:id="@+id/userType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Phone of User"
+                    android:text="Type of User"
                     android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>
