@@ -15,5 +15,6 @@ public class PlaylistActivity extends AppCompatActivity {
         binding = ActivityPlaylistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
     }
 }

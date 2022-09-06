@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:text="Your Questions will be shown here hue hue hue"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <RadioGroup
