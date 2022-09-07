@@ -23,16 +23,16 @@ import com.debuggers.apna_tutor.Adapters.CourseAdapter;
 import com.debuggers.apna_tutor.Helpers.API;
 import com.debuggers.apna_tutor.Models.Course;
 import com.debuggers.apna_tutor.R;
-import com.debuggers.apna_tutor.databinding.FragmentLibraryBinding;
+import com.debuggers.apna_tutor.databinding.FragmentHomeBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-public class LibraryFragment extends Fragment {
-    FragmentLibraryBinding binding;
+public class TeacherHomeFragment extends Fragment {
+    FragmentHomeBinding binding;
 
-    public LibraryFragment() {
+    public TeacherHomeFragment() {
         // Required empty public constructor
     }
 
@@ -44,11 +44,10 @@ public class LibraryFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentLibraryBinding.inflate(inflater, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
 
         updateUi();
-        binding.libraryRefresher.setOnRefreshListener(this::updateUi);
+        binding.homeRefresher.setOnRefreshListener(this::updateUi);
 
         return binding.getRoot();
     }
@@ -66,23 +65,23 @@ public class LibraryFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (binding.libraryRV.getAdapter() != null) ((CourseAdapter) binding.libraryRV.getAdapter()).getFilter().filter(newText);
+                if (binding.homeRV.getAdapter() != null) ((CourseAdapter) binding.homeRV.getAdapter()).getFilter().filter(newText);
                 return false;
             }
         });
     }
 
     private void updateUi() {
-        binding.libraryRefresher.setRefreshing(true);
-        QUEUE.add(new JsonObjectRequest(Request.Method.GET, API.COURSES_FOLLOWED, null, response -> {
+        binding.homeRefresher.setRefreshing(true);
+        QUEUE.add(new JsonObjectRequest(Request.Method.GET, API.COURSES_UPLOADED, null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
-            binding.libraryRV.setLayoutManager(new LinearLayoutManager(requireContext()));
-            binding.libraryRV.setAdapter(new CourseAdapter(courses, (course, position) -> {
+            binding.homeRV.setLayoutManager(new LinearLayoutManager(requireContext()));
+            binding.homeRV.setAdapter(new CourseAdapter(courses, (course, position) -> {
 
             }));
-            binding.libraryRefresher.setRefreshing(false);
+            binding.homeRefresher.setRefreshing(false);
         }, error -> {
-            binding.libraryRefresher.setRefreshing(false);
+            binding.homeRefresher.setRefreshing(false);
             Toast.makeText(requireContext(), API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
         })).setRetryPolicy(new DefaultRetryPolicy());
     }

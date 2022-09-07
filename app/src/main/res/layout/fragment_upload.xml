@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".Fragments.UploadFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -160,27 +161,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:layout_weight="1"
+                android:padding="8dp"
                 android:text="Quiz"
                 android:textSize="20dp"
-                android:textStyle="italic"
-                />
+                android:textStyle="italic" />
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add Quiz"
                 android:layout_marginStart="70dp"
-                />
+                android:layout_weight="1"
+                android:text="Add Quiz" />
 
         </LinearLayout>
     </LinearLayout>

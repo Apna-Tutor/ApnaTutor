@@ -14,6 +14,9 @@ public class User {
     private String password;
     private String type;
 
+    public User() {
+    }
+
     public User(String name, String email, String avatar, String password) {
         this.name = name;
         this.email = email;

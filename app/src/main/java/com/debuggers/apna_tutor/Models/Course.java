@@ -15,6 +15,9 @@ public class Course {
     private ArrayList<String> followedBy;
     private HashMap<String, String> leaderBoard;
 
+    public Course() {
+    }
+
     public Course(String author, String title, String description, String thumbnail) {
         this.author = author;
         this.title = title;

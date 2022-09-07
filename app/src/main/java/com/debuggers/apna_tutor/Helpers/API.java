@@ -19,6 +19,7 @@ public class API {
     public static final String COURSES_ALL = String.format("%s/courses/all", BASE_URL);
     public static final String COURSES_IN = String.format("%s/courses/in", BASE_URL);
     public static final String COURSES_FOLLOWED = String.format("%s/courses/followed", BASE_URL);
+    public static final String COURSES_UPLOADED = String.format("%s/courses/uploaded", BASE_URL);
     public static final String COURSE_ADD = String.format("%s/courses/add/course", BASE_URL);
     public static final String COURSE_UPDATE = String.format("%s/courses/update", BASE_URL);
     public static final String COURSE_DELETE = String.format("%s/courses/delete", BASE_URL);

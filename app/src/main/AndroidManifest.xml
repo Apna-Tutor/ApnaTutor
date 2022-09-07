@@ -26,7 +26,7 @@
             android:name=".activity_quiz"
             android:exported="false" />
         <activity
-            android:name=".Activities.Activity_Player"
+            android:name=".Activities.ActivityPlayer"
             android:exported="false" />
         <activity
             android:name=".Activities.MainStudentsActivity"

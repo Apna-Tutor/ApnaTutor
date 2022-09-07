@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.debuggers.apna_tutor.R;
 
-public class activity_Leaderboard extends AppCompatActivity {
+public class ActivityLeaderboard extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

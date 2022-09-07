@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.debuggers.apna_tutor.Adapters.PagerAdapter;
-import com.debuggers.apna_tutor.Fragments.HomeFragment;
+import com.debuggers.apna_tutor.Fragments.StudentHomeFragment;
 import com.debuggers.apna_tutor.Fragments.LibraryFragment;
 import com.debuggers.apna_tutor.Fragments.ProfileFragment;
 import com.debuggers.apna_tutor.R;
@@ -28,7 +28,7 @@ public class MainStudentsActivity extends AppCompatActivity {
         setSupportActionBar(binding.mainToolbar);// down 3 option
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
+        fragments.add(new StudentHomeFragment());
         fragments.add(new LibraryFragment());
         fragments.add(new ProfileFragment());
 

@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.debuggers.apna_tutor.Adapters.PagerAdapter;
-import com.debuggers.apna_tutor.Fragments.HomeFragment;
 import com.debuggers.apna_tutor.Fragments.LibraryFragment;
 import com.debuggers.apna_tutor.Fragments.ProfileFragment;
+import com.debuggers.apna_tutor.Fragments.TeacherHomeFragment;
+import com.debuggers.apna_tutor.Fragments.UploadFragment;
 import com.debuggers.apna_tutor.R;
-import com.debuggers.apna_tutor.databinding.ActivityStudentsMainBinding;
 import com.debuggers.apna_tutor.databinding.ActivityTeacherMainBinding;
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,8 +29,8 @@ public class MainTeacherActivity extends AppCompatActivity {
         setSupportActionBar(binding.mainToolbar);// down 3 option
 
         ArrayList<Fragment> fragments = new ArrayList<>();
-        fragments.add(new HomeFragment());
-        fragments.add(new LibraryFragment());
+        fragments.add(new TeacherHomeFragment());
+        fragments.add(new UploadFragment());
         fragments.add(new ProfileFragment());
 
         binding.mainTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

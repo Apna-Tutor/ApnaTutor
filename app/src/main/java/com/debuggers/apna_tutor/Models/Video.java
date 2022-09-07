@@ -19,6 +19,9 @@ public class Video {
     private ArrayList<Note> notes;
     private ArrayList<Quiz> quiz;
 
+    public Video() {
+    }
+
     public Video(String title, String description, String thumbnail, String videoUrl) {
         this.title = title;
         this.description = description;

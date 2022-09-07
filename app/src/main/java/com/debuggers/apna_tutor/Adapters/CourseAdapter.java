@@ -47,7 +47,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
     }
 
     public interface setOnClickListener {
-        void OnClickListener(Course hall, int position);
+        void OnClickListener(Course course, int position);
     }
 
     @Override

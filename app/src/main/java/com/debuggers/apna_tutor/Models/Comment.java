@@ -2,6 +2,7 @@ package com.debuggers.apna_tutor.Models;
 
 
 import java.util.ArrayList;
+
 import org.parceler.Parcel;
 
 @Parcel
@@ -12,6 +13,9 @@ public class Comment {
     private Long date;
     private ArrayList<String> likedBy;
     private ArrayList<Comment> replies;
+
+    public Comment() {
+    }
 
     public Comment(String userId, String comment) {
         this.userId = userId;
