@@ -1,7 +1,9 @@
 package com.debuggers.apna_tutor.Fragments;
 
 import static com.debuggers.apna_tutor.App.ME;
+import static com.debuggers.apna_tutor.App.PREFERENCES;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.debuggers.apna_tutor.Activities.MainActivity;
 import com.debuggers.apna_tutor.R;
 import com.debuggers.apna_tutor.databinding.FragmentProfileBinding;
 
@@ -35,6 +38,17 @@ public class ProfileFragment extends Fragment {
         binding.userEmail.setText(ME.getEmail());
         binding.userType.setText(ME.getType());
 
+        binding.settingsBtn.setOnClickListener(v-> {
+
+        });
+        binding.faqsBtn.setOnClickListener(v-> {
+
+        });
+        binding.logoutBtn.setOnClickListener(v-> {
+            PREFERENCES.edit().remove("EMAIL").remove("PASSWORD").apply();
+            startActivity(new Intent(requireContext(), MainActivity.class));
+            requireActivity().finishAffinity();
+        });
 
         return binding.getRoot();
     }
