@@ -38,13 +38,12 @@ public class API {
         return queryBuilder.deleteCharAt(queryBuilder.length() - 1).toString();
     }
 
-    //            return new JSONObject(new String(error.networkResponse.data, StandardCharsets.UTF_8)).getJSONArray("errors").getJSONObject(0).getString("message");
     public static String parseVolleyError(VolleyError error) {
         try {
             return new String(error.networkResponse.data, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
-            return e.getMessage();
+            return "Something went wrong!";
         }
     }
 }
