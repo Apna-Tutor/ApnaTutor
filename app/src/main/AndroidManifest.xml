@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.debuggers.apna_tutor">
+    package="com.debuggers.apnatutor">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="com.debuggers.apnatutor.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,13 +17,13 @@
         android:theme="@style/Theme.Apna_Tutor"
         tools:targetApi="31">
         <activity
-            android:name=".PlaylistActivity"
+            android:name=".Activities.PlaylistActivity"
             android:exported="false" />
         <activity
-            android:name=".activity_Leaderboard"
+            android:name=".Activities.ActivityLeaderboard"
             android:exported="false" />
         <activity
-            android:name=".activity_quiz"
+            android:name=".Activities.ActivityQuiz"
             android:exported="false" />
         <activity
             android:name=".Activities.ActivityPlayer"

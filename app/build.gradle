@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.debuggers.apna_tutor"
+        applicationId "com.debuggers.apnatutor"
         minSdk 24
         targetSdk 32
         versionCode 1
