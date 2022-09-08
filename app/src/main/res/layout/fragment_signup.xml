@@ -23,7 +23,7 @@
             android:background="@drawable/input_bg"
             android:ems="10"
             android:hint="Enter name"
-            android:inputType="textPersonName"
+            android:inputType="textPersonName|textCapWords"
             android:minHeight="48dp"
             tools:ignore="HardcodedText" />
 

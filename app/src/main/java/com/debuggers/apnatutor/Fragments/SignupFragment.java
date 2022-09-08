@@ -69,15 +69,8 @@ public class SignupFragment extends Fragment {
             }) {
                 @Override
                 public byte[] getBody() {
-                    JSONObject body = new JSONObject();
-                    try {
-                        body.put("name", binding.name.getText().toString().trim());
-                        body.put("email", binding.email.getText().toString().trim());
-                        body.put("password", binding.pass1.getText().toString().trim());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return body.toString().getBytes(StandardCharsets.UTF_8);
+                    User user = new User(binding.name.getText().toString().trim(), binding.email.getText().toString().trim(), null, binding.pass1.getText().toString().trim());
+                    return new Gson().toJson(user).getBytes(StandardCharsets.UTF_8);
                 }
             }).setRetryPolicy(new DefaultRetryPolicy());
         });
