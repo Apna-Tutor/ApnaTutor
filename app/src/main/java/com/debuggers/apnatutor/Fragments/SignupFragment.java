@@ -57,14 +57,17 @@ public class SignupFragment extends Fragment {
                 return;
             }
 
+            binding.signup.setEnabled(false);
             QUEUE.add(new JsonObjectRequest(Request.Method.POST, API.SIGNUP, null, response -> {
                 ME = new Gson().fromJson(response.toString(), User.class);
                 if (binding.remember.isChecked()) {
                     PREFERENCES.edit().putString("EMAIL", ME.getEmail()).putString("PASSWORD", ME.getPassword()).apply();
                 }
+                binding.signup.setEnabled(true);
                 startActivity(new Intent(requireContext(), MainStudentsActivity.class));
                 requireActivity().finish();
             }, error -> {
+                binding.signup.setEnabled(true);
                 Toast.makeText(requireContext(), API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
             }) {
                 @Override

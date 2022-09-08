@@ -49,11 +49,13 @@ public class LoginFragment extends Fragment {
                 return;
             }
 
+            binding.login.setEnabled(false);
             QUEUE.add(new JsonObjectRequest(Request.Method.POST, API.LOGIN, null, response -> {
                 ME = new Gson().fromJson(response.toString(), User.class);
                 if (binding.remember.isChecked()) {
                     PREFERENCES.edit().putString("EMAIL", ME.getEmail()).putString("PASSWORD", ME.getPassword()).apply();
                 }
+                binding.login.setEnabled(true);
                 if (ME.getType().equals(User.TEACHER)) {
                     startActivity(new Intent(requireActivity(), MainTeacherActivity.class));
                 } else {
@@ -61,6 +63,7 @@ public class LoginFragment extends Fragment {
                 }
                 requireActivity().finish();
             }, error -> {
+                binding.login.setEnabled(true);
                 Toast.makeText(requireContext(), API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
             }) {
                 @Override
