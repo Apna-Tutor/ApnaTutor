@@ -2,6 +2,8 @@ package com.debuggers.apnatutor.Models;
 
 import org.parceler.Parcel;
 
+import java.util.Objects;
+
 @Parcel
 public class Note {
     private String _id;
@@ -58,5 +60,18 @@ public class Note {
 
     public void setTimeStamp(int timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return _id.equals(note._id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_id);
     }
 }

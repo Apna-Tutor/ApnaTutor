@@ -2,6 +2,8 @@ package com.debuggers.apnatutor.Models;
 
 import org.parceler.Parcel;
 
+import java.util.Objects;
+
 @Parcel
 public class User {
     public static final String USER = "USER";
@@ -71,5 +73,18 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return _id.equals(user._id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_id);
     }
 }

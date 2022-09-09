@@ -2,6 +2,7 @@ package com.debuggers.apnatutor.Models;
 
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.parceler.Parcel;
 
@@ -71,5 +72,18 @@ public class Comment {
 
     public void setReplies(ArrayList<Comment> replies) {
         this.replies = replies;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return _id.equals(comment._id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_id);
     }
 }
