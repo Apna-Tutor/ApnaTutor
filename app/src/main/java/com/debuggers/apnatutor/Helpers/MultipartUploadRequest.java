@@ -216,6 +216,7 @@ public class MultipartUploadRequest extends Request<String> {
          * @param name     label of data
          * @param inputStream     input stream
          * @param mimeType mime data like "image/jpeg"
+         * @throws IOException
          */
         public DataPart(String name, InputStream inputStream, String mimeType) throws IOException {
             fileName = name;
