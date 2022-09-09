@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Parcel
 public class User {
-    public static final String USER = "USER";
+    public static final String STUDENT = "STUDENT";
     public static final String TEACHER = "TEACHER";
 
     private String _id;
@@ -24,7 +24,7 @@ public class User {
         this.email = email;
         this.avatar = avatar;
         this.password = password;
-        this.type = USER;
+        this.type = STUDENT;
     }
 
     public String get_id() {

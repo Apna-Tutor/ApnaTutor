@@ -1,7 +1,7 @@
 package com.debuggers.apnatutor.Models;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 import org.parceler.Parcel;
 
@@ -9,13 +9,13 @@ import org.parceler.Parcel;
 public class Quiz {
     private String _id;
     private String question;
-    private ArrayList<String> options;
+    private List<String> options;
     private String answer;
 
     public Quiz() {
     }
 
-    public Quiz(String question, ArrayList<String> options, String answer) {
+    public Quiz(String question, List<String> options, String answer) {
         this.question = question;
         this.options = options;
         this.answer = answer;
@@ -37,11 +37,11 @@ public class Quiz {
         this.question = question;
     }
 
-    public ArrayList<String> getOptions() {
+    public List<String> getOptions() {
         return options;
     }
 
-    public void setOptions(ArrayList<String> options) {
+    public void setOptions(List<String> options) {
         this.options = options;
     }
 
@@ -51,18 +51,5 @@ public class Quiz {
 
     public void setAnswer(String answer) {
         this.answer = answer;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Quiz quiz = (Quiz) o;
-        return _id.equals(quiz._id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(_id);
     }
 }

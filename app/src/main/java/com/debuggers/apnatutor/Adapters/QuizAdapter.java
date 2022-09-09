@@ -8,29 +8,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.debuggers.apnatutor.Models.Course;
 import com.debuggers.apnatutor.Models.Quiz;
+import com.debuggers.apnatutor.databinding.ItemQuizQuestionBinding;
 import com.debuggers.apnatutor.databinding.ItemVideoBinding;
 
 import java.util.List;
 
-public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.VideoViewHolder> {
-    private final setOnClickListener listener;
+public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder> {
     private final List<Quiz> quizzes;
 
-    public QuizAdapter(List<Quiz> quizzes, setOnClickListener listener) {
+    public QuizAdapter(List<Quiz> quizzes) {
         this.quizzes = quizzes;
-        this.listener = listener;
     }
 
     @NonNull
     @Override
-    public VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VideoViewHolder(ItemVideoBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    public QuizViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new QuizViewHolder(ItemQuizQuestionBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         Quiz quiz = quizzes.get(position);
-
+        holder.binding.quizQuestion.setText(quiz.getQuestion());
+        holder.binding.optionA.setText(quiz.getOptions().get(0));
+        holder.binding.optionB.setText(quiz.getOptions().get(1));
+        holder.binding.optionC.setText(quiz.getOptions().get(2));
+        holder.binding.optionD.setText(quiz.getOptions().get(3));
     }
 
     @Override
@@ -42,10 +45,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.VideoViewHolde
         void OnClickListener(Course hall, int position);
     }
 
-    public static class VideoViewHolder extends RecyclerView.ViewHolder {
-        ItemVideoBinding binding;
+    public static class QuizViewHolder extends RecyclerView.ViewHolder {
+        ItemQuizQuestionBinding binding;
 
-        public VideoViewHolder(@NonNull ItemVideoBinding binding) {
+        public QuizViewHolder(@NonNull ItemQuizQuestionBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
