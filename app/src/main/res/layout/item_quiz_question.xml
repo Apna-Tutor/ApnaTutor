@@ -14,7 +14,7 @@
         android:id="@+id/quizQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:text="Your Questions will be shown here hue hue hue"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -23,10 +23,10 @@
         android:id="@+id/quizOptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp">
+        android:layout_marginStart="16dp">
 
         <RadioButton
-            android:id="@+id/quiz_option1"
+            android:id="@+id/optionA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
@@ -34,7 +34,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/quiz_option2"
+            android:id="@+id/optionB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
@@ -42,7 +42,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/quiz_option3"
+            android:id="@+id/optionC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
@@ -50,7 +50,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <RadioButton
-            android:id="@+id/quiz_option4"
+            android:id="@+id/optionD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="40dp"
