@@ -1,6 +1,7 @@
 package com.debuggers.apnatutor.Adapters;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -9,6 +10,7 @@ import android.widget.Filterable;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.debuggers.apnatutor.Models.Video;
 import com.debuggers.apnatutor.databinding.ItemVideoBinding;
 
@@ -22,6 +24,8 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     private final setOnClickListener listener;
     private final List<Video> videos;
     private final List<Video> allVideos;
+    private Context context;
+
 
     public VideoAdapter(List<Video> videos, setOnClickListener listener) {
         this.videos = videos;
@@ -32,13 +36,17 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     @NonNull
     @Override
     public VideoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         return new VideoViewHolder(ItemVideoBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull VideoViewHolder holder, int position) {
         Video video = videos.get(position);
-
+        holder.binding.videoName.setText(video.getTitle());
+        Glide.with(context).load(video.getThumbnail()).into(holder.binding.videoThumbnail);
+        holder.binding.uploadDate.setText(video.getDate().toString()); //Fix required
+        holder.binding.viewersCount.setText(video.getViewedBy().size());
     }
 
     @Override
