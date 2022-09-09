@@ -1,66 +1,107 @@
 package com.debuggers.apnatutor.Fragments;
 
+import static com.debuggers.apnatutor.App.QUEUE;
+
+import android.app.ProgressDialog;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.debuggers.apnatutor.Helpers.API;
+import com.debuggers.apnatutor.Helpers.MultipartUploadRequest;
 import com.debuggers.apnatutor.R;
+import com.debuggers.apnatutor.databinding.FragmentCourseUploadBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CourseUploadFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+
 public class CourseUploadFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentCourseUploadBinding binding;
+    Uri thumbnail;
+    private final ActivityResultLauncher<String> launcher = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+        if (result != null) {
+            thumbnail = result;
+            Cursor cursor = requireContext().getContentResolver().query(thumbnail, null, null, null, null);
+            int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            cursor.moveToFirst();
+            binding.thumbnail.setImageURI(thumbnail);
+            binding.thumbnailName.setText(cursor.getString(nameIndex));
+        }
+    });
 
     public CourseUploadFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CourseUploadFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CourseUploadFragment newInstance(String param1, String param2) {
-        CourseUploadFragment fragment = new CourseUploadFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setHasOptionsMenu(true);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course_upload, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentCourseUploadBinding.inflate(inflater, container, false);
+
+        binding.thumbnail.setOnClickListener(view -> {
+            launcher.launch("image/*");
+        });
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.done) {
+            upload();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void upload() {
+        ProgressDialog pd = new ProgressDialog(requireContext());
+        pd.setCancelable(false);
+        pd.setTitle("Uploading thumbnail...");
+
+        QUEUE.add(new MultipartUploadRequest(Request.Method.PUT, API.UPLOAD_THUMBNAIL, response -> {
+            pd.dismiss();
+            Log.d("TAG", "upload: "+response);
+        }, error -> {
+            Toast.makeText(requireContext(), API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
+            pd.dismiss();
+        }) {
+            @Override
+            protected Map<String, DataPart> getByteData() throws AuthFailureError {
+                Map<String, DataPart> body = new HashMap<>();
+                try {
+                    body.put("thumbnail", new DataPart(
+                            binding.thumbnailName.getText().toString(),
+                            requireContext().getContentResolver().openInputStream(thumbnail),
+                            requireContext().getContentResolver().getType(thumbnail)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return body;
+            }
+        }).setRetryPolicy(new DefaultRetryPolicy());
     }
 }

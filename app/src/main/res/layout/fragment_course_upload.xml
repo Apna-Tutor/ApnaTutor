@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:background="@drawable/input_bg"
-        android:hint="Enter the course Name here"
+        android:hint="Enter the course name here"
         android:minHeight="48dp" />
 
     <com.google.android.material.card.MaterialCardView
@@ -63,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="16:9"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +104,7 @@
         android:layout_marginBottom="4dp"
         android:background="@drawable/input_bg"
         android:gravity="start|top"
-        android:hint="Add video description here"
+        android:hint="Add course description here"
         android:padding="8dp" />
 
 

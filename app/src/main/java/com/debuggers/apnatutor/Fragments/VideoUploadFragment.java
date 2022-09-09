@@ -81,7 +81,6 @@ public class VideoUploadFragment extends Fragment {
         quizzes = new ArrayList<>();
         fetchCourses();
 
-
         binding.thumbnail.setOnClickListener(view -> {
             launcher.launch("image/*");
         });

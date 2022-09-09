@@ -29,6 +29,10 @@ public class API {
     public static final String QUIZ_ADD = String.format("%s/courses/add/quiz", BASE_URL);
     public static final String NOTES_ADD = String.format("%s/courses/add/notes", BASE_URL);
 
+    public static final String UPLOAD_THUMBNAIL = String.format("%s/upload/thumbnail", BASE_URL);
+    public static final String UPLOAD_AVATAR = String.format("%s/upload/avatar", BASE_URL);
+    public static final String UPLOAD_VIDEO = String.format("%s/upload/video", BASE_URL);
+
     public static String getQuery(Map<String, String> params) {
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("?");

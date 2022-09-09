@@ -57,5 +57,6 @@ public class ProfileFragment extends Fragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.search).setVisible(false);
+        menu.findItem(R.id.done).setVisible(false);
     }
 }
