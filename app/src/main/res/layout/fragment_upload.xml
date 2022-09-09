@@ -1,227 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
+    android:orientation="vertical"
     tools:context=".Fragments.UploadFragment">
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/uploadTab"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:tabIndicatorColor="?attr/colorOnPrimary"
+        app:tabSelectedTextColor="?attr/colorOnPrimary"
+        app:tabTextColor="@color/light_gray">
 
-        <TextView
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Course Name"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:text="Upload Course" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/input_bg"
-            android:orientation="vertical"
-            android:padding="0dp">
+            android:text="Upload Video" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/selectCourse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dropDownWidth="match_parent"
-                android:minHeight="40dp"
-                android:padding="8dp"
-                android:spinnerMode="dropdown"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-        </LinearLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Video"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:padding="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
-            app:contentPadding="8dp"
-            app:strokeColor="?attr/colorPrimary"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="4dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toTopOf="@+id/thumbnail"
-                        app:layout_constraintTop_toTopOf="@+id/thumbnail">
-
-                        <ImageView
-                            android:id="@+id/thumbnail"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:background="@color/light_gray"
-                            android:backgroundTint="@color/light_gray"
-                            android:scaleType="centerCrop"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="16:9"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/thumbnailName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Thumbnail name.jpg"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="4dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toTopOf="@+id/thumbnail"
-                        app:layout_constraintTop_toTopOf="@+id/thumbnail">
-
-                        <VideoView
-                            android:id="@+id/video"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="16:9"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <TextView
-                        android:id="@+id/vdoName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Video name.mp4"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:text="Add Description"
-            android:textSize="18dp"
-            android:textStyle="bold" />
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/input_bg"
-            android:fillViewport="true"
-            android:padding="0dp"
-            android:scrollbarThumbHorizontal="?attr/colorPrimary"
-            android:scrollbarThumbVertical="?attr/colorPrimary"
-            android:scrollbars="vertical">
-
-            <EditText
-                android:id="@+id/description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="start|top"
-                android:hint="Add video description here"
-                android:inputType="textMultiLine|textCapSentences"
-                android:padding="8dp"
-                android:scrollbars="vertical"
-                android:singleLine="false" />
-        </androidx.core.widget.NestedScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Quiz"
-                android:textSize="20dp"
-                android:textStyle="bold|italic" />
-
-            <Button
-                android:id="@+id/addQuiz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_add"
-                android:drawableTint="?attr/colorOnPrimary"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:minWidth="0dp"
-                android:minHeight="40dp"
-                android:text="Add Quiz"
-                tools:ignore="TouchTargetSizeCheck" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/quizes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp" />
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/uploadViewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

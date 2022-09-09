@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".Fragments.CourseUploadFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -20,12 +23,12 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:hint="Enter the course Name here"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:background="@drawable/input_bg"/>
+        android:background="@drawable/input_bg"
+        android:hint="Enter the course Name here"
+        android:minHeight="48dp" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -36,7 +39,7 @@
         app:cardElevation="5dp"
         app:contentPadding="8dp"
         app:strokeColor="?attr/colorPrimary"
-        app:strokeWidth="1dp">
+        app:strokeWidth="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,13 +76,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Thumbnail name.jpg"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,6 +93,7 @@
         android:text="Description"
         android:textSize="18dp"
         android:textStyle="bold" />
+
     <MultiAutoCompleteTextView
         android:id="@+id/courseDescrption"
         android:layout_width="match_parent"
