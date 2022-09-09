@@ -1,6 +1,7 @@
 package com.debuggers.apnatutor.Models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import org.parceler.Parcel;
 
@@ -120,5 +121,18 @@ public class Video {
 
     public void setQuiz(ArrayList<Quiz> quiz) {
         this.quiz = quiz;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Video video = (Video) o;
+        return _id.equals(video._id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_id);
     }
 }
