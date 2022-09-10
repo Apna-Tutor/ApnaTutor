@@ -15,29 +15,42 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/email"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/input_bg"
-            android:ems="10"
             android:hint="Enter email address"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp"
-            tools:ignore="HardcodedText" />
+            android:importantForAutofill="yes"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidth="2dp">
 
-        <EditText
-            android:id="@+id/pass"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/input_bg"
-            android:ems="10"
             android:hint="Enter password"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            tools:ignore="HardcodedText" />
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/remember"

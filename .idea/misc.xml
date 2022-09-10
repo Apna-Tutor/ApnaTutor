@@ -44,24 +44,29 @@
         <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/quiz_questionadd.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/spinner_click_layout.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/teacher_upload.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/drawable-v24/input_bg.xml" value="0.225" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_authentication.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_change_password.xml" value="0.28703703703703703" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_leaderboard.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_notes.xml" value="0.2722222222222222" />
-        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_player.xml" value="0.38697916666666665" />
-        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_playlist.xml" value="0.16203703703703703" />
-        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_quiz.xml" value="0.19074074074074074" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_player.xml" value="0.28703703703703703" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_playlist.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_quiz.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_settings.xml" value="0.3859375" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_students_main.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_teacher_main.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_update_password.xml" value="0.38697916666666665" />
-        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_update_profile.xml" value="0.3859375" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_update_profile.xml" value="0.28703703703703703" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/add_course_dialog.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_course_upload.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_home.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_library.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_login.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_profile.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_signup.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_upload.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_video_upload.xml" value="0.38697916666666665" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_course.xml" value="0.19074074074074074" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_leaderboard.xml" value="0.16203703703703703" />
         <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_quiz_question.xml" value="0.38697916666666665" />

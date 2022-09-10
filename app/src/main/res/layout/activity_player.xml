@@ -42,14 +42,32 @@
             android:paddingEnd="16dp"
             android:paddingBottom="8dp">
 
-            <TextView
-                android:id="@+id/videoTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Name of the video will be here"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/videoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:layout_weight="0.04"
+                    android:text="Name of the video will be here"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/descriptionArrow"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:tint="?attr/colorControlNormal" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,14 +126,14 @@
                 <ImageView
                     android:id="@+id/likeBtn"
                     style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
                     android:clickable="true"
                     android:minWidth="0dp"
-                    android:padding="6dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_like_outlined"
+                    app:tint="?attr/colorControlNormal"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             </LinearLayout>
@@ -131,46 +149,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp">
 
-            <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/input_bg"
-                android:ems="10"
+                android:layout_weight="0.04"
                 android:hint="Add a comment..."
-                android:inputType="textPersonName"
-                android:minHeight="40dp"
-                android:textSize="16sp"
-                tools:ignore="TouchTargetSizeCheck" />
+                app:boxBackgroundColor="@android:color/transparent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                >
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/post"
-                style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:minWidth="0dp"
-                app:cardBackgroundColor="?attr/colorPrimary"
-                app:cardCornerRadius="40dp"
-                app:cardElevation="0dp"
-                app:contentPadding="8dp">
-
-                <ImageView
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:minWidth="0dp"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_send"
-                    app:tint="?attr/colorOnPrimary" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:minWidth="0dp"
+                app:tint="?attr/colorControlNormal"
+                app:srcCompat="@drawable/ic_send" />
 
         </LinearLayout>
     </LinearLayout>

@@ -19,11 +19,11 @@ public class ActivitySettings extends AppCompatActivity {
         binding = ActivitySettingsBinding.inflate(getLayoutInflater());
 
         binding.updateProfile.setOnClickListener(view -> {
-            startActivity(new Intent(this,ActivityUpdateProfile.class));
+            startActivity(new Intent(ActivitySettings.this,ActivityUpdateProfile.class));
         });
 
         binding.changePassword.setOnClickListener(view -> {
-            startActivity(new Intent(this,ActivityChangePassword.class));
+            startActivity(new Intent(ActivitySettings.this,ActivityChangePassword.class));
         });
 
         // Creator Mode Switch
