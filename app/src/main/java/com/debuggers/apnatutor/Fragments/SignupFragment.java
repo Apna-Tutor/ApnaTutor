@@ -40,19 +40,19 @@ public class SignupFragment extends Fragment {
         binding = FragmentSignupBinding.inflate(inflater, container, false);
 
         binding.signup.setOnClickListener(v -> {
-            if (binding.name.getText().toString().trim().isEmpty()) {
+            if (binding.name.getText() == null || binding.name.getText().toString().trim().isEmpty()) {
                 binding.name.setError("Name is required!");
                 return;
             }
-            if (!Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString().trim()).matches()) {
+            if (binding.email.getText() == null || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString().trim()).matches()) {
                 binding.email.setError("A valid email is required!");
                 return;
             }
-            if (binding.pass1.getText().toString().trim().length() < 6) {
+            if (binding.pass1.getText() == null || binding.pass1.getText().toString().trim().length() < 6) {
                 binding.pass1.setError("Enter a valid password of minimum length 6!");
                 return;
             }
-            if (!binding.pass2.getText().toString().trim().equals(binding.pass1.getText().toString().trim())) {
+            if (binding.pass2.getText() == null || !binding.pass2.getText().toString().trim().equals(binding.pass1.getText().toString().trim())) {
                 binding.pass2.setError("Passwords doesn't match!");
                 return;
             }

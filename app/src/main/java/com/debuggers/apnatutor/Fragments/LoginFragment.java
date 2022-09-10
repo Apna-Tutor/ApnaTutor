@@ -40,11 +40,11 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         binding.login.setOnClickListener(v -> {
-            if (!Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString().trim()).matches()) {
+            if (binding.email.getText() == null || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString().trim()).matches()) {
                 binding.email.setError("A valid email is required!");
                 return;
             }
-            if (binding.pass.getText().toString().trim().length() < 6) {
+            if (binding.pass.getText() == null || binding.pass.getText().toString().trim().length() < 6) {
                 binding.pass.setError("Enter a valid password of minimum length 6!");
                 return;
             }
