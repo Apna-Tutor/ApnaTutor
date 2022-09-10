@@ -64,7 +64,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="8dp"
                     android:clickable="true"
-                    app:srcCompat="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    app:srcCompat="@drawable/ic_arrow_down"
                     app:tint="?attr/colorControlNormal" />
 
             </LinearLayout>
