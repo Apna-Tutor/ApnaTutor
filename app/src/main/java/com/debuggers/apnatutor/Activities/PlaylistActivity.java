@@ -49,6 +49,7 @@ public class PlaylistActivity extends AppCompatActivity {
         binding.allVideos.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         updateUi();
         binding.playlistRefresher.setOnRefreshListener(this::updateUi);
+
     }
 
     @Override
