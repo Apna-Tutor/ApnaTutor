@@ -4,6 +4,7 @@
     package="com.debuggers.apnatutor">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:name="com.debuggers.apnatutor.App"
@@ -14,19 +15,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Apna_Tutor"
+        android:theme="@style/Theme.ApnaTutor"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityChangePassword"
+            android:name=".Activities.ActivityChangePassword"
             android:exported="false" />
         <activity
-            android:name=".ActivityUpdatePassword"
+            android:name=".Activities.ActivityUpdateProfile"
             android:exported="false" />
         <activity
-            android:name=".ActivityUpdateProfile"
-            android:exported="false" />
-        <activity
-            android:name=".ActivitySettings"
+            android:name=".Activities.ActivitySettings"
             android:exported="false" />
         <activity
             android:name=".Activities.PlaylistActivity"

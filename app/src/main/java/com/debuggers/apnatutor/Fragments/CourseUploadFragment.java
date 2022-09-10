@@ -54,6 +54,7 @@ public class CourseUploadFragment extends Fragment {
             cursor.moveToFirst();
             binding.thumbnail.setImageURI(thumbnail);
             binding.thumbnailName.setText(cursor.getString(nameIndex));
+            cursor.close();
         }
     });
 

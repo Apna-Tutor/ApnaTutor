@@ -29,13 +29,13 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/userDP"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_profile" />
+                    android:src="@drawable/ic_profile" />
 
                 <Button
                     android:id="@+id/button_changeAvatar"
@@ -69,6 +69,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:text="Prasun Sarkar"
+                    android:textColor="@android:color/primary_text_light"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -99,7 +100,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/settingsBtn"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:clickable="true"
             android:contextClickable="true"
@@ -108,17 +109,16 @@
             android:minHeight="48dp"
             android:padding="8dp"
             app:cardCornerRadius="32dp"
-            app:cardElevation="5dp"
-            app:contentPaddingBottom="8dp"
-            app:contentPaddingLeft="16dp"
-            app:contentPaddingRight="16dp"
-            app:contentPaddingTop="8dp">
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -148,17 +148,16 @@
             android:minHeight="48dp"
             android:padding="8dp"
             app:cardCornerRadius="32dp"
-            app:cardElevation="5dp"
-            app:contentPaddingBottom="8dp"
-            app:contentPaddingLeft="16dp"
-            app:contentPaddingRight="16dp"
-            app:contentPaddingTop="8dp">
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <ImageView
                     android:layout_width="32dp"
@@ -187,17 +186,16 @@
             android:minHeight="48dp"
             android:padding="8dp"
             app:cardCornerRadius="32dp"
-            app:cardElevation="5dp"
-            app:contentPaddingBottom="8dp"
-            app:contentPaddingLeft="16dp"
-            app:contentPaddingRight="16dp"
-            app:contentPaddingTop="8dp">
+            app:cardElevation="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <ImageView
                     android:layout_width="32dp"

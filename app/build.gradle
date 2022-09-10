@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.1'
     implementation 'org.parceler:parceler-api:1.1.13'
     annotationProcessor 'org.parceler:parceler:1.1.13'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

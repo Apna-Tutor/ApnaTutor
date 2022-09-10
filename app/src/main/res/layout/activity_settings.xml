@@ -3,113 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".Activities.ActivitySettings">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/mainToolbar"
+        android:id="@+id/settingsToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="5dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back"
         app:title="Settings" />
 
     <LinearLayout
-        android:id="@+id/updateProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="32dp"
-            android:layout_height="36dp"
-            app:srcCompat="@drawable/ic_update_profile"
-            app:tint="?attr/colorControlNormal" />
+        android:divider="@android:color/darker_gray"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
+            android:id="@+id/updateProfile"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
             android:text="Update Profile"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:id="@+id/changePassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            app:srcCompat="@drawable/ic_change_password"
-            app:tint="?attr/colorControlNormal" />
-
         <TextView
-            android:id="@+id/textView3"
-            android:layout_width="0dp"
+            android:id="@+id/changePassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_key"
+            android:drawablePadding="8dp"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
             android:text="Change Password"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="8dp">
-
         <Switch
             android:id="@+id/createrMode"
-            android:layout_width="0dp"
-            android:layout_height="32dp"
-            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
             android:text="Creater Mode"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
 
 </LinearLayout>

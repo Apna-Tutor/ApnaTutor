@@ -8,16 +8,6 @@ import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,7 +19,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -41,7 +39,6 @@ import com.debuggers.apnatutor.Models.Course;
 import com.debuggers.apnatutor.Models.Quiz;
 import com.debuggers.apnatutor.Models.Video;
 import com.debuggers.apnatutor.R;
-import com.debuggers.apnatutor.databinding.FragmentUploadBinding;
 import com.debuggers.apnatutor.databinding.FragmentVideoUploadBinding;
 import com.debuggers.apnatutor.databinding.QuizQuestionDialogBinding;
 import com.google.gson.Gson;
@@ -82,6 +79,7 @@ public class VideoUploadFragment extends Fragment {
                     mediaPlayer.start();
                 });
             }
+            cursor.close();
         }
     });
 
@@ -104,13 +102,9 @@ public class VideoUploadFragment extends Fragment {
         fetchCourses();
         binding.refreshBtn.setOnClickListener(view -> fetchCourses());
 
-        binding.thumbnail.setOnClickListener(view -> {
-            launcher.launch("image/*");
-        });
+        binding.thumbnail.setOnClickListener(view -> launcher.launch("image/*"));
 
-        binding.video.setOnClickListener(view -> {
-            launcher.launch("video/*");
-        });
+        binding.video.setOnClickListener(view -> launcher.launch("video/*"));
 
         binding.quizes.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.quizes.setAdapter(new QuizAdapter(quizzes));
@@ -304,6 +298,7 @@ public class VideoUploadFragment extends Fragment {
                 requireContext().getContentResolver().openInputStream(video),
                 requireContext().getContentResolver().getType(video));
 
+        String courseId = courses.get(binding.selectCourse.getSelectedItemPosition()-1).get_id();
         Video newVideo = new Video(binding.videoTitle.getText().toString().trim(), binding.description.getText().toString().trim(), null, null, quizzes);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
@@ -325,7 +320,7 @@ public class VideoUploadFragment extends Fragment {
                 notificationManager.notify(1, progressNotification.build());
 
                 newVideo.setVideoUrl(videoUrl);
-                QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.VIDEO_ADD, courses.get(binding.selectCourse.getSelectedItemPosition()-1).get_id()), null, response -> {
+                QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.VIDEO_ADD, courseId), null, response -> {
                     notificationManager.cancel(1);
                     NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
@@ -353,7 +348,7 @@ public class VideoUploadFragment extends Fragment {
                 notificationManager.notify(2, completeNotification.build());
             }) {
                 @Override
-                protected Map<String, DataPart> getByteData() throws AuthFailureError {
+                protected Map<String, DataPart> getByteData() {
                     Map<String, DataPart> body = new HashMap<>();
                     body.put("video", videoData);
                     return body;
@@ -368,22 +363,22 @@ public class VideoUploadFragment extends Fragment {
             notificationManager.notify(2, completeNotification.build());
         }) {
             @Override
-            protected Map<String, DataPart> getByteData() throws AuthFailureError {
+            protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> body = new HashMap<>();
                 body.put("thumbnail", thumbnailData);
                 return body;
             }
         }).setRetryPolicy(new DefaultRetryPolicy());
 
-//        thumbnail = null; video = null; quizzes.clear();
-//        if (binding.quizes.getAdapter() != null) binding.quizes.getAdapter().notifyDataSetChanged();
-//        binding.selectCourse.setSelection(0);
-//        binding.videoTitle.setText(null);
-//        binding.thumbnail.setImageURI(null);
-//        binding.video.setVideoURI(null);
-//        binding.thumbnailName.setText(null);
-//        binding.vdoName.setText(null);
-//        binding.description.setText(null);
+        thumbnail = null; video = null; quizzes.clear();
+        if (binding.quizes.getAdapter() != null) binding.quizes.getAdapter().notifyDataSetChanged();
+        binding.selectCourse.setSelection(0);
+        binding.videoTitle.setText(null);
+        binding.thumbnail.setImageURI(null);
+        binding.video.setVideoURI(null);
+        binding.thumbnailName.setText(null);
+        binding.vdoName.setText(null);
+        binding.description.setText(null);
     }
 
 }
