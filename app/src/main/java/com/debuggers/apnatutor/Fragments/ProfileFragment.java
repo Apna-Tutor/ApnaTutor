@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.debuggers.apnatutor.Activities.ActivitySettings;
 import com.debuggers.apnatutor.Activities.MainActivity;
 import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.FragmentProfileBinding;
@@ -39,7 +40,7 @@ public class ProfileFragment extends Fragment {
         binding.userType.setText(ME.getType());
 
         binding.settingsBtn.setOnClickListener(v-> {
-
+            startActivity(new Intent(requireContext(), ActivitySettings.class));
         });
         binding.faqsBtn.setOnClickListener(v-> {
 
