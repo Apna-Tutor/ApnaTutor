@@ -17,6 +17,18 @@
         android:theme="@style/Theme.Apna_Tutor"
         tools:targetApi="31">
         <activity
+            android:name=".ActivityChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityUpdatePassword"
+            android:exported="false" />
+        <activity
+            android:name=".ActivityUpdateProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ActivitySettings"
+            android:exported="false" />
+        <activity
             android:name=".Activities.PlaylistActivity"
             android:exported="false" />
         <activity
