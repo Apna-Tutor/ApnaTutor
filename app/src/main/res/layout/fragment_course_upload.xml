@@ -18,18 +18,22 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
-
-    <EditText
-        android:id="@+id/courseName"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/input_bg"
+        android:layout_margin="8dp"
         android:hint="Enter the course name here"
-        android:inputType="text|textCapSentences"
-        android:minHeight="48dp" />
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxStrokeWidth="2dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/courseName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text|textCapSentences" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -97,34 +101,29 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/input_bg"
-        android:fillViewport="true"
-        android:padding="0dp"
-        android:scrollbarThumbHorizontal="?attr/colorPrimary"
-        android:scrollbarThumbVertical="?attr/colorPrimary"
-        android:scrollbars="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="Add video description here"
+        app:counterEnabled="true"
+        app:counterMaxLength="500"
+        app:boxStrokeColor="?attr/colorPrimary"
+        app:boxStrokeWidth="2dp">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:gravity="start|top"
-            android:hint="Add video description here"
-            android:inputType="textMultiLine|textCapSentences"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"
+            android:layout_height="200dp"
+            android:inputType="textMultiLine"
+            android:overScrollMode="always"
+            android:scrollIndicators="right"
+            android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"
             android:singleLine="false" />
-    </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
 </LinearLayout>

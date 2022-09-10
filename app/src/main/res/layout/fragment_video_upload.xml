@@ -75,17 +75,23 @@
             android:textSize="18dp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/videoTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@drawable/input_bg"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="16dp"
             android:hint="Enter the video name here"
-            android:inputType="text|textCapSentences"
-            android:minHeight="48dp" />
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidth="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/videoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text|textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -214,20 +220,30 @@
             android:scrollbarThumbVertical="?attr/colorPrimary"
             android:scrollbars="vertical">
 
-            <EditText
-                android:id="@+id/description"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="start|top"
+                android:layout_margin="8dp"
                 android:hint="Add video description here"
-                android:inputType="textMultiLine|textCapSentences"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="8dp"
-                android:scrollbars="vertical"
-                android:singleLine="false" />
+                app:boxStrokeColor="?attr/colorPrimary"
+                app:boxStrokeWidth="2dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="500">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:scrollIndicators="right"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:singleLine="false" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.core.widget.NestedScrollView>
 
         <LinearLayout
