@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.debuggers.apnatutor.Helpers.API;
 import com.debuggers.apnatutor.Models.Course;
 import com.debuggers.apnatutor.Models.User;
+import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.ItemCourseBinding;
 import com.google.gson.Gson;
 
@@ -57,14 +58,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         Course course = courses.get(position);
         Glide.with(context).load(course.getThumbnail()).into(holder.binding.courseThumbnail);
         holder.binding.courseName.setText(course.getTitle());
-        holder.binding.videosCount.setText(String.valueOf(course.getVideos().size()));
-        holder.binding.followersCount.setText(String.valueOf(course.getFollowedBy().size()));
+        holder.binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
+        holder.binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
 
         holder.getAuthor(course.getAuthor(), (author, error) -> {
             if (error != null) {
                 Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
             } else if (author != null){
-                Glide.with(context).load(author.getAvatar()).into(holder.binding.authorDp);
+                Glide.with(context).load(author.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
                 holder.binding.authorName.setText(author.getName());
             }
         });

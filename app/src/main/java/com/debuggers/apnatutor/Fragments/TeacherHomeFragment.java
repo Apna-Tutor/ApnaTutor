@@ -1,7 +1,9 @@
 package com.debuggers.apnatutor.Fragments;
 
+import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,11 +16,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.debuggers.apnatutor.Activities.PlaylistActivity;
 import com.debuggers.apnatutor.Adapters.CourseAdapter;
 import com.debuggers.apnatutor.Helpers.API;
 import com.debuggers.apnatutor.Models.Course;
@@ -26,6 +31,8 @@ import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.FragmentHomeBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -45,6 +52,9 @@ public class TeacherHomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
+
+        binding.homeRV.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.homeRV.addItemDecoration(new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL));
 
         updateUi();
         binding.homeRefresher.setOnRefreshListener(this::updateUi);
@@ -74,11 +84,10 @@ public class TeacherHomeFragment extends Fragment {
 
     private void updateUi() {
         binding.homeRefresher.setRefreshing(true);
-        QUEUE.add(new JsonObjectRequest(Request.Method.GET, API.COURSES_UPLOADED, null, response -> {
+        QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?author=%s", API.COURSES_UPLOADED, ME.get_id()), null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
-            binding.homeRV.setLayoutManager(new LinearLayoutManager(requireContext()));
             binding.homeRV.setAdapter(new CourseAdapter(courses, (course, position) -> {
-
+                startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", Parcels.wrap(course)));
             }));
             binding.homeRefresher.setRefreshing(false);
         }, error -> {

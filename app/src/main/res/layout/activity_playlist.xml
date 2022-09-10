@@ -1,153 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/playlistRefresher"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities.PlaylistActivity">
 
-    <LinearLayout
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/playlistToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <LinearLayout
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/playlistRefresher"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/courseThumbnail"
-                app:layout_constraintStart_toStartOf="@+id/courseThumbnail">
-
-                <ImageView
-                    android:id="@+id/courseThumbnail"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="16:9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_conversion_absoluteHeight="0dp"
-                    tools:layout_conversion_absoluteWidth="379dp"
-                    tools:srcCompat="@drawable/ic_launcher_background" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/authorDp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    tools:layout_conversion_absoluteHeightbsoluteX="36dp"
-                    tools:layout_conversion_absoluteWidth="40dp"
-                    tools:layout_editor_a="40dp"
-                    tools:layout_editor_absoluteY="36dp"
-                    tools:srcCompat="@drawable/ic_launcher_background" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:background="?android:attr/colorBackground"
+                    android:elevation="5dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/courseName"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="Course Name"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        tools:layout_conversion_absoluteHeight="33dp"
-                        tools:layout_conversion_absoluteWidth="300dp"
-                        tools:layout_editor_absoluteX="86dp"
-                        tools:layout_editor_absoluteY="26dp" />
+                        app:layout_constraintEnd_toStartOf="@+id/courseThumbnail"
+                        app:layout_constraintStart_toStartOf="@+id/courseThumbnail">
+
+                        <ImageView
+                            android:id="@+id/courseThumbnail"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintDimensionRatio="16:9"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_conversion_absoluteHeight="0dp"
+                            tools:layout_conversion_absoluteWidth="379dp"
+                            tools:srcCompat="@drawable/ic_launcher_background" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="8dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/authorName"
+                        <ImageView
+                            android:id="@+id/authorDp"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginEnd="8dp"
+                            app:srcCompat="@drawable/ic_profile"
+                            tools:layout_conversion_absoluteHeightbsoluteX="36dp"
+                            tools:layout_conversion_absoluteWidth="40dp"
+                            tools:layout_editor_a="40dp"
+                            tools:layout_editor_absoluteY="36dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/courseName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:text="Course Name"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                tools:layout_conversion_absoluteHeight="33dp"
+                                tools:layout_conversion_absoluteWidth="300dp"
+                                tools:layout_editor_absoluteX="86dp"
+                                tools:layout_editor_absoluteY="26dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/authorName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Author Name"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="5dp"
+                                    android:layout_height="5dp"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginEnd="4dp"
+                                    app:cardBackgroundColor="@android:color/darker_gray"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                </androidx.cardview.widget.CardView>
+
+                                <TextView
+                                    android:id="@+id/videosCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="5dp"
+                                    android:layout_height="5dp"
+                                    android:layout_marginStart="4dp"
+                                    android:layout_marginEnd="4dp"
+                                    app:cardBackgroundColor="@android:color/darker_gray"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp" />
+
+                                <TextView
+                                    android:id="@+id/followersCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="100"
+                                    android:textColor="@android:color/darker_gray"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/options"
+                            style="@android:style/Widget.Material.Toolbar.Button.Navigation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Author Name"
-                            android:textSize="10sp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
-                            android:layout_height="14dp"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="4dp"
-                            app:cardBackgroundColor="@android:color/darker_gray"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp" />
-
-                        <TextView
-                            android:id="@+id/videosCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Videos Count"
-                            android:textSize="10sp" />
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="5dp"
-                            android:layout_height="5dp"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="4dp"
-                            app:cardBackgroundColor="@android:color/darker_gray"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp" />
-
-                        <TextView
-                            android:id="@+id/followersCount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Followers Count"
-                            android:textSize="10sp" />
+                            android:layout_marginStart="8dp"
+                            android:clickable="true"
+                            android:minWidth="0dp"
+                            android:padding="4dp"
+                            app:srcCompat="@drawable/ic_more"
+                            tools:layout_conversion_absoluteHeightbsoluteX="36dp"
+                            tools:layout_conversion_absoluteWidth="40dp"
+                            tools:layout_editor_a="40dp"
+                            tools:layout_editor_absoluteY="36dp" />
                     </LinearLayout>
+
+
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/follow"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    tools:layout_conversion_absoluteHeightbsoluteX="36dp"
-                    tools:layout_conversion_absoluteWidth="40dp"
-                    tools:layout_editor_a="40dp"
-                    tools:layout_editor_absoluteY="36dp"
-                    tools:srcCompat="@drawable/ic_add" />
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/allVideos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
             </LinearLayout>
 
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/allVideos"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</LinearLayout>

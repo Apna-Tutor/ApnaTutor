@@ -17,6 +17,7 @@ import com.debuggers.apnatutor.databinding.ItemVideoBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -26,7 +27,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     private final List<Video> videos;
     private final List<Video> allVideos;
     private Context context;
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
 
     public VideoAdapter(List<Video> videos, setOnClickListener listener) {
@@ -47,8 +47,10 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         Video video = videos.get(position);
         holder.binding.videoName.setText(video.getTitle());
         Glide.with(context).load(video.getThumbnail()).into(holder.binding.videoThumbnail);
-        holder.binding.uploadDate.setText(formatter.format(video.getDate()));
-        holder.binding.viewersCount.setText(video.getViewedBy().size());
+        holder.binding.uploadDate.setText(new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date(video.getDate())));
+        holder.binding.viewersCount.setText(String.format(Locale.getDefault(), "%d views", video.getViewedBy().size()));
+
+        holder.itemView.setOnClickListener(view -> listener.OnClickListener(video, position));
     }
 
     @Override

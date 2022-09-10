@@ -20,7 +20,7 @@
 
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/courseName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -28,6 +28,7 @@
         android:layout_marginBottom="4dp"
         android:background="@drawable/input_bg"
         android:hint="Enter the course name here"
+        android:inputType="text|textCapSentences"
         android:minHeight="48dp" />
 
     <com.google.android.material.card.MaterialCardView
@@ -35,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="5dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="0dp"
         app:contentPadding="8dp"
         app:strokeColor="?attr/colorPrimary"
         app:strokeWidth="2dp">
@@ -63,6 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
+                        android:background="@color/light_gray"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="16:9"
@@ -76,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Thumbnail name.jpg"
+                    android:hint="Select course thumbnail"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -95,17 +97,34 @@
         android:textSize="18dp"
         android:textStyle="bold" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/courseDescrption"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="240dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/input_bg"
-        android:gravity="start|top"
-        android:hint="Add course description here"
-        android:padding="8dp" />
+        android:fillViewport="true"
+        android:padding="0dp"
+        android:scrollbarThumbHorizontal="?attr/colorPrimary"
+        android:scrollbarThumbVertical="?attr/colorPrimary"
+        android:scrollbars="vertical">
+
+        <EditText
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="Add video description here"
+            android:inputType="textMultiLine|textCapSentences"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="vertical"
+            android:singleLine="false" />
+    </androidx.core.widget.NestedScrollView>
 
 
 </LinearLayout>

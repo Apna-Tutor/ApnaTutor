@@ -1,6 +1,8 @@
 package com.debuggers.apnatutor.Models;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 import java.util.Objects;
 
 import org.parceler.Parcel;
@@ -13,26 +15,26 @@ public class Video {
     private String thumbnail;
     private String videoUrl;
     private Long date;
-    private ArrayList<String> likedBy;
-    private ArrayList<String> viewedBy;
-    private ArrayList<Comment> comments;
-    private ArrayList<Note> notes;
-    private ArrayList<Quiz> quiz;
+    private List<String> likedBy;
+    private List<String> viewedBy;
+    private List<Comment> comments;
+    private List<Note> notes;
+    private List<Quiz> quiz;
 
     public Video() {
     }
 
-    public Video(String title, String description, String thumbnail, String videoUrl) {
+    public Video(String title, String description, String thumbnail, String videoUrl, List<Quiz> quizzes) {
         this.title = title;
         this.description = description;
         this.thumbnail = thumbnail;
         this.videoUrl = videoUrl;
         this.date = System.currentTimeMillis();
+        this.quiz = quizzes;
         this.likedBy = new ArrayList<>();
         this.viewedBy = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.notes = new ArrayList<>();
-        this.quiz = new ArrayList<>();
     }
 
     public String get_id() {
@@ -83,43 +85,43 @@ public class Video {
         this.date = date;
     }
 
-    public ArrayList<String> getLikedBy() {
+    public List<String> getLikedBy() {
         return likedBy;
     }
 
-    public void setLikedBy(ArrayList<String> likedBy) {
+    public void setLikedBy(List<String> likedBy) {
         this.likedBy = likedBy;
     }
 
-    public ArrayList<String> getViewedBy() {
+    public List<String> getViewedBy() {
         return viewedBy;
     }
 
-    public void setViewedBy(ArrayList<String> viewedBy) {
+    public void setViewedBy(List<String> viewedBy) {
         this.viewedBy = viewedBy;
     }
 
-    public ArrayList<Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
-    public ArrayList<Note> getNotes() {
+    public List<Note> getNotes() {
         return notes;
     }
 
-    public void setNotes(ArrayList<Note> notes) {
+    public void setNotes(List<Note> notes) {
         this.notes = notes;
     }
 
-    public ArrayList<Quiz> getQuiz() {
+    public List<Quiz> getQuiz() {
         return quiz;
     }
 
-    public void setQuiz(ArrayList<Quiz> quiz) {
+    public void setQuiz(List<Quiz> quiz) {
         this.quiz = quiz;
     }
 
