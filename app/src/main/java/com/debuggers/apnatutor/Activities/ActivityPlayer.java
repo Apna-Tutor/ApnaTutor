@@ -58,7 +58,6 @@ public class ActivityPlayer extends AppCompatActivity {
         setSupportActionBar(binding.playerToolbar);
         binding.playerToolbar.setNavigationOnClickListener(view -> finish());
 
-
         fullscreen = false;
         video = Parcels.unwrap(getIntent().getParcelableExtra("VIDEO"));
         course = Parcels.unwrap(getIntent().getParcelableExtra("COURSE"));
