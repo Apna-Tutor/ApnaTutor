@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userPicture"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_profile" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="User Name"
+                android:textAppearance="?attr/textAppearanceSubtitle1" />
+
+            <TextView
+                android:id="@+id/userComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam imperdiet placerat nunc non tempor." />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/options2"
+            style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:clickable="true"
+            android:minWidth="0dp"
+            app:srcCompat="@drawable/ic_more" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:dividerColor="@color/black"
+        app:dividerInsetEnd="32dp"
+        app:dividerInsetStart="32dp" />
+
+
+</LinearLayout>

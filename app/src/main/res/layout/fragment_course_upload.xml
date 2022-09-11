@@ -123,8 +123,6 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:overScrollMode="always"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
             android:scrollIndicators="right"
             android:scrollbarStyle="insideInset"
             android:scrollbars="vertical"

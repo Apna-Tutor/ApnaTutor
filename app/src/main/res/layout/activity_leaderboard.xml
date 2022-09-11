@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Activities.ActivityLeaderboard">
-<androidx.recyclerview.widget.RecyclerView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/Leaderboard_ScoreRecyclerview"
-    ></androidx.recyclerview.widget.RecyclerView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/leaderboardToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="5dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Leaderboard" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/leaderboardRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"/>
+</LinearLayout>

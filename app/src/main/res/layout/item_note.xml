@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    app:contentPadding="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Title"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:dividerColor="@color/black" />
+
+        <TextView
+            android:id="@+id/noteContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam convallis a erat mollis tristique. Donec eget interdum augue. Pellentesque eros lacus, hendrerit a turpis et, pulvinar facilisis velit. Praesent consectetur sodales ex, at ultricies erat egestas pulvinar. Nam euismod dolor ut lectus aliquam aliquet. Mauris vehicula luctus consectetur."
+            android:textAppearance="?attr/textAppearanceBody2" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

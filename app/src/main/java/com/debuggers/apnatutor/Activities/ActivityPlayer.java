@@ -4,6 +4,7 @@ import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -222,6 +223,18 @@ public class ActivityPlayer extends AppCompatActivity {
         binding.closeComment.setOnClickListener(view -> {
             binding.commentsArea.setVisibility(View.GONE);
             binding.initArea.setVisibility(View.VISIBLE);
+        });
+
+        binding.openNotes.setOnClickListener(view -> {
+            startActivity(new Intent(this, ActivityNotes.class));
+        });
+
+        binding.openQuiz.setOnClickListener(view -> {
+            startActivity(new Intent(this, ActivityQuiz.class));
+        });
+
+        binding.openLeaderboard.setOnClickListener(view -> {
+            startActivity(new Intent(this, ActivityLeaderboard.class));
         });
     }
 

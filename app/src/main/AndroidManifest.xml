@@ -4,7 +4,7 @@
     package="com.debuggers.apnatutor">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name="com.debuggers.apnatutor.App"
@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ApnaTutor"
         tools:targetApi="31">
+        <activity
+            android:name=".Activities.ActivityNotes"
+            android:exported="false" />
         <activity
             android:name=".Activities.ActivityChangePassword"
             android:exported="false" />
@@ -37,8 +40,8 @@
             android:exported="false" />
         <activity
             android:name=".Activities.ActivityPlayer"
-            android:exported="false"
-            android:configChanges="keyboardHidden|orientation|screenSize"/>
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="false" />
         <activity
             android:name=".Activities.MainStudentsActivity"
             android:exported="true" />
