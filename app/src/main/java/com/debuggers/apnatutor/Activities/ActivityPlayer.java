@@ -18,10 +18,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.debuggers.apnatutor.Adapters.VideoAdapter;
 import com.debuggers.apnatutor.Helpers.API;
 import com.debuggers.apnatutor.Models.Course;
 import com.debuggers.apnatutor.Models.User;
@@ -67,6 +70,12 @@ public class ActivityPlayer extends AppCompatActivity {
         binding.viewsCount.setText(String.format(Locale.getDefault(), "%d views", video.getViewedBy().size()));
         binding.likeBtn.setImageResource((video.getLikedBy().contains(ME.get_id())) ? R.drawable.ic_like_filled : R.drawable.ic_like_outlined);
         binding.videoDesciption.setText(video.getDescription());
+        binding.videosRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.videosRv.setAdapter(new VideoAdapter(course.getVideos(), (video1, position) -> {
+
+        }));
+
+        Log.d("TAG", "onCreate: "+course.getVideos());
 
         if (course.getAuthor().equals(ME.get_id())) {
             binding.authorName.setText(ME.getName());
@@ -198,15 +207,21 @@ public class ActivityPlayer extends AppCompatActivity {
         });
 
         binding.openDescription.setOnClickListener(view -> {
-            if (binding.descriptionArea.getVisibility() == View.VISIBLE) {
-                binding.descriptionArea.setVisibility(View.GONE);
-                binding.commentsArea.setVisibility(View.VISIBLE);
-                binding.descriptionArrow.setImageResource(R.drawable.ic_arrow_down);
-            } else {
-                binding.descriptionArea.setVisibility(View.VISIBLE);
-                binding.commentsArea.setVisibility(View.GONE);
-                binding.descriptionArrow.setImageResource(R.drawable.ic_arrow_up);
-            }
+            binding.descriptionArea.setVisibility(View.VISIBLE);
+            binding.initArea.setVisibility(View.GONE);
+        });
+        binding.closeDescription.setOnClickListener(view -> {
+            binding.descriptionArea.setVisibility(View.GONE);
+            binding.initArea.setVisibility(View.VISIBLE);
+        });
+
+        binding.openComments.setOnClickListener(view -> {
+            binding.commentsArea.setVisibility(View.VISIBLE);
+            binding.initArea.setVisibility(View.GONE);
+        });
+        binding.closeComment.setOnClickListener(view -> {
+            binding.commentsArea.setVisibility(View.GONE);
+            binding.initArea.setVisibility(View.VISIBLE);
         });
     }
 

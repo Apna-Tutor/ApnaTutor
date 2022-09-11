@@ -22,7 +22,6 @@
         android:id="@+id/video"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
         android:keepScreenOn="true"
         app:buffered_color="@android:color/white"
         app:controller_layout_id="@layout/custom_exoplayer_controls"
@@ -41,29 +40,30 @@
         android:showDividers="middle">
 
         <LinearLayout
-            android:id="@+id/openDescription"
+            android:id="@+id/initArea"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0.5dp"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
+            android:layout_height="match_parent"
+            android:divider="@android:color/darker_gray"
             android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp">
+            android:showDividers="middle">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="top"
-                android:orientation="horizontal">
+                android:layout_marginBottom="0.5dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp">
 
                 <TextView
                     android:id="@+id/videoTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="2"
@@ -73,85 +73,148 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/descriptionArrow"
-                    android:layout_width="24sp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/ic_arrow_down"
-                    app:tint="?attr/colorControlNormal"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/authorName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="Name of Teacher"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/views_count"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/authorName"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="100 Views"
-                            android:textSize="12dp" />
+                            android:layout_marginBottom="4dp"
+                            android:text="Name of Teacher"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="5dp"
-                            android:layout_height="5dp"
-                            android:layout_marginStart="4dp"
-                            android:layout_marginEnd="4dp"
-                            app:cardBackgroundColor="@android:color/darker_gray"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp" />
-
-                        <TextView
-                            android:id="@+id/date_ofUpload"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:includeFontPadding="false"
-                            android:text="Date"
-                            android:textSize="12dp" />
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/views_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="100 Views"
+                                android:textSize="12dp" />
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="5dp"
+                                android:layout_height="5dp"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp"
+                                app:cardBackgroundColor="@android:color/darker_gray"
+                                app:cardCornerRadius="5dp"
+                                app:cardElevation="0dp" />
+
+                            <TextView
+                                android:id="@+id/date_ofUpload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:includeFontPadding="false"
+                                android:text="Date"
+                                android:textSize="12dp" />
+                        </LinearLayout>
+
                     </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/likeBtn"
+                        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:minWidth="0dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_like_outlined"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/likeBtn"
-                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="8dp"
-                    android:clickable="true"
-                    android:minWidth="0dp"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_like_outlined"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/openDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="Description"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/openComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="Comments"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/openNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="My Notes"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/openQuiz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="Quiz"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/openLeaderboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="Leaderboard"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videosRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                tools:itemCount="3" />
 
         </LinearLayout>
 
@@ -162,81 +225,88 @@
             android:layout_marginTop="0.5dp"
             android:divider="@android:color/darker_gray"
             android:orientation="vertical"
-            android:showDividers="middle">
+            android:showDividers="middle"
+            android:visibility="gone">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorBackground"
                 android:elevation="2dp"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="Comments"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fillViewport="true">
-
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:divider="@android:color/darker_gray"
-                    android:orientation="vertical"
-                    android:showDividers="middle">
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    android:text="Comments"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="8dp">
+                <ImageView
+                    android:id="@+id/closeComment"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_close"
+                    app:tint="?attr/colorPrimary"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
 
-                        <EditText
-                            android:id="@+id/comment"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/input_bg"
-                            android:ems="10"
-                            android:hint="Leave a comment..."
-                            android:inputType="textMultiLine|text|textImeMultiLine"
-                            android:maxHeight="120dp"
-                            android:minHeight="40dp"
-                            android:overScrollMode="always"
-                            android:paddingHorizontal="16dp"
-                            android:paddingVertical="8dp"
-                            android:scrollbars="vertical"
-                            android:textSize="16sp"
-                            tools:ignore="TouchTargetSizeCheck" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/input_bg"
+                    android:ems="10"
+                    android:hint="Leave a comment..."
+                    android:inputType="textMultiLine|text|textImeMultiLine"
+                    android:maxHeight="120dp"
+                    android:minHeight="40dp"
+                    android:overScrollMode="always"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:scrollbars="vertical"
+                    android:textSize="16sp"
+                    tools:ignore="TouchTargetSizeCheck" />
 
 
-                        <ImageView
-                            android:id="@+id/postComment"
-                            style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="8dp"
-                            android:clickable="true"
-                            android:minWidth="0dp"
-                            android:scaleType="centerInside"
-                            app:srcCompat="@drawable/ic_send"
-                            app:tint="?attr/colorPrimary"
-                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                <ImageView
+                    android:id="@+id/postComment"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_send"
+                    app:tint="?attr/colorPrimary"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-                    </LinearLayout>
+            </LinearLayout>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/comments"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/comments"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -250,16 +320,37 @@
             android:showDividers="middle"
             android:visibility="gone">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/colorBackground"
                 android:elevation="2dp"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:text="Description"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    android:text="Description"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/closeDescription"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_close"
+                    app:tint="?attr/colorPrimary"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
