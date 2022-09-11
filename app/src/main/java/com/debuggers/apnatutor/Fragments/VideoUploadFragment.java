@@ -94,6 +94,7 @@ public class VideoUploadFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentVideoUploadBinding.inflate(inflater, container, false);
@@ -110,19 +111,15 @@ public class VideoUploadFragment extends Fragment {
         binding.quizes.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.quizes.setAdapter(new QuizAdapter(quizzes));
         binding.addQuiz.setOnClickListener(view -> showQuizDialog());
-        binding.description.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(binding.description.hasFocus()){
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                    switch (motionEvent.getAction() & MotionEvent.ACTION_MASK){
-                        case MotionEvent.ACTION_SCROLL:
-                            view.getParent().requestDisallowInterceptTouchEvent(false);
-                            return true;
-                    }
+        binding.description.setOnTouchListener((view, motionEvent) -> {
+            if(binding.description.hasFocus()){
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                if ((motionEvent.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_SCROLL) {
+                    view.getParent().requestDisallowInterceptTouchEvent(false);
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
         return binding.getRoot();
@@ -135,7 +132,7 @@ public class VideoUploadFragment extends Fragment {
                 Toast.makeText(requireContext(), "Please select a course!", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if (binding.videoTitle.getText().toString().trim().isEmpty()) {
+            if (binding.videoTitle.getText() == null || binding.videoTitle.getText().toString().trim().isEmpty()) {
                 binding.videoTitle.setError("Valid video title is required!");
                 Toast.makeText(requireContext(), "Valid video title is required!", Toast.LENGTH_SHORT).show();
                 return false;
@@ -148,7 +145,7 @@ public class VideoUploadFragment extends Fragment {
                 Toast.makeText(requireContext(), "Please select a video!", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if (binding.description.getText().toString().trim().isEmpty()) {
+            if (binding.description.getText() == null || binding.description.getText().toString().trim().isEmpty()) {
                 binding.description.setError("Valid course name is required!");
                 return false;
             }
@@ -252,7 +249,7 @@ public class VideoUploadFragment extends Fragment {
         dialogBinding.cancel.setOnClickListener(view -> dialog.dismiss());
 
         dialogBinding.submit.setOnClickListener(view -> {
-            if (dialogBinding.question.getText().toString().trim().isEmpty()) {
+            if (dialogBinding.question.getText() == null || dialogBinding.question.getText().toString().trim().isEmpty()) {
                 dialogBinding.question.setError("A valid question is required!");
                 return;
             }
@@ -314,7 +311,7 @@ public class VideoUploadFragment extends Fragment {
                 requireContext().getContentResolver().getType(video));
 
         String courseId = courses.get(binding.selectCourse.getSelectedItemPosition()-1).get_id();
-        Video newVideo = new Video(binding.videoTitle.getText().toString().trim(), binding.description.getText().toString().trim(), null, null, quizzes);
+        Video newVideo = new Video(Objects.requireNonNull(binding.videoTitle.getText()).toString().trim(), Objects.requireNonNull(binding.description.getText()).toString().trim(), null, null, quizzes);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
         final NotificationCompat.Builder progressNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
@@ -395,5 +392,4 @@ public class VideoUploadFragment extends Fragment {
         binding.vdoName.setText(null);
         binding.description.setText(null);
     }
-
 }

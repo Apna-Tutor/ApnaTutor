@@ -3,11 +3,17 @@ package com.debuggers.apnatutor.Fragments;
 import static com.debuggers.apnatutor.App.NOTIFICATION_CHANNEL_ID;
 import static com.debuggers.apnatutor.App.QUEUE;
 
-import android.app.Notification;
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -16,16 +22,6 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 
-import android.provider.OpenableColumns;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -36,13 +32,11 @@ import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.FragmentCourseUploadBinding;
 import com.google.gson.Gson;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class CourseUploadFragment extends Fragment {
     FragmentCourseUploadBinding binding;
@@ -69,27 +63,22 @@ public class CourseUploadFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentCourseUploadBinding.inflate(inflater, container, false);
 
-        binding.thumbnail.setOnClickListener(view -> {
-            launcher.launch("image/*");
-        });
+        binding.thumbnail.setOnClickListener(view -> launcher.launch("image/*"));
 
-        binding.description.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(binding.description.hasFocus()){
-                    view.getParent().requestDisallowInterceptTouchEvent(true);
-                    switch (motionEvent.getAction() & MotionEvent.ACTION_MASK){
-                        case MotionEvent.ACTION_SCROLL:
-                            view.getParent().requestDisallowInterceptTouchEvent(false);
-                            return true;
-                    }
+        binding.description.setOnTouchListener((view, motionEvent) -> {
+            if(binding.description.hasFocus()){
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                if ((motionEvent.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_SCROLL) {
+                    view.getParent().requestDisallowInterceptTouchEvent(false);
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
 
         return binding.getRoot();
@@ -98,7 +87,7 @@ public class CourseUploadFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.done) {
-            if (binding.courseName.getText().toString().trim().isEmpty()) {
+            if (binding.courseName.getText() == null || binding.courseName.getText().toString().trim().isEmpty()) {
                 binding.courseName.setError("Valid course name is required!");
                 Toast.makeText(requireContext(), "Valid course name is required!", Toast.LENGTH_SHORT).show();
                 return false;
@@ -107,7 +96,7 @@ public class CourseUploadFragment extends Fragment {
                 Toast.makeText(requireContext(), "Please select thumbnail!", Toast.LENGTH_SHORT).show();
                 return false;
             }
-            if (binding.description.getText().toString().trim().isEmpty()) {
+            if (binding.description.getText() == null || binding.description.getText().toString().trim().isEmpty()) {
                 binding.description.setError("Please add a description!");
                 Toast.makeText(requireContext(), "Please add a description!", Toast.LENGTH_SHORT).show();
                 return false;
@@ -128,7 +117,7 @@ public class CourseUploadFragment extends Fragment {
                 requireContext().getContentResolver().openInputStream(thumbnail),
                 requireContext().getContentResolver().getType(thumbnail));
 
-        Course newCourse = new Course(binding.courseName.getText().toString().trim(), binding.description.toString().trim(), null);
+        Course newCourse = new Course(Objects.requireNonNull(binding.courseName.getText()).toString().trim(), binding.description.toString().trim(), null);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
         final NotificationCompat.Builder progressNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
@@ -172,7 +161,7 @@ public class CourseUploadFragment extends Fragment {
             notificationManager.notify(2, completeNotification.build());
         }) {
             @Override
-            protected Map<String, DataPart> getByteData() throws AuthFailureError {
+            protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> body = new HashMap<>();
                 body.put("thumbnail", thumbnailData);
                 return body;
