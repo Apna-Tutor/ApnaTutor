@@ -25,6 +25,9 @@ public class API {
     public static final String COURSE_DELETE = String.format("%s/courses/delete", BASE_URL);
 
     public static final String VIDEO_ADD = String.format("%s/courses/add/video", BASE_URL);
+    public static final String ADD_VIDEO_VIEW = String.format("%s/courses/video/add-view", BASE_URL);
+    public static final String ADD_VIDEO_LIKE = String.format("%s/courses/video/add-like", BASE_URL);
+    public static final String REMOVE_VIDEO_LIKE = String.format("%s/courses/video/remove-like", BASE_URL);
     public static final String COMMENT_ADD = String.format("%s/courses/add/comment", BASE_URL);
     public static final String QUIZ_ADD = String.format("%s/courses/add/quiz", BASE_URL);
     public static final String NOTES_ADD = String.format("%s/courses/add/notes", BASE_URL);

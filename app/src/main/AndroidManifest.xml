@@ -37,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".Activities.ActivityPlayer"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".Activities.MainStudentsActivity"
             android:exported="true" />

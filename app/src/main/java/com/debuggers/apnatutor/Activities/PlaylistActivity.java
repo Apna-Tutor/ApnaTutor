@@ -78,7 +78,7 @@ public class PlaylistActivity extends AppCompatActivity {
         binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
         binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
 
-        binding.allVideos.setAdapter(new VideoAdapter(course.getVideos(), (video, position) -> startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", Parcels.wrap(video)))));
+        binding.allVideos.setAdapter(new VideoAdapter(course.getVideos(), (video, position) -> startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", Parcels.wrap(video)).putExtra("COURSE", Parcels.wrap(course)))));
 
         if (course.getAuthor().equals(ME.get_id())) {
             Glide.with(this).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(binding.authorDp);
