@@ -56,11 +56,10 @@ public class MainTeacherActivity extends AppCompatActivity {
             }
         });
         binding.mainViewpager.setAdapter(new PagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
-        binding.mainViewpager.setOffscreenPageLimit(fragments.size());
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(@NonNull Menu menu) {
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu,menu);
         return super.onPrepareOptionsMenu(menu);
     }

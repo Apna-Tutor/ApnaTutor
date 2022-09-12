@@ -56,7 +56,6 @@ public class MainStudentsActivity extends AppCompatActivity {
             }
         });
         binding.mainViewpager.setAdapter(new PagerAdapter(getSupportFragmentManager(), getLifecycle(), fragments));
-        binding.mainViewpager.setOffscreenPageLimit(fragments.size());
     }
 
     @Override

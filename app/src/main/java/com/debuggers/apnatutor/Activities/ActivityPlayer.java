@@ -20,7 +20,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -143,10 +142,9 @@ public class ActivityPlayer extends AppCompatActivity {
         });
 
         if (!video.getViewedBy().contains(ME.get_id())) {
-            QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s&video=%s", API.ADD_VIDEO_VIEW, course.get_id(), video.get_id()), null, response -> {
-                Course updatedCourse = new Gson().fromJson(response.toString(), Course.class);
-                video.getViewedBy().add(ME.get_id());
-            }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show()) {
+            QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s&video=%s", API.ADD_VIDEO_VIEW, course.get_id(), video.get_id()), null,
+                    response -> video.getViewedBy().add(ME.get_id()),
+                    error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show()) {
                 @Override
                 public byte[] getBody() {
                     JSONObject object = new JSONObject();
@@ -164,7 +162,6 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.likeBtn.setEnabled(false);
             if (video.getLikedBy().contains(ME.get_id())) {
                 QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s&video=%s", API.REMOVE_VIDEO_LIKE, course.get_id(), video.get_id()), null, response -> {
-                    Course updatedCourse = new Gson().fromJson(response.toString(), Course.class);
                     video.getLikedBy().remove(ME.get_id());
                     binding.likeBtn.setEnabled(true);
                     binding.likeBtn.setImageResource(R.drawable.ic_like_outlined);
@@ -185,7 +182,6 @@ public class ActivityPlayer extends AppCompatActivity {
                 }).setRetryPolicy(new DefaultRetryPolicy());
             } else {
                 QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s&video=%s", API.ADD_VIDEO_LIKE, course.get_id(), video.get_id()), null, response -> {
-                    Course updatedCourse = new Gson().fromJson(response.toString(), Course.class);
                     video.getLikedBy().add(ME.get_id());
                     binding.likeBtn.setEnabled(true);
                     binding.likeBtn.setImageResource(R.drawable.ic_like_filled);
@@ -225,17 +221,9 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.initArea.setVisibility(View.VISIBLE);
         });
 
-        binding.openNotes.setOnClickListener(view -> {
-            startActivity(new Intent(this, ActivityNotes.class));
-        });
-
-        binding.openQuiz.setOnClickListener(view -> {
-            startActivity(new Intent(this, ActivityQuiz.class));
-        });
-
-        binding.openLeaderboard.setOnClickListener(view -> {
-            startActivity(new Intent(this, ActivityLeaderboard.class));
-        });
+        binding.openNotes.setOnClickListener(view -> startActivity(new Intent(this, ActivityNotes.class)));
+        binding.openQuiz.setOnClickListener(view -> startActivity(new Intent(this, ActivityQuiz.class)));
+        binding.openLeaderboard.setOnClickListener(view -> startActivity(new Intent(this, ActivityLeaderboard.class)));
     }
 
     @Override

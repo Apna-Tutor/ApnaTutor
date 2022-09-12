@@ -63,7 +63,6 @@ public class UploadFragment extends Fragment {
             }
         });
         binding.uploadViewpager.setAdapter(new PagerAdapter(getChildFragmentManager(), getLifecycle(), fragments));
-        binding.uploadViewpager.setOffscreenPageLimit(fragments.size());
 
         return binding.getRoot();
     }

@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.debuggers.apnatutor.Activities.PlaylistActivity;
 import com.debuggers.apnatutor.Adapters.CourseAdapter;
 import com.debuggers.apnatutor.Helpers.API;
@@ -66,6 +65,7 @@ public class TeacherHomeFragment extends Fragment {
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.done).setVisible(false);
+        menu.findItem(R.id.search).setVisible(true);
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
