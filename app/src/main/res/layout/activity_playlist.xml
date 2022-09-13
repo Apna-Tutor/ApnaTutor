@@ -132,7 +132,7 @@
                                     android:id="@+id/videosCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="100"
+                                    android:text=""
                                     android:textSize="12sp" />
 
                                 <androidx.cardview.widget.CardView
@@ -148,7 +148,7 @@
                                     android:id="@+id/followersCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="100"
+                                    android:text=""
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </LinearLayout>
