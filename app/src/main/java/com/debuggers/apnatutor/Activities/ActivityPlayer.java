@@ -230,6 +230,7 @@ public class ActivityPlayer extends AppCompatActivity {
                     return new Gson().toJson(newComment).getBytes(StandardCharsets.UTF_8);
                 }
             }).setRetryPolicy(new DefaultRetryPolicy());
+            binding.comment.setText("");
         });
 
         binding.openNotes.setOnClickListener(view -> startActivity(new Intent(this, ActivityNotes.class)));
