@@ -1,6 +1,8 @@
 package com.debuggers.apnatutor.Models;
 
 
+import static com.debuggers.apnatutor.App.ME;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -18,8 +20,8 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String userId, String comment) {
-        this.userId = userId;
+    public Comment(String comment) {
+        this.userId = ME.get_id();
         this.comment = comment;
         this.date = System.currentTimeMillis();
         this.likedBy = new ArrayList<>();

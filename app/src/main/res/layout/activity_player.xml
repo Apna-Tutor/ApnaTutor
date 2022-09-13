@@ -21,7 +21,8 @@
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:background="@android:color/black"
         android:keepScreenOn="true"
         app:buffered_color="@android:color/white"
         app:controller_layout_id="@layout/custom_exoplayer_controls"
@@ -276,51 +277,65 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/comment"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/input_bg"
-                    android:ems="10"
-                    android:hint="Leave a comment..."
-                    android:inputType="textMultiLine|text|textImeMultiLine"
-                    android:maxHeight="120dp"
-                    android:minHeight="40dp"
-                    android:overScrollMode="always"
+                    android:background="?android:attr/colorBackground"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="8dp"
-                    android:scrollbars="vertical"
-                    android:textSize="16sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:paddingVertical="8dp">
+
+                    <EditText
+                        android:id="@+id/comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/input_bg"
+                        android:ems="10"
+                        android:hint="Leave a comment..."
+                        android:inputType="textMultiLine|text|textImeMultiLine"
+                        android:maxHeight="120dp"
+                        android:minHeight="40dp"
+                        android:overScrollMode="always"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="8dp"
+                        android:scrollbars="vertical"
+                        android:textSize="16sp"
+                        tools:ignore="TouchTargetSizeCheck" />
 
 
-                <ImageView
-                    android:id="@+id/postComment"
-                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:clickable="true"
-                    android:minWidth="0dp"
-                    android:scaleType="centerInside"
-                    app:srcCompat="@drawable/ic_send"
-                    app:tint="?attr/colorPrimary"
-                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    <ImageView
+                        android:id="@+id/postComment"
+                        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:minWidth="0dp"
+                        android:scaleType="centerInside"
+                        app:srcCompat="@drawable/ic_send"
+                        app:tint="?attr/colorPrimary"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
+                </LinearLayout>
+
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/commentsRefresher"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/comments"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:paddingVertical="4dp" />
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/comments"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
 
         </LinearLayout>
 

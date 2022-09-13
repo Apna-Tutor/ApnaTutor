@@ -87,7 +87,7 @@ public class StudentHomeFragment extends Fragment {
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, API.COURSES_ALL, null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
             binding.homeRV.setAdapter(new CourseAdapter(courses, (course, position) -> {
-                startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", Parcels.wrap(course)));
+                startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()));
             }));
             binding.homeRefresher.setRefreshing(false);
         }, error -> {

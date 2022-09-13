@@ -15,7 +15,7 @@ public class Course {
     private String title;
     private String description;
     private String thumbnail;
-    private ArrayList<Video> videos;
+    private ArrayList<String> videos;
     private ArrayList<String> followedBy;
     private HashMap<String, String> leaderBoard;
 
@@ -72,11 +72,11 @@ public class Course {
         this.thumbnail = thumbnail;
     }
 
-    public ArrayList<Video> getVideos() {
+    public ArrayList<String> getVideos() {
         return videos;
     }
 
-    public void setVideos(ArrayList<Video> videos) {
+    public void setVideos(ArrayList<String> videos) {
         this.videos = videos;
     }
 

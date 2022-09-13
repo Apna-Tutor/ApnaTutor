@@ -20,17 +20,31 @@ public class API {
     public static final String COURSES_IN = String.format("%s/courses/in", BASE_URL);
     public static final String COURSES_FOLLOWED = String.format("%s/courses/followed", BASE_URL);
     public static final String COURSES_UPLOADED = String.format("%s/courses/uploaded", BASE_URL);
-    public static final String COURSE_ADD = String.format("%s/courses/add/course", BASE_URL);
+    public static final String COURSE_ADD = String.format("%s/courses/add", BASE_URL);
     public static final String COURSE_UPDATE = String.format("%s/courses/update", BASE_URL);
     public static final String COURSE_DELETE = String.format("%s/courses/delete", BASE_URL);
 
-    public static final String VIDEO_ADD = String.format("%s/courses/add/video", BASE_URL);
-    public static final String ADD_VIDEO_VIEW = String.format("%s/courses/video/add-view", BASE_URL);
-    public static final String ADD_VIDEO_LIKE = String.format("%s/courses/video/add-like", BASE_URL);
-    public static final String REMOVE_VIDEO_LIKE = String.format("%s/courses/video/remove-like", BASE_URL);
-    public static final String COMMENT_ADD = String.format("%s/courses/add/comment", BASE_URL);
-    public static final String QUIZ_ADD = String.format("%s/courses/add/quiz", BASE_URL);
-    public static final String NOTES_ADD = String.format("%s/courses/add/notes", BASE_URL);
+    public static final String VIDEO_BY_ID = String.format("%s/videos", BASE_URL);
+    public static final String VIDEOS_ALL = String.format("%s/videos/all", BASE_URL);
+    public static final String VIDEOS_IN = String.format("%s/videos/in", BASE_URL);
+    public static final String VIDEO_ADD = String.format("%s/videos/add", BASE_URL);
+    public static final String VIDEO_ADD_VIEW = String.format("%s/videos/add-view", BASE_URL);
+    public static final String VIDEO_ADD_LIKE = String.format("%s/videos/add-like", BASE_URL);
+    public static final String VIDEO_REMOVE_LIKE = String.format("%s/videos/remove-like", BASE_URL);
+    public static final String VIDEO_ADD_NOTES = String.format("%s/videos/add-notes", BASE_URL);
+    public static final String VIDEO_REMOVE_NOTES = String.format("%s/videos/remove-notes", BASE_URL);
+    public static final String VIDEO_UPDATE = String.format("%s/videos/update", BASE_URL);
+    public static final String VIDEO_DELETE = String.format("%s/videos/delete", BASE_URL);
+
+    public static final String COMMENT_BY_ID = String.format("%s/comments", BASE_URL);
+    public static final String COMMENTS_ALL = String.format("%s/comments/all", BASE_URL);
+    public static final String COMMENTS_IN = String.format("%s/comments/in", BASE_URL);
+    public static final String COMMENT_ADD = String.format("%s/comments/add", BASE_URL);
+    public static final String COMMENT_ADD_LIKE = String.format("%s/comments/add-like", BASE_URL);
+    public static final String COMMENT_REMOVE_LIKE = String.format("%s/comments/remove-like", BASE_URL);
+    public static final String COMMENT_UPDATE = String.format("%s/comments/update", BASE_URL);
+    public static final String COMMENT_DELETE = String.format("%s/comments/delete", BASE_URL);
+
 
     public static final String UPLOAD_THUMBNAIL = String.format("%s/upload/thumbnail", BASE_URL);
     public static final String UPLOAD_AVATAR = String.format("%s/upload/avatar", BASE_URL);

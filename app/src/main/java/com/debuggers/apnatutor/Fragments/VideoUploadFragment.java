@@ -150,7 +150,7 @@ public class VideoUploadFragment extends Fragment {
                 return false;
             }
             try {
-                upload();
+                upload(courses.get(binding.selectCourse.getSelectedItemPosition()-1).get_id());
             } catch (IOException e) {
                 Toast.makeText(requireContext(), "Something went wrong! Please try again.", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
@@ -299,7 +299,7 @@ public class VideoUploadFragment extends Fragment {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private void upload() throws IOException {
+    private void upload(String courseId) throws IOException {
         MultipartUploadRequest.DataPart thumbnailData = new MultipartUploadRequest.DataPart(
                 binding.thumbnailName.getText().toString().trim(),
                 requireContext().getContentResolver().openInputStream(thumbnail),
@@ -310,7 +310,6 @@ public class VideoUploadFragment extends Fragment {
                 requireContext().getContentResolver().openInputStream(video),
                 requireContext().getContentResolver().getType(video));
 
-        String courseId = courses.get(binding.selectCourse.getSelectedItemPosition()-1).get_id();
         Video newVideo = new Video(Objects.requireNonNull(binding.videoTitle.getText()).toString().trim(), Objects.requireNonNull(binding.description.getText()).toString().trim(), null, null, quizzes);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());

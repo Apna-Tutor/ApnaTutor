@@ -17,7 +17,7 @@ public class Video {
     private Long date;
     private List<String> likedBy;
     private List<String> viewedBy;
-    private List<Comment> comments;
+    private List<String> comments;
     private List<Note> notes;
     private List<Quiz> quiz;
 
@@ -101,11 +101,11 @@ public class Video {
         this.viewedBy = viewedBy;
     }
 
-    public List<Comment> getComments() {
+    public List<String> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<String> comments) {
         this.comments = comments;
     }
 
