@@ -6,4 +6,5 @@
     <string name="email">Email <font color='#FF0000'>*</font></string>
     <string name="password">Password <font color='#FF0000'>*</font></string>
     <string name="old_password">Old Password <font color='#FF0000'>*</font></string>
+    <string name="long_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam imperdiet placerat nunc non tempor. Proin auctor fringilla eros, id dignissim velit. Nullam hendrerit imperdiet lacus ac viverra. Morbi pulvinar ut nunc vel gravida. Proin dictum urna ac enim tincidunt pellentesque. Duis eget commodo neque.</string>
 </resources>

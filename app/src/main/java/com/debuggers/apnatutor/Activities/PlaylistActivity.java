@@ -6,13 +6,13 @@ import static com.debuggers.apnatutor.App.QUEUE;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -31,15 +31,9 @@ import com.debuggers.apnatutor.databinding.ActivityPlaylistBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 
 public class PlaylistActivity extends AppCompatActivity {
@@ -117,6 +111,17 @@ public class PlaylistActivity extends AppCompatActivity {
             binding.courseName.setText(course.getTitle());
             binding.videosCount.setText(String.format(Locale.getDefault(), "%d videos", course.getVideos().size()));
             binding.followersCount.setText(String.format(Locale.getDefault(), "%d followers", course.getFollowedBy().size()));
+
+            String truncate = course.getDescription().substring(0, 100) + "...";
+            binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+            binding.courseDescription.setOnClickListener(view -> {
+                if (binding.courseDescription.getText() == course.getDescription()) {
+                    binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+                } else
+                    binding.courseDescription.setText(course.getDescription());
+            });
+
         }, error -> {
             if (count[0] == 1) binding.playlistRefresher.setRefreshing(false);
             else count[0]++;
@@ -125,7 +130,8 @@ public class PlaylistActivity extends AppCompatActivity {
 
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?course=%s", API.VIDEOS_ALL, courseId), null, videosRes -> {
             videos.clear();
-            videos.addAll(new Gson().fromJson(videosRes.toString(), new TypeToken<List<Video>>() {}.getType()));
+            videos.addAll(new Gson().fromJson(videosRes.toString(), new TypeToken<List<Video>>() {
+            }.getType()));
             Objects.requireNonNull(binding.allVideos.getAdapter()).notifyDataSetChanged();
             if (count[0] == 1) binding.playlistRefresher.setRefreshing(false);
             else count[0]++;

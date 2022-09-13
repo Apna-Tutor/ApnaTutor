@@ -8,65 +8,73 @@
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable-v24/input_bg.xml" value="0.248" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable-v24/selected_tab_bg.xml" value="0.248" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable-v24/tab_bg.xml" value="0.248" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/dialog_bg.xml" value="0.2525" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_add.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_arrow_right.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_back.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_change_password.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_close.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_done.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_forward_10.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_fullscreen.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_fullscreen_exit.xml" value="0.279" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_help.xml" value="0.248" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_home.xml" value="0.248" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_like_filled.xml" value="0.2525" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_like_outlined.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_more.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_pause.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_person.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_play.xml" value="0.279" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_refresh.xml" value="0.2525" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_replay_10.xml" value="0.279" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_send.xml" value="0.2525" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_settings.xml" value="0.248" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_subscriptions.xml" value="0.248" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/drawable/ic_update_profile.xml" value="0.2525" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_authentication.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_change_password.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_player.xml" value="0.4" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_playlist.xml" value="0.3427362482369535" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_player.xml" value="0.264" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_playlist.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_quiz.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_settings.xml" value="0.4" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_students_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_teacher_main.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/activity_update_profile.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/custom_exoplayer_controlls.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/custom_exoplayer_controls.xml" value="0.4" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_course_upload.xml" value="0.264" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_library.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_login.xml" value="0.4" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_signup.xml" value="0.264" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_signup.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_student_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_teacher_home.xml" value="0.1" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_teacher_upload.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_upload.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/fragment_video_upload.xml" value="0.4" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_comment.xml" value="0.536" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_course.xml" value="0.4" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_course.xml" value="0.264" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_leaderboard.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_quiz_question.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_video.xml" value="0.8" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/item_video.xml" value="0.264" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/quiz_question.xml" value="0.264" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/quiz_question_dialog.xml" value="0.3133159268929504" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/quiz_question_dialog.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/quiz_questionadd.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/spinner_click_layout.xml" value="0.27447916666666666" />
         <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/layout/teacher_upload.xml" value="0.27447916666666666" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/menu/main_menu.xml" value="0.4" />
-        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/menu/playlist_menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android Studio/ApnaTutor/app/src/main/res/menu/main_menu.xml" value="0.1" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/activity_main.xml" value="0.36574074074074076" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/quiz_questionadd.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/spinner_click_layout.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/Apna_Tutor/app/src/main/res/layout/teacher_upload.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/drawable-v24/input_bg.xml" value="0.225" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_authentication.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_change_password.xml" value="0.28703703703703703" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_leaderboard.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_notes.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_player.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_playlist.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_quiz.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_settings.xml" value="0.3859375" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_students_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_teacher_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_update_password.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/activity_update_profile.xml" value="0.28703703703703703" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/add_course_dialog.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_course_upload.xml" value="0.1" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_home.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_library.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_login.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_profile.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_signup.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_upload.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/fragment_video_upload.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_comment.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_course.xml" value="0.19074074074074074" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_leaderboard.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_note.xml" value="0.3859375" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_quiz_question.xml" value="0.38697916666666665" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/item_video.xml" value="0.34629629629629627" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/quiz_question.xml" value="0.16203703703703703" />
+        <entry key="..\:/College/App-e Teaser/Apna Tutor/app/src/main/res/layout/quiz_question_dialog.xml" value="0.38697916666666665" />
         <entry key="..\:/Project/AndroidStudio/Apna_Tutor/app/src/main/res/layout/activity_main.xml" value="0.2359375" />
         <entry key="..\:/Project/AndroidStudio/Apna_Tutor/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
         <entry key="..\:/Project/AndroidStudio/Apna_Tutor/app/src/main/res/layout/fragment_home.xml" value="0.264" />
