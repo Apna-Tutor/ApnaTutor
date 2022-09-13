@@ -60,7 +60,7 @@ public class PlaylistActivity extends AppCompatActivity {
 
         binding.allVideos.setLayoutManager(new LinearLayoutManager(this));
         binding.allVideos.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.allVideos.setAdapter(new VideoAdapter(videos, (video, position) -> startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId))));
+        binding.allVideos.setAdapter(new VideoAdapter(videos, null, (video, position) -> startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId))));
 
         updateUi();
         binding.playlistRefresher.setOnRefreshListener(this::updateUi);

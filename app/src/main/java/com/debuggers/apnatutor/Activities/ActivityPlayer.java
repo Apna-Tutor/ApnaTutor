@@ -76,7 +76,9 @@ public class ActivityPlayer extends AppCompatActivity {
         binding.video.setPlayer(player);
 
         binding.videosRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.videosRv.setAdapter(new VideoAdapter(videos, (video, position) -> startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId))));
+        binding.videosRv.setAdapter(new VideoAdapter(videos, videoId, (video, position) -> {
+            if (!video.get_id().equals(videoId)) startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId));
+        }));
 
         binding.comments.setLayoutManager(new LinearLayoutManager(this));
         binding.comments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

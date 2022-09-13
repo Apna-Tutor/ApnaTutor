@@ -8,6 +8,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -27,11 +28,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
     private final List<Video> videos;
     private final List<Video> allVideos;
     private Context context;
+    private final String selectedId;
 
 
-    public VideoAdapter(List<Video> videos, setOnClickListener listener) {
+    public VideoAdapter(List<Video> videos, @Nullable String selectedId, setOnClickListener listener) {
         this.videos = videos;
         this.allVideos = new ArrayList<>(videos);
+        this.selectedId = selectedId;
         this.listener = listener;
     }
 
