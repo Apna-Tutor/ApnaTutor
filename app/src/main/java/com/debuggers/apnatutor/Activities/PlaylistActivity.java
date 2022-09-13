@@ -1,11 +1,14 @@
 package com.debuggers.apnatutor.Activities;
 
+import static android.content.ContentValues.TAG;
 import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spanned;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -40,6 +43,7 @@ public class PlaylistActivity extends AppCompatActivity {
     ActivityPlaylistBinding binding;
     String courseId;
     List<Video> videos;
+    boolean isExpanded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,19 +111,24 @@ public class PlaylistActivity extends AppCompatActivity {
                 })).setRetryPolicy(new DefaultRetryPolicy());
             }
 
-            Glide.with(this).load(course.getThumbnail()).into(binding.courseThumbnail);
             binding.courseName.setText(course.getTitle());
             binding.videosCount.setText(String.format(Locale.getDefault(), "%d videos", course.getVideos().size()));
             binding.followersCount.setText(String.format(Locale.getDefault(), "%d followers", course.getFollowedBy().size()));
 
-            String truncate = course.getDescription().substring(0, 100) + "...";
-            binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+
+            Spanned viewMore = HtmlCompat.fromHtml(course.getDescription().substring(0, 100) + "..." + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY);
+            Spanned viewLess = HtmlCompat.fromHtml(course.getDescription() + "..." + "<font color = 'blue'> <u>View Less</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY);
+            binding.courseDescription.setText(viewMore);
 
             binding.courseDescription.setOnClickListener(view -> {
-                if (binding.courseDescription.getText() == course.getDescription()) {
-                    binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                } else
-                    binding.courseDescription.setText(course.getDescription());
+                if (isExpanded) {
+                    binding.courseDescription.setText(viewMore);
+                    isExpanded = false;
+                }
+                else {
+                    binding.courseDescription.setText(viewLess);
+                    isExpanded = true;
+                }
             });
 
         }, error -> {

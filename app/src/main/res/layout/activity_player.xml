@@ -16,7 +16,8 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back" />
+        app:navigationIcon="@drawable/ic_back"
+        app:title=" "/>
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video"
