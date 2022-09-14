@@ -95,11 +95,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         }
 
         public void getAuthor(String id, setOnReadyAuthor listener) {
-            if (Objects.equals(id, ME.get_id())) {
-                user = ME;
+            if (user != null) {
                 listener.OnReadyAuthor(user, null);
             } else {
-                if (user != null) {
+                if (Objects.equals(id, ME.get_id())) {
+                    user = ME;
                     listener.OnReadyAuthor(user, null);
                 } else {
                     QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, id), null, response -> {

@@ -18,9 +18,6 @@
         android:theme="@style/Theme.ApnaTutor"
         tools:targetApi="31">
         <activity
-            android:name=".Activities.ActivityNotes"
-            android:exported="false" />
-        <activity
             android:name=".Activities.ActivityChangePassword"
             android:exported="false" />
         <activity
@@ -31,9 +28,6 @@
             android:exported="false" />
         <activity
             android:name=".Activities.PlaylistActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activities.ActivityLeaderboard"
             android:exported="false" />
         <activity
             android:name=".Activities.ActivityQuiz"

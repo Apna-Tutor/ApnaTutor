@@ -3,34 +3,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardElevation="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
     app:contentPadding="8dp">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:divider="@android:color/darker_gray"
+        android:orientation="vertical"
+        android:showDividers="middle">
 
-        <TextView
-            android:id="@+id/noteTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Title"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
-
-        <com.google.android.material.divider.MaterialDivider
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:dividerColor="@color/black" />
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/noteTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:text="Title"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/highlight_background_color"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/timeStamp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:text="01:05:09"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/noteContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam convallis a erat mollis tristique. Donec eget interdum augue. Pellentesque eros lacus, hendrerit a turpis et, pulvinar facilisis velit. Praesent consectetur sodales ex, at ultricies erat egestas pulvinar. Nam euismod dolor ut lectus aliquam aliquet. Mauris vehicula luctus consectetur."
             android:textAppearance="?attr/textAppearanceBody2" />
     </LinearLayout>

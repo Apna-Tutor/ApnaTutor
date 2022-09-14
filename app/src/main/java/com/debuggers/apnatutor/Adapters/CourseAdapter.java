@@ -122,11 +122,11 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         }
 
         public void getAuthor(String id, setOnReadyAuthor listener) {
-            if (Objects.equals(id, ME.get_id())) {
-                author = ME;
+            if (author != null) {
                 listener.OnReadyAuthor(author, null);
             } else {
-                if (author != null) {
+                if (Objects.equals(id, ME.get_id())) {
+                    author = ME;
                     listener.OnReadyAuthor(author, null);
                 } else {
                     QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, id), null, response -> {

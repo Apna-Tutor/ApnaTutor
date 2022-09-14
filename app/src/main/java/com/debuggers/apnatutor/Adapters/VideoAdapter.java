@@ -2,6 +2,7 @@ package com.debuggers.apnatutor.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.debuggers.apnatutor.Models.Video;
+import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.ItemVideoBinding;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +54,13 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         Glide.with(context).load(video.getThumbnail()).into(holder.binding.videoThumbnail);
         holder.binding.uploadDate.setText(new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date(video.getDate())));
         holder.binding.viewersCount.setText(String.format(Locale.getDefault(), "%d views", video.getViewedBy().size()));
+
+        if (video.get_id().equals(selectedId)) holder.binding.getRoot().setCardBackgroundColor(context.getColor(R.color.highlight_background_color));
+        else holder.binding.getRoot().setCardBackgroundColor(context.getColor(R.color.background_color));
+
+        Log.d("TAG", "onBindViewHolder: "+selectedId);
+        Log.d("TAG", "onBindViewHolder: "+video.get_id());
+        Log.d("TAG", "onBindViewHolder: "+video.get_id().equals(selectedId));
 
         holder.itemView.setOnClickListener(view -> listener.OnClickListener(video, position));
     }

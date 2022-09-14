@@ -246,9 +246,9 @@ public class VideoUploadFragment extends Fragment {
 
         dialogBinding.answer.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_activated_1, options));
 
-        dialogBinding.cancel.setOnClickListener(view -> dialog.dismiss());
+        dialogBinding.cancelNewQuiz.setOnClickListener(view -> dialog.dismiss());
 
-        dialogBinding.submit.setOnClickListener(view -> {
+        dialogBinding.submitNewQuiz.setOnClickListener(view -> {
             if (dialogBinding.question.getText() == null || dialogBinding.question.getText().toString().trim().isEmpty()) {
                 dialogBinding.question.setError("A valid question is required!");
                 return;

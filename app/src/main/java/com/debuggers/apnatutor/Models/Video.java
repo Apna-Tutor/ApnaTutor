@@ -20,6 +20,7 @@ public class Video {
     private List<String> comments;
     private List<Note> notes;
     private List<Quiz> quiz;
+    private List<Rank> leaderBoard;
 
     public Video() {
     }
@@ -35,6 +36,7 @@ public class Video {
         this.viewedBy = new ArrayList<>();
         this.comments = new ArrayList<>();
         this.notes = new ArrayList<>();
+        this.leaderBoard = new ArrayList<>();
     }
 
     public String get_id() {
@@ -123,6 +125,14 @@ public class Video {
 
     public void setQuiz(List<Quiz> quiz) {
         this.quiz = quiz;
+    }
+
+    public List<Rank> getLeaderBoard() {
+        return leaderBoard;
+    }
+
+    public void setLeaderBoard(List<Rank> leaderBoard) {
+        this.leaderBoard = leaderBoard;
     }
 
     @Override

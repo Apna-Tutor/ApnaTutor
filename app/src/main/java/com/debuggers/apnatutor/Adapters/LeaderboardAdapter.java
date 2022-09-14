@@ -3,12 +3,9 @@ package com.debuggers.apnatutor.Adapters;
 import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,28 +18,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.debuggers.apnatutor.Helpers.API;
-import com.debuggers.apnatutor.Models.Course;
+import com.debuggers.apnatutor.Models.Rank;
 import com.debuggers.apnatutor.Models.User;
 import com.debuggers.apnatutor.R;
-import com.debuggers.apnatutor.databinding.ItemCourseBinding;
+import com.debuggers.apnatutor.databinding.ItemLeaderboardBinding;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder> implements Filterable {
+public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder> {
     private final setOnClickListener listener;
-    private final List<Course> courses;
-    private final List<Course> allCourses;
+    private final List<Rank> ranks;
     private Context context;
 
-    public LeaderboardAdapter(List<Course> courses, setOnClickListener listener) {
-        this.courses = courses;
-        this.allCourses = new ArrayList<>(courses);
+    public LeaderboardAdapter(List<Rank> ranks, setOnClickListener listener) {
+        this.ranks = ranks;
         this.listener = listener;
     }
 
@@ -50,62 +42,32 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public LeaderboardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new LeaderboardViewHolder(ItemCourseBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+        return new LeaderboardViewHolder(ItemLeaderboardBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
-        Course course = courses.get(position);
-        Glide.with(context).load(course.getThumbnail()).into(holder.binding.courseThumbnail);
-        holder.binding.courseName.setText(course.getTitle());
-        holder.binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
-        holder.binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
-
-        holder.getAuthor(course.getAuthor(), (author, error) -> {
+        Rank rank = ranks.get(position);
+        holder.getAuthor(rank.getUserId(), (author, error) -> {
             if (error != null) {
                 Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
             } else if (author != null){
-                Glide.with(context).load(author.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
-                holder.binding.authorName.setText(author.getName());
+                Glide.with(context).load(author.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+                holder.binding.studentName.setText(author.getName());
+                holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%f%%", rank.getPercentage()));
+                holder.itemView.setOnClickListener(v-> listener.OnClickListener(author, position));
             }
         });
 
-        holder.itemView.setOnClickListener(v-> listener.OnClickListener(course, position));
     }
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return ranks.size();
     }
 
     public interface setOnClickListener {
-        void OnClickListener(Course course, int position);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                ArrayList<Course> tmp = new ArrayList<>();
-                if (constraint.toString().trim().isEmpty()) {
-                    tmp.addAll(allCourses);
-                } else {
-                    tmp.addAll(allCourses.stream().filter(course -> course.getTitle().toLowerCase(Locale.ROOT).contains(constraint.toString().trim().toLowerCase(Locale.ROOT))).collect(Collectors.toList()));
-                }
-                FilterResults results = new FilterResults();
-                results.values = tmp;
-                return results;
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                courses.clear();
-                courses.addAll((Collection<? extends Course>) results.values);
-                notifyDataSetChanged();
-            }
-        };
+        void OnClickListener(User user, int position);
     }
 
     public static class LeaderboardViewHolder extends RecyclerView.ViewHolder  {
@@ -113,20 +75,20 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             void OnReadyAuthor(@Nullable User author, @Nullable VolleyError error);
         }
 
-        ItemCourseBinding binding;
+        ItemLeaderboardBinding binding;
         private User author;
 
-        public LeaderboardViewHolder(@NonNull ItemCourseBinding binding) {
+        public LeaderboardViewHolder(@NonNull ItemLeaderboardBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         public void getAuthor(String id, setOnReadyAuthor listener) {
-            if (Objects.equals(id, ME.get_id())) {
-                author = ME;
+            if (author != null) {
                 listener.OnReadyAuthor(author, null);
             } else {
-                if (author != null) {
+                if (Objects.equals(id, ME.get_id())) {
+                    author = ME;
                     listener.OnReadyAuthor(author, null);
                 } else {
                     QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, id), null, response -> {

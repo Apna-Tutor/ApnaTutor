@@ -26,6 +26,113 @@
 
 
   <LinearLayout
+      android:id="@+id/exoMainButtonsLayout"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:gravity="center"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/rewind"
+        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="Rewind"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_replay_10"
+        app:tint="@android:color/white"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <ImageButton
+        android:id="@+id/play_pause"
+        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="Play | Pause"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_pause"
+        android:visibility="gone"
+        app:tint="@android:color/white" />
+
+    <ProgressBar
+        android:id="@+id/exoProgress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="16dp"
+        android:indeterminateTint="@android:color/white"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp" />
+
+    <ImageButton
+        android:id="@+id/forward"
+        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="Forward"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_forward_10"
+        app:tint="@android:color/white"
+        tools:ignore="TouchTargetSizeCheck" />
+  </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/exoTop"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:paddingVertical="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <ImageButton
+        android:id="@+id/backBtn"
+        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="Back"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_arrow_left"
+        app:tint="@android:color/white"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/addNote"
+        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="Add Note"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="4dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_add"
+        app:tint="@android:color/white"
+        tools:ignore="TouchTargetSizeCheck" />
+  </LinearLayout>
+
+  <LinearLayout
       android:id="@+id/exoSeekbarLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
@@ -94,69 +201,6 @@
         android:layout_height="wrap_content"
         tools:ignore="SpeakableTextPresentCheck" />
 
-  </LinearLayout>
-
-  <LinearLayout
-      android:id="@+id/exoMainButtonsLayout"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:gravity="center"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
-
-    <ImageButton
-        android:id="@+id/rewind"
-        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="16dp"
-        android:contentDescription="Rewind"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="4dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_replay_10"
-        app:tint="@android:color/white"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <ImageButton
-        android:id="@+id/play_pause"
-        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="16dp"
-        android:contentDescription="Play | Pause"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="4dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_pause"
-        android:visibility="gone"
-        app:tint="@android:color/white" />
-
-    <ProgressBar
-        android:id="@+id/exoProgress"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="16dp"
-        android:indeterminateTint="@android:color/white"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="4dp" />
-
-    <ImageButton
-        android:id="@+id/forward"
-        style="@android:style/Widget.Material.Toolbar.Button.Navigation"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="16dp"
-        android:contentDescription="Forward"
-        android:paddingHorizontal="4dp"
-        android:paddingVertical="4dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_forward_10"
-        app:tint="@android:color/white"
-        tools:ignore="TouchTargetSizeCheck" />
   </LinearLayout>
 
 

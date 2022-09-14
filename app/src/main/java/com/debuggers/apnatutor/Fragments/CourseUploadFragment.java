@@ -117,7 +117,7 @@ public class CourseUploadFragment extends Fragment {
                 requireContext().getContentResolver().openInputStream(thumbnail),
                 requireContext().getContentResolver().getType(thumbnail));
 
-        Course newCourse = new Course(Objects.requireNonNull(binding.courseName.getText()).toString().trim(), binding.description.toString().trim(), null);
+        Course newCourse = new Course(Objects.requireNonNull(binding.courseName.getText()).toString().trim(), Objects.requireNonNull(binding.description.getText()).toString().trim(), null);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
         final NotificationCompat.Builder progressNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)

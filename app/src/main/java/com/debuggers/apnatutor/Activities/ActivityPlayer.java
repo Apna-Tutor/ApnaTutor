@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -26,14 +27,19 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.debuggers.apnatutor.Adapters.CommentAdapter;
+import com.debuggers.apnatutor.Adapters.LeaderboardAdapter;
+import com.debuggers.apnatutor.Adapters.NotesAdapter;
 import com.debuggers.apnatutor.Adapters.VideoAdapter;
 import com.debuggers.apnatutor.Helpers.API;
 import com.debuggers.apnatutor.Models.Comment;
 import com.debuggers.apnatutor.Models.Course;
+import com.debuggers.apnatutor.Models.Note;
+import com.debuggers.apnatutor.Models.Rank;
 import com.debuggers.apnatutor.Models.User;
 import com.debuggers.apnatutor.Models.Video;
 import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.ActivityPlayerBinding;
+import com.debuggers.apnatutor.databinding.AddNoteDialogBinding;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
@@ -60,24 +66,31 @@ public class ActivityPlayer extends AppCompatActivity {
     Course course;
     List<Comment> comments;
     List<Video> videos;
+    List<Note> notes;
+    List<Rank> ranks;
 
-    @SuppressLint("SourceLockedOrientationActivity")
+    @SuppressLint({"SourceLockedOrientationActivity", "NotifyDataSetChanged"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        setSupportActionBar(binding.playerToolbar);
-        binding.playerToolbar.setNavigationOnClickListener(view -> finish());
+
+        fullscreen = false;
+        videoId = getIntent().getStringExtra("VIDEO");
+        courseId = getIntent().getStringExtra("COURSE");
 
         player = new ExoPlayer.Builder(this).build();
         comments = new ArrayList<>();
         videos = new ArrayList<>();
+        notes = new ArrayList<>();
+        ranks = new ArrayList<>();
         binding.video.setPlayer(player);
 
         binding.videosRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.videosRv.setAdapter(new VideoAdapter(videos, videoId, (video, position) -> {
-            if (!video.get_id().equals(videoId)) startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId));
+            if (!video.get_id().equals(videoId))
+                startActivity(new Intent(this, ActivityPlayer.class).putExtra("VIDEO", video.get_id()).putExtra("COURSE", courseId));
         }));
 
         binding.comments.setLayoutManager(new LinearLayoutManager(this));
@@ -86,9 +99,17 @@ public class ActivityPlayer extends AppCompatActivity {
 
         }));
 
-        fullscreen = false;
-        videoId = getIntent().getStringExtra("VIDEO");
-        courseId = getIntent().getStringExtra("COURSE");
+        binding.notes.setLayoutManager(new LinearLayoutManager(this));
+        binding.notes.setAdapter(new NotesAdapter(notes, (note, position) -> {
+            player.seekTo(note.getTimeStamp());
+            player.setPlayWhenReady(true);
+        }));
+
+        binding.leaderboard.setLayoutManager(new LinearLayoutManager(this));
+        binding.leaderboard.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        binding.leaderboard.setAdapter(new LeaderboardAdapter(ranks, (rank, position) -> {
+
+        }));
 
         fetchVideo();
         fetchCourse();
@@ -101,19 +122,76 @@ public class ActivityPlayer extends AppCompatActivity {
             else if (player.getPlaybackState() == Player.STATE_ENDED) {
                 player.seekTo(0);
                 player.setPlayWhenReady(true);
-            }
-            else player.setPlayWhenReady(true);
+            } else player.setPlayWhenReady(true);
         });
         binding.video.findViewById(R.id.forward).setOnClickListener(view -> player.seekTo(player.getCurrentPosition() + 10000));
         binding.video.findViewById(R.id.rewind).setOnClickListener(view -> player.seekTo(player.getCurrentPosition() - 10000));
         binding.video.findViewById(R.id.exo_fullscreen).setOnClickListener(view -> {
             if (fullscreen) {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                ((ImageButton) view).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_fullscreen));
             } else {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                ((ImageButton) view).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_fullscreen_exit));
             }
+        });
+        binding.video.findViewById(R.id.backBtn).setOnClickListener(view -> {
+            if (fullscreen) setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            else finish();
+        });
+        binding.video.findViewById(R.id.addNote).setOnClickListener(view -> {
+            player.pause();
+            AddNoteDialogBinding dialogBinding = AddNoteDialogBinding.inflate(getLayoutInflater());
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setView(dialogBinding.getRoot())
+                    .setCancelable(false)
+                    .create();
+            dialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_bg);
+            dialog.show();
+
+            dialogBinding.cancelNewNote.setOnClickListener(v -> {
+                player.setPlayWhenReady(true);
+                dialog.dismiss();
+            });
+
+            dialogBinding.submitNewNote.setOnClickListener(v -> {
+                if (video == null) {
+                    Toast.makeText(this, "Please wait till the video loads!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (dialogBinding.noteTitle.getText() == null || dialogBinding.noteTitle.getText().toString().trim().isEmpty()) {
+                    dialogBinding.noteTitle.setError("A valid title is required!");
+                    return;
+                }
+                if (dialogBinding.noteContent.getText() == null || dialogBinding.noteContent.getText().toString().trim().isEmpty()) {
+                    dialogBinding.noteContent.setError("A valid content is required!");
+                    return;
+                }
+
+                dialogBinding.noteTitle.setEnabled(false);
+                dialogBinding.noteContent.setEnabled(false);
+                dialogBinding.cancelNewNote.setEnabled(false);
+                dialogBinding.submitNewNote.setEnabled(false);
+
+                Note note = new Note(dialogBinding.noteTitle.getText().toString().trim(), dialogBinding.noteContent.getText().toString().trim(), player.getCurrentPosition());
+                QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?video=%s", API.VIDEO_ADD_NOTES, videoId), null, response -> {
+                    video = new Gson().fromJson(response.toString(), Video.class);
+                    notes.clear();
+                    notes.addAll(video.getNotes());
+                    Objects.requireNonNull(binding.notes.getAdapter()).notifyDataSetChanged();
+                    player.setPlayWhenReady(true);
+                    dialog.dismiss();
+                }, error -> {
+                    Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
+                    dialogBinding.noteTitle.setEnabled(true);
+                    dialogBinding.noteContent.setEnabled(true);
+                    dialogBinding.cancelNewNote.setEnabled(true);
+                    dialogBinding.submitNewNote.setEnabled(true);
+                }) {
+                    @Override
+                    public byte[] getBody() {
+                        return new Gson().toJson(note).getBytes(StandardCharsets.UTF_8);
+                    }
+                }).setRetryPolicy(new DefaultRetryPolicy());
+            });
         });
 
         player.addListener(new Player.Listener() {
@@ -142,7 +220,8 @@ public class ActivityPlayer extends AppCompatActivity {
                 ImageButton btn = binding.video.findViewById(R.id.play_pause);
                 if (isPlaying) btn.setImageResource(R.drawable.ic_pause);
                 else {
-                    if (player.getPlaybackState() == Player.STATE_ENDED) btn.setImageResource(R.drawable.ic_refresh);
+                    if (player.getPlaybackState() == Player.STATE_ENDED)
+                        btn.setImageResource(R.drawable.ic_refresh);
                     else btn.setImageResource(R.drawable.ic_play);
                 }
             }
@@ -215,6 +294,24 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.initArea.setVisibility(View.VISIBLE);
         });
 
+        binding.openNotes.setOnClickListener(view -> {
+            binding.notesArea.setVisibility(View.VISIBLE);
+            binding.initArea.setVisibility(View.GONE);
+        });
+        binding.closeNotes.setOnClickListener(view -> {
+            binding.notesArea.setVisibility(View.GONE);
+            binding.initArea.setVisibility(View.VISIBLE);
+        });
+
+        binding.openLeaderboard.setOnClickListener(view -> {
+            binding.leaderboardArea.setVisibility(View.VISIBLE);
+            binding.initArea.setVisibility(View.GONE);
+        });
+        binding.closeLeaderboard.setOnClickListener(view -> {
+            binding.leaderboardArea.setVisibility(View.GONE);
+            binding.initArea.setVisibility(View.VISIBLE);
+        });
+
         binding.postComment.setOnClickListener(view -> {
             if (binding.comment.getText().toString().trim().isEmpty()) {
                 binding.comment.setError("Can not post an empty comment!");
@@ -232,9 +329,7 @@ public class ActivityPlayer extends AppCompatActivity {
             }).setRetryPolicy(new DefaultRetryPolicy());
         });
 
-        binding.openNotes.setOnClickListener(view -> startActivity(new Intent(this, ActivityNotes.class)));
         binding.openQuiz.setOnClickListener(view -> startActivity(new Intent(this, ActivityQuiz.class)));
-        binding.openLeaderboard.setOnClickListener(view -> startActivity(new Intent(this, ActivityLeaderboard.class)));
     }
 
     @Override
@@ -253,6 +348,14 @@ public class ActivityPlayer extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (player != null) player.release();
+    }
+
+    @SuppressLint("SourceLockedOrientationActivity")
+    @Override
+    public void onBackPressed() {
+        if (fullscreen) setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        else super.onBackPressed();
+
     }
 
     @Override
@@ -274,6 +377,7 @@ public class ActivityPlayer extends AppCompatActivity {
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
         binding.video.setLayoutParams(params);
         binding.restContainer.setVisibility(View.GONE);
+        ((ImageButton) binding.video.findViewById(R.id.exo_fullscreen)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_fullscreen_exit));
         fullscreen = true;
     }
 
@@ -286,14 +390,21 @@ public class ActivityPlayer extends AppCompatActivity {
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         binding.video.setLayoutParams(params);
         binding.restContainer.setVisibility(View.VISIBLE);
+        ((ImageButton) binding.video.findViewById(R.id.exo_fullscreen)).setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_fullscreen));
         fullscreen = false;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private void fetchVideo() {
         QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?video=%s", API.VIDEO_BY_ID, videoId), null, courseRes -> {
             video = new Gson().fromJson(courseRes.toString(), Video.class);
+
             player.addMediaItem(MediaItem.fromUri(video.getVideoUrl()));
             player.prepare();
+
+            if (!video.getViewedBy().contains(ME.get_id())) {
+                addMyView();
+            }
 
             binding.videoTitle.setText(video.getTitle());
             binding.dateOfUpload.setText(new SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()).format(new Date(video.getDate())));
@@ -301,9 +412,14 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.likeBtn.setImageResource((video.getLikedBy().contains(ME.get_id())) ? R.drawable.ic_like_filled : R.drawable.ic_like_outlined);
             binding.videoDesciption.setText(video.getDescription());
 
-            if (!video.getViewedBy().contains(ME.get_id())) {
-                addMyView();
-            }
+            notes.clear();
+            notes.addAll(video.getNotes());
+            Objects.requireNonNull(binding.notes.getAdapter()).notifyDataSetChanged();
+
+            ranks.clear();
+            ranks.addAll(video.getLeaderBoard());
+            Objects.requireNonNull(binding.leaderboard.getAdapter()).notifyDataSetChanged();
+
         }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
     }
 
@@ -342,8 +458,9 @@ public class ActivityPlayer extends AppCompatActivity {
     private void fetchVideos() {
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?course=%s", API.VIDEOS_ALL, courseId), null, videosRes -> {
             videos.clear();
-            videos.addAll(new Gson().fromJson(videosRes.toString(), new TypeToken<List<Video>>(){}.getType()));
-            Objects.requireNonNull(binding.comments.getAdapter()).notifyDataSetChanged();
+            videos.addAll(new Gson().fromJson(videosRes.toString(), new TypeToken<List<Video>>() {
+            }.getType()));
+            Objects.requireNonNull(binding.videosRv.getAdapter()).notifyDataSetChanged();
         }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
     }
 
@@ -352,7 +469,8 @@ public class ActivityPlayer extends AppCompatActivity {
         binding.commentsRefresher.setRefreshing(true);
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?video=%s", API.COMMENTS_ALL, videoId), null, commentsRes -> {
             comments.clear();
-            comments.addAll(new Gson().fromJson(commentsRes.toString(), new TypeToken<List<Comment>>(){}.getType()));
+            comments.addAll(new Gson().fromJson(commentsRes.toString(), new TypeToken<List<Comment>>() {
+            }.getType()));
             Objects.requireNonNull(binding.comments.getAdapter()).notifyDataSetChanged();
             binding.commentsRefresher.setRefreshing(false);
         }, error -> {

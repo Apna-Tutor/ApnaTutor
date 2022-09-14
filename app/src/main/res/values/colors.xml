@@ -4,7 +4,8 @@
     <color name="primary_variant_color">#FF04519E</color>
     <color name="secondary_color">#FF40E0D0</color>
     <color name="secondary_variant_color">#FF288B81</color>
-    <color name="background_color">#FFEFEFEF</color>
+    <color name="background_color">#FFFFFFFF</color>
+    <color name="highlight_background_color">#F0F8FF</color>
     <color name="light_gray">#FFDCDCDC</color>
     <color name="success_color">#FF00FF00</color>
     <color name="error_color">#FFFF0000</color>

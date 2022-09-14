@@ -1,5 +1,7 @@
 package com.debuggers.apnatutor.Models;
 
+import static com.debuggers.apnatutor.App.ME;
+
 import org.parceler.Parcel;
 
 import java.util.Objects;
@@ -10,13 +12,13 @@ public class Note {
     private String userId;
     private String title;
     private String description;
-    private int timeStamp;
+    private long timeStamp;
 
     public Note() {
     }
 
-    public Note(String userId, String title, String description, int timeStamp) {
-        this.userId = userId;
+    public Note(String title, String description, long timeStamp) {
+        this.userId = ME.get_id();
         this.title = title;
         this.description = description;
         this.timeStamp = timeStamp;
@@ -54,11 +56,11 @@ public class Note {
         this.description = description;
     }
 
-    public int getTimeStamp() {
+    public long getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(int timeStamp) {
+    public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
 
