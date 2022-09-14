@@ -218,8 +218,12 @@ public class ActivityPlayer extends AppCompatActivity {
             public void onIsPlayingChanged(boolean isPlaying) {
                 Player.Listener.super.onIsPlayingChanged(isPlaying);
                 ImageButton btn = binding.video.findViewById(R.id.play_pause);
-                if (isPlaying) btn.setImageResource(R.drawable.ic_pause);
-                else {
+                if (isPlaying) {
+                    binding.video.setControllerShowTimeoutMs(3000);
+                    btn.setImageResource(R.drawable.ic_pause);
+                } else {
+                    binding.video.setControllerShowTimeoutMs(0);
+                    binding.video.showController();
                     if (player.getPlaybackState() == Player.STATE_ENDED)
                         btn.setImageResource(R.drawable.ic_refresh);
                     else btn.setImageResource(R.drawable.ic_play);

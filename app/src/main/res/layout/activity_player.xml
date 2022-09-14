@@ -7,17 +7,6 @@
     android:orientation="vertical"
     tools:context=".Activities.ActivityPlayer">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/playerToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="5dp"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back" />
-
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video"
         android:layout_width="match_parent"
@@ -173,10 +162,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
-                android:drawableEnd="@drawable/ic_arrow_right"
+                android:drawableEnd="@drawable/ic_arrow_down"
                 android:drawableTint="@android:color/secondary_text_light"
                 android:padding="16dp"
                 android:text="My Notes"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/openLeaderboard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="@android:color/secondary_text_light"
+                android:padding="16dp"
+                android:text="Leaderboard"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -190,19 +192,6 @@
                 android:drawableTint="@android:color/secondary_text_light"
                 android:padding="16dp"
                 android:text="Quiz"
-                android:textColor="@android:color/secondary_text_light"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/openLeaderboard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:drawableEnd="@drawable/ic_arrow_right"
-                android:drawableTint="@android:color/secondary_text_light"
-                android:padding="16dp"
-                android:text="Leaderboard"
                 android:textColor="@android:color/secondary_text_light"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -249,7 +238,8 @@
                 android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -356,7 +346,8 @@
                 android:elevation="2dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -401,6 +392,108 @@
                         android:text="TextView" />
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/notesArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0.5dp"
+            android:divider="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/colorBackground"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    android:text="Notes"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/closeNotes"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_close"
+                    app:tint="@android:color/secondary_text_light"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/notes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/leaderboardArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0.5dp"
+            android:divider="@android:color/darker_gray"
+            android:orientation="vertical"
+            android:showDividers="middle"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/colorBackground"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingVertical="8dp"
+                    android:text="Leaderboard"
+                    android:textColor="@android:color/secondary_text_light"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/closeLeaderboard"
+                    style="@android:style/Widget.Material.Toolbar.Button.Navigation"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:minWidth="0dp"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/ic_close"
+                    app:tint="@android:color/secondary_text_light"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
