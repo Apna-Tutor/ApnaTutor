@@ -70,10 +70,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        Glide.with(requireContext()).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(binding.userDP);
-        binding.userName.setText(ME.getName());
-        binding.userEmail.setText(ME.getEmail());
-        binding.userType.setText(ME.getType());
+
 
         binding.buttonChangeAvatar.setOnClickListener(view -> launcher.launch("image/*"));
 
@@ -88,6 +85,12 @@ public class ProfileFragment extends Fragment {
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUi();
     }
 
     @Override
@@ -164,5 +167,12 @@ public class ProfileFragment extends Fragment {
                 return body;
             }
         }).setRetryPolicy(new DefaultRetryPolicy());
+    }
+
+    private void updateUi() {
+        Glide.with(requireContext()).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(binding.userDP);
+        binding.userName.setText(ME.getName());
+        binding.userEmail.setText(ME.getEmail());
+        binding.userType.setText(ME.getType());
     }
 }

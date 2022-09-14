@@ -11,13 +11,12 @@
         android:id="@+id/playlistToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:elevation="5dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Playlist"/>
+        app:title="Playlist" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/playlistRefresher"

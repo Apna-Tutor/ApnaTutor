@@ -316,7 +316,8 @@ public class VideoUploadFragment extends Fragment {
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
         final NotificationCompat.Builder progressNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Uploading image...")
+                .setContentTitle("Creating new video")
+                .setContentText("Uploading image...")
                 .setOngoing(true)
                 .setProgress(100, 0, true)
                 .setOnlyAlertOnce(true);
