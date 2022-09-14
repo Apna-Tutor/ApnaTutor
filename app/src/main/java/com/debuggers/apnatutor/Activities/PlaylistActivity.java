@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.text.HtmlCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -117,9 +116,6 @@ public class PlaylistActivity extends AppCompatActivity {
                 if (binding.courseDescription.getMaxLines() == 5) binding.courseDescription.setMaxLines(Integer.MAX_VALUE);
                 else binding.courseDescription.setMaxLines(5);
             });
-
-            Log.d("TAG", "updateUi: "+binding.courseDescription.getLineCount());
-            Log.d("TAG", "updateUi: "+binding.courseDescription.getMaxLines());
 
         }, error -> {
             if (count[0] == 1) binding.playlistRefresher.setRefreshing(false);

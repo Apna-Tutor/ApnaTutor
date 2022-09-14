@@ -6,6 +6,7 @@ import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
@@ -387,6 +388,8 @@ public class VideoUploadFragment extends Fragment {
         binding.videoTitle.setText(null);
         binding.thumbnail.setImageURI(null);
         binding.video.setVideoURI(null);
+        binding.video.setVisibility(View.GONE);
+        binding.video.setVisibility(View.VISIBLE);
         binding.thumbnailName.setText(null);
         binding.vdoName.setText(null);
         binding.description.setText(null);
