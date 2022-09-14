@@ -107,7 +107,6 @@ public class PlaylistActivity extends AppCompatActivity {
                 })).setRetryPolicy(new DefaultRetryPolicy());
             }
 
-            Glide.with(this).load(course.getThumbnail()).into(binding.courseThumbnail);
             binding.courseName.setText(course.getTitle());
             binding.videosCount.setText(String.format(Locale.getDefault(), "%d videos", course.getVideos().size()));
             binding.followersCount.setText(String.format(Locale.getDefault(), "%d followers", course.getFollowedBy().size()));
