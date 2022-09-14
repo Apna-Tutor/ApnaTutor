@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.debuggers.apnatutor.Activities.PlaylistActivity;
 import com.debuggers.apnatutor.Adapters.CourseAdapter;
 import com.debuggers.apnatutor.Helpers.API;
@@ -31,8 +30,7 @@ import com.debuggers.apnatutor.databinding.FragmentHomeBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.parceler.Parcels;
-
+import java.util.Collections;
 import java.util.List;
 
 public class StudentHomeFragment extends Fragment {
@@ -86,9 +84,7 @@ public class StudentHomeFragment extends Fragment {
         binding.homeRefresher.setRefreshing(true);
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, API.COURSES_ALL, null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
-            binding.homeRV.setAdapter(new CourseAdapter(courses, (course, position) -> {
-                startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()));
-            }));
+            binding.homeRV.setAdapter(new CourseAdapter(courses, Collections.nCopies(courses.size(), null), (course, position) -> startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()))));
             binding.homeRefresher.setRefreshing(false);
         }, error -> {
             binding.homeRefresher.setRefreshing(false);

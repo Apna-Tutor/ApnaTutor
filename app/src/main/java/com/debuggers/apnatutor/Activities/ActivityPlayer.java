@@ -52,6 +52,7 @@ import org.json.JSONObject;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -60,15 +61,14 @@ import java.util.stream.Collectors;
 
 public class ActivityPlayer extends AppCompatActivity {
     ActivityPlayerBinding binding;
-    ExoPlayer player;
     boolean fullscreen;
+    ExoPlayer player;
     String videoId, courseId;
-    Video video;
-    Course course;
-    List<Comment> comments;
+    Video video; Course course;
+    List<Comment> comments; List<User> commentAuthors;
     List<Video> videos;
     List<Note> notes;
-    List<Rank> ranks;
+    List<Rank> ranks; List<User> rankUsers;
 
     @SuppressLint({"SourceLockedOrientationActivity", "NotifyDataSetChanged"})
     @Override
@@ -83,9 +83,11 @@ public class ActivityPlayer extends AppCompatActivity {
 
         player = new ExoPlayer.Builder(this).build();
         comments = new ArrayList<>();
+        commentAuthors = new ArrayList<>();
         videos = new ArrayList<>();
         notes = new ArrayList<>();
         ranks = new ArrayList<>();
+        rankUsers = new ArrayList<>();
         binding.video.setPlayer(player);
 
         binding.videosRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -96,7 +98,7 @@ public class ActivityPlayer extends AppCompatActivity {
 
         binding.comments.setLayoutManager(new LinearLayoutManager(this));
         binding.comments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.comments.setAdapter(new CommentAdapter(comments, (comment, position) -> {
+        binding.comments.setAdapter(new CommentAdapter(comments, commentAuthors, (comment, position) -> {
 
         }));
 
@@ -108,7 +110,7 @@ public class ActivityPlayer extends AppCompatActivity {
 
         binding.leaderboard.setLayoutManager(new LinearLayoutManager(this));
         binding.leaderboard.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.leaderboard.setAdapter(new LeaderboardAdapter(ranks, (rank, position) -> {
+        binding.leaderboard.setAdapter(new LeaderboardAdapter(ranks, rankUsers, (rank, position) -> {
 
         }));
 
@@ -325,6 +327,7 @@ public class ActivityPlayer extends AppCompatActivity {
             Comment newComment = new Comment(binding.comment.getText().toString().trim());
             QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?video=%s", API.COMMENT_ADD, videoId), null, response -> {
                 comments.add(0, new Gson().fromJson(response.toString(), Comment.class));
+                commentAuthors.add(0, null);
                 Objects.requireNonNull(binding.comments.getAdapter()).notifyItemInserted(0);
             }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show()) {
                 @Override
@@ -422,8 +425,8 @@ public class ActivityPlayer extends AppCompatActivity {
             notes.addAll(video.getNotes().stream().filter(note -> ME.get_id().equals(note.getUserId())).collect(Collectors.toList()));
             Objects.requireNonNull(binding.notes.getAdapter()).notifyDataSetChanged();
 
-            ranks.clear();
-            ranks.addAll(video.getLeaderBoard());
+            ranks.clear(); rankUsers.clear();
+            ranks.addAll(video.getLeaderBoard()); rankUsers.addAll(Collections.nCopies(ranks.size(), null));
             Objects.requireNonNull(binding.leaderboard.getAdapter()).notifyDataSetChanged();
 
         }, error -> Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
@@ -474,9 +477,8 @@ public class ActivityPlayer extends AppCompatActivity {
     private void fetchComments() {
         binding.commentsRefresher.setRefreshing(true);
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?video=%s", API.COMMENTS_ALL, videoId), null, commentsRes -> {
-            comments.clear();
-            comments.addAll(new Gson().fromJson(commentsRes.toString(), new TypeToken<List<Comment>>() {
-            }.getType()));
+            comments.clear(); commentAuthors.clear();
+            comments.addAll(new Gson().fromJson(commentsRes.toString(), new TypeToken<List<Comment>>() {}.getType())); commentAuthors.addAll(Collections.nCopies(comments.size(), null));
             Objects.requireNonNull(binding.comments.getAdapter()).notifyDataSetChanged();
             binding.commentsRefresher.setRefreshing(false);
         }, error -> {

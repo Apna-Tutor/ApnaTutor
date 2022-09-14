@@ -9,12 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.debuggers.apnatutor.Helpers.API;
@@ -31,10 +29,12 @@ import java.util.Objects;
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder> {
     private final setOnClickListener listener;
     private final List<Rank> ranks;
+    private final List<User> users;
     private Context context;
 
-    public LeaderboardAdapter(List<Rank> ranks, setOnClickListener listener) {
+    public LeaderboardAdapter(List<Rank> ranks, List<User> users, setOnClickListener listener) {
         this.ranks = ranks;
+        this.users = users;
         this.listener = listener;
     }
 
@@ -48,16 +48,20 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
         Rank rank = ranks.get(position);
-        holder.getAuthor(rank.getUserId(), (author, error) -> {
-            if (error != null) {
-                Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
-            } else if (author != null){
-                Glide.with(context).load(author.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
-                holder.binding.studentName.setText(author.getName());
+        if (Objects.equals(rank.getUserId(), ME.get_id())) {
+            Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+            holder.binding.studentName.setText(ME.getName());
+            holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%f%%", rank.getPercentage()));
+            holder.itemView.setOnClickListener(v-> listener.OnClickListener(ME, position));
+        } else {
+            QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, rank.getUserId()), null, response -> {
+                User user = new Gson().fromJson(response.toString(), User.class);
+                Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+                holder.binding.studentName.setText(user.getName());
                 holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%f%%", rank.getPercentage()));
-                holder.itemView.setOnClickListener(v-> listener.OnClickListener(author, position));
-            }
-        });
+                holder.itemView.setOnClickListener(v-> listener.OnClickListener(user, position));
+            }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
+        }
 
     }
 
@@ -71,34 +75,11 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     }
 
     public static class LeaderboardViewHolder extends RecyclerView.ViewHolder  {
-        public interface setOnReadyAuthor {
-            void OnReadyAuthor(@Nullable User author, @Nullable VolleyError error);
-        }
-
         ItemLeaderboardBinding binding;
-        private User author;
 
         public LeaderboardViewHolder(@NonNull ItemLeaderboardBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-        }
-
-        public void getAuthor(String id, setOnReadyAuthor listener) {
-            if (author != null) {
-                listener.OnReadyAuthor(author, null);
-            } else {
-                if (Objects.equals(id, ME.get_id())) {
-                    author = ME;
-                    listener.OnReadyAuthor(author, null);
-                } else {
-                    QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, id), null, response -> {
-                        author = new Gson().fromJson(response.toString(), User.class);
-                        listener.OnReadyAuthor(author, null);
-                    }, error -> {
-                        listener.OnReadyAuthor(null, error);
-                    })).setRetryPolicy(new DefaultRetryPolicy());
-                }
-            }
         }
     }
 }

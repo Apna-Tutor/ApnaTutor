@@ -31,8 +31,7 @@ import com.debuggers.apnatutor.databinding.FragmentHomeBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.parceler.Parcels;
-
+import java.util.Collections;
 import java.util.List;
 
 public class TeacherHomeFragment extends Fragment {
@@ -86,7 +85,7 @@ public class TeacherHomeFragment extends Fragment {
         binding.homeRefresher.setRefreshing(true);
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?author=%s", API.COURSES_UPLOADED, ME.get_id()), null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
-            binding.homeRV.setAdapter(new CourseAdapter(courses, (course, position) -> startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()))));
+            binding.homeRV.setAdapter(new CourseAdapter(courses, Collections.nCopies(courses.size(), null), (course, position) -> startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()))));
             binding.homeRefresher.setRefreshing(false);
         }, error -> {
             binding.homeRefresher.setRefreshing(false);
