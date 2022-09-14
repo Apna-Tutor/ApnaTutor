@@ -56,6 +56,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ActivityPlayer extends AppCompatActivity {
     ActivityPlayerBinding binding;
@@ -418,7 +419,7 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.videoDesciption.setText(video.getDescription());
 
             notes.clear();
-            notes.addAll(video.getNotes());
+            notes.addAll(video.getNotes().stream().filter(note -> ME.get_id().equals(note.getUserId())).collect(Collectors.toList()));
             Objects.requireNonNull(binding.notes.getAdapter()).notifyDataSetChanged();
 
             ranks.clear();
