@@ -16,7 +16,8 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_back" />
+        app:navigationIcon="@drawable/ic_back"
+        app:title="Playlist"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/playlistRefresher"
@@ -39,28 +40,6 @@
                     android:background="?android:attr/colorBackground"
                     android:elevation="5dp"
                     android:orientation="vertical">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toStartOf="@+id/courseThumbnail"
-                        app:layout_constraintStart_toStartOf="@+id/courseThumbnail">
-
-                        <ImageView
-                            android:id="@+id/courseThumbnail"
-                            android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:adjustViewBounds="true"
-                            android:scaleType="centerCrop"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintDimensionRatio="16:9"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:layout_conversion_absoluteHeight="0dp"
-                            tools:layout_conversion_absoluteWidth="379dp"
-                            tools:srcCompat="@drawable/ic_launcher_background" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -96,8 +75,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
                                 android:text="Course Name"
+                                android:singleLine="false"
                                 android:textColor="@android:color/primary_text_light"
-                                android:textSize="16sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
                                 tools:layout_conversion_absoluteHeight="33dp"
                                 tools:layout_conversion_absoluteWidth="300dp"
@@ -132,7 +112,7 @@
                                     android:id="@+id/videosCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="100"
+                                    android:text=""
                                     android:textSize="12sp" />
 
                                 <androidx.cardview.widget.CardView
@@ -148,7 +128,7 @@
                                     android:id="@+id/followersCount"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="100"
+                                    android:text=""
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </LinearLayout>
@@ -178,7 +158,8 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
-                        android:text="Course Description" />
+                        android:text="Course Description"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
