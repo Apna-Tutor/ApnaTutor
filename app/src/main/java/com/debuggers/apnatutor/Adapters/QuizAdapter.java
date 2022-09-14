@@ -41,8 +41,8 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         return quizzes.size();
     }
 
-    public interface setOnClickListener {
-        void OnClickListener(Course hall, int position);
+    public interface setOnSelectListener {
+        void OnSelectListener(Quiz quiz, String selection, int position);
     }
 
     public static class QuizViewHolder extends RecyclerView.ViewHolder {

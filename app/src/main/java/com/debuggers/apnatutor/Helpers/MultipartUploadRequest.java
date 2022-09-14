@@ -18,12 +18,6 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Map;
 
-/**
- * Custom request to make multipart header and upload file.
- * 
- * Sketch Project Studio
- * Created by Angga on 27/04/2016 12.05.
- */
 public class MultipartUploadRequest extends Request<String> {
     private final String twoHyphens = "--";
     private final String lineEnd = "\r\n";
@@ -124,25 +118,12 @@ public class MultipartUploadRequest extends Request<String> {
         mErrorListener.onErrorResponse(error);
     }
 
-    /**
-     * Parse data into data output stream.
-     *
-     * @param dataOutputStream data output stream handle file attachment
-     * @param data             loop through data
-     */
     private void dataParse(DataOutputStream dataOutputStream, Map<String, DataPart> data) throws IOException {
         for (Map.Entry<String, DataPart> entry : data.entrySet()) {
             buildDataPart(dataOutputStream, entry.getValue(), entry.getKey());
         }
     }
 
-    /**
-     * Write data file into header and data output stream.
-     *
-     * @param dataOutputStream data output stream handle data parsing
-     * @param dataFile         data byte as DataPart from collection
-     * @param inputName        name of data input
-     */
     private void buildDataPart(DataOutputStream dataOutputStream, DataPart dataFile, String inputName) throws IOException {
         dataOutputStream.writeBytes(twoHyphens + boundary + lineEnd);
         dataOutputStream.writeBytes("Content-Disposition: form-data; name=\"" + inputName + "\"; filename=\"" + dataFile.getFileName() + "\"" + lineEnd);
@@ -163,6 +144,7 @@ public class MultipartUploadRequest extends Request<String> {
             bufferSize = Math.min(bytesAvailable, maxBufferSize);
             bytesRead = fileInputStream.read(buffer, 0, bufferSize);
         }
+
         dataOutputStream.writeBytes(lineEnd);
     }
 
@@ -174,100 +156,45 @@ public class MultipartUploadRequest extends Request<String> {
         private byte[] content;
         private String type;
 
-        /**
-         * Default data part
-         */
-        public DataPart() {
-        }
+        public DataPart() {}
 
-        /**
-         * Constructor with data.
-         *
-         * @param name label of data
-         * @param data byte data
-         */
         public DataPart(String name, byte[] data) {
             fileName = name;
             content = data;
         }
 
-        /**
-         * Constructor with mime data type.
-         *
-         * @param name     label of data
-         * @param data     byte data
-         * @param mimeType mime data like "image/jpeg"
-         */
         public DataPart(String name, byte[] data, String mimeType) {
             fileName = name;
             content = data;
             type = mimeType;
         }
 
-        /**
-         * Constructor with mime data type.
-         *
-         * @param name     label of data
-         * @param inputStream     input stream
-         * @param mimeType mime data like "image/jpeg"
-         * @throws IOException
-         */
         public DataPart(String name, InputStream inputStream, String mimeType) throws IOException {
             fileName = name;
             type = mimeType;
             content = IOUtils.toByteArray(inputStream);
         }
 
-        /**
-         * Getter file name.
-         *
-         * @return file name
-         */
         public String getFileName() {
             return fileName;
         }
 
-        /**
-         * Setter file name.
-         *
-         * @param fileName string file name
-         */
         public void setFileName(String fileName) {
             this.fileName = fileName;
         }
 
-        /**
-         * Getter content.
-         *
-         * @return byte file data
-         */
         public byte[] getContent() {
             return content;
         }
 
-        /**
-         * Setter content.
-         *
-         * @param content byte file data
-         */
         public void setContent(byte[] content) {
             this.content = content;
         }
 
-        /**
-         * Getter mime type.
-         *
-         * @return mime type
-         */
         public String getType() {
             return type;
         }
 
-        /**
-         * Setter mime type.
-         *
-         * @param type mime type
-         */
         public void setType(String type) {
             this.type = type;
         }

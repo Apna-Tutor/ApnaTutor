@@ -11,48 +11,32 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:elevation="8dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:title="Authentication" />
 
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/authenticationTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="8dp"
-        android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp">
+        android:background="@android:color/transparent"
+        app:tabBackground="@drawable/tab_bg"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
+        app:tabUnboundedRipple="false">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/authenticationTab"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@android:color/transparent"
-            app:tabBackground="@drawable/tab_bg"
-            app:tabIndicator="@null"
-            app:tabPaddingEnd="0dp"
-            app:tabPaddingStart="0dp"
-            app:tabRippleColor="@null"
-            app:tabSelectedTextColor="?attr/colorPrimary"
-            app:tabTextColor="@android:color/white"
-            app:tabUnboundedRipple="false">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log In" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log In" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up" />
-
-        </com.google.android.material.tabs.TabLayout>
-    </LinearLayout>
+    </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/authenticationViewpager"

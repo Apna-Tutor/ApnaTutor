@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -366,7 +367,7 @@ public class VideoUploadFragment extends Fragment {
                     body.put("video", videoData);
                     return body;
                 }
-            }).setRetryPolicy(new DefaultRetryPolicy());
+            });
         }, error -> {
             notificationManager.cancel(1);
             NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
@@ -381,7 +382,7 @@ public class VideoUploadFragment extends Fragment {
                 body.put("thumbnail", thumbnailData);
                 return body;
             }
-        }).setRetryPolicy(new DefaultRetryPolicy());
+        });
 
         thumbnail = null; video = null; quizzes.clear();
         if (binding.quizes.getAdapter() != null) binding.quizes.getAdapter().notifyDataSetChanged();

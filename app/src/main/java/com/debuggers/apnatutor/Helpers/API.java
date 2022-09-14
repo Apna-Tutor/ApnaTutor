@@ -50,8 +50,8 @@ public class API {
     public static final String UPLOAD_AVATAR = String.format("%s/upload/avatar", BASE_URL);
     public static final String UPLOAD_VIDEO = String.format("%s/upload/video", BASE_URL);
 
-    public static String getQuery(Map<String, String> params) {
-        StringBuilder queryBuilder = new StringBuilder();
+    public static String getQuery(String url, Map<String, String> params) {
+        StringBuilder queryBuilder = new StringBuilder(url);
         queryBuilder.append("?");
         for (Map.Entry<String, String> entry : params.entrySet()) {
             queryBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");

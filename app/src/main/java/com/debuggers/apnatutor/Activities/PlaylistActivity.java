@@ -96,7 +96,9 @@ public class PlaylistActivity extends AppCompatActivity {
             } else {
                 QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, course.getAuthor()), null, userRes -> {
                     User author = new Gson().fromJson(userRes.toString(), User.class);
-                    Glide.with(this).load(author.getAvatar()).into(binding.authorDp);
+                    try {
+                        Glide.with(this).load(author.getAvatar()).into(binding.authorDp);
+                    } catch (Exception e) {e.printStackTrace();}
                     binding.authorName.setText(author.getName());
                     if (count[0] == 1) binding.playlistRefresher.setRefreshing(false);
                     else count[0]++;

@@ -167,7 +167,7 @@ public class CourseUploadFragment extends Fragment {
                 body.put("thumbnail", thumbnailData);
                 return body;
             }
-        }).setRetryPolicy(new DefaultRetryPolicy());
+        });
 
         thumbnail = null;
         binding.courseName.setText(null);
