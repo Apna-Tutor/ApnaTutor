@@ -158,6 +158,8 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginEnd="16dp"
                         android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="5"
                         android:text="Course Description"
                         android:textSize="16sp" />
 

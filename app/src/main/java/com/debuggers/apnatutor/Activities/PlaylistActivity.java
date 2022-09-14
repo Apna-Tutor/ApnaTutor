@@ -6,6 +6,7 @@ import static com.debuggers.apnatutor.App.QUEUE;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -110,16 +111,15 @@ public class PlaylistActivity extends AppCompatActivity {
             binding.courseName.setText(course.getTitle());
             binding.videosCount.setText(String.format(Locale.getDefault(), "%d videos", course.getVideos().size()));
             binding.followersCount.setText(String.format(Locale.getDefault(), "%d followers", course.getFollowedBy().size()));
-
-            String truncate = course.getDescription().substring(0, 100) + "...";
-            binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
+            binding.courseDescription.setText(course.getDescription());
 
             binding.courseDescription.setOnClickListener(view -> {
-                if (binding.courseDescription.getText() == course.getDescription()) {
-                    binding.courseDescription.setText(HtmlCompat.fromHtml(truncate + "<font color = 'blue'> <u>View More</u></font>", HtmlCompat.FROM_HTML_MODE_LEGACY));
-                } else
-                    binding.courseDescription.setText(course.getDescription());
+                if (binding.courseDescription.getMaxLines() == 5) binding.courseDescription.setMaxLines(Integer.MAX_VALUE);
+                else binding.courseDescription.setMaxLines(5);
             });
+
+            Log.d("TAG", "updateUi: "+binding.courseDescription.getLineCount());
+            Log.d("TAG", "updateUi: "+binding.courseDescription.getMaxLines());
 
         }, error -> {
             if (count[0] == 1) binding.playlistRefresher.setRefreshing(false);
