@@ -97,7 +97,7 @@ public class TeacherHomeFragment extends Fragment {
         binding.homeRefresher.setRefreshing(true);
         QUEUE.add(new JsonArrayRequest(Request.Method.GET, String.format("%s?author=%s", API.COURSES_UPLOADED, ME.get_id()), null, response -> {
             List<Course> courses = new Gson().fromJson(response.toString(), new TypeToken<List<Course>>(){}.getType());
-            binding.homeRV.setAdapter(new CourseAdapter(courses, new ArrayList<>(Collections.nCopies(courses.size(), null)), new CourseAdapter.setEventListeners() {
+            binding.homeRV.setAdapter(new CourseAdapter(courses, new CourseAdapter.setEventListeners() {
                 @Override
                 public void OnClickListener(Course course, int position) {
                     startActivity(new Intent(requireContext(), PlaylistActivity.class).putExtra("COURSE", course.get_id()));

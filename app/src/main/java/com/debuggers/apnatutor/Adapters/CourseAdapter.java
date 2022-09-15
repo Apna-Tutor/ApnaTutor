@@ -29,23 +29,25 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> implements Filterable {
     private final setEventListeners listener;
     private final List<Course> courses;
-    private final List<User> users;
     private final List<Course> allCourses;
     private Context context;
+    private final Map<Course, User> users;
 
-    public CourseAdapter(List<Course> courses, List<User> users, setEventListeners listener) {
+    public CourseAdapter(List<Course> courses, setEventListeners listener) {
         this.courses = courses;
         this.allCourses = new ArrayList<>(courses);
-        this.users = users;
         this.listener = listener;
+        this.users = new HashMap<>();
     }
 
     @NonNull
@@ -82,21 +84,22 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
 
         holder.binding.authorName.setText(null);
         holder.binding.authorDp.setImageDrawable(null);
-        if (users.get(position) != null) {
-            User user = users.get(position);
+        if (users.containsKey(course)) {
+            User user = users.get(course);
+            assert user != null;
             holder.binding.authorName.setText(user.getName());
             Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
         } else {
             if (course.getAuthor().equals(ME.get_id())) {
                 holder.binding.authorName.setText(ME.getName());
                 Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
-                users.set(position, ME);
+                users.put(course, ME);
             } else {
                 QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, course.getAuthor()), null, response -> {
                     User user = new Gson().fromJson(response.toString(), User.class);
                     holder.binding.authorName.setText(user.getName());
                     Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
-                    users.set(position, user);
+                    users.put(course, user);
                 }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
             }
         }
@@ -135,9 +138,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 courses.clear();
-                users.clear();
                 courses.addAll((Collection<? extends Course>) results.values);
-                users.addAll(Collections.nCopies(courses.size(), null));
                 notifyDataSetChanged();
             }
         };
