@@ -1,5 +1,7 @@
 package com.debuggers.apnatutor.Models;
 
+import static com.debuggers.apnatutor.App.ME;
+
 import org.parceler.Parcel;
 
 import java.util.Objects;
@@ -12,8 +14,8 @@ public class Rank {
     public Rank() {
     }
 
-    public Rank(String userId, Double percentage) {
-        this.userId = userId;
+    public Rank(Double percentage) {
+        this.userId = ME.get_id();
         this.percentage = percentage;
     }
 

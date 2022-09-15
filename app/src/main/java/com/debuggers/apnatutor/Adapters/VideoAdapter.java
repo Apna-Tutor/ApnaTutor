@@ -58,10 +58,6 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         if (video.get_id().equals(selectedId)) holder.binding.getRoot().setCardBackgroundColor(context.getColor(R.color.highlight_background_color));
         else holder.binding.getRoot().setCardBackgroundColor(context.getColor(R.color.background_color));
 
-        Log.d("TAG", "onBindViewHolder: "+selectedId);
-        Log.d("TAG", "onBindViewHolder: "+video.get_id());
-        Log.d("TAG", "onBindViewHolder: "+video.get_id().equals(selectedId));
-
         holder.itemView.setOnClickListener(view -> listener.OnClickListener(video, position));
     }
 

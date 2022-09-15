@@ -6,13 +6,11 @@ import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.annotation.SuppressLint;
 import android.database.Cursor;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -111,7 +109,7 @@ public class VideoUploadFragment extends Fragment {
         binding.video.setOnClickListener(view -> launcher.launch("video/*"));
 
         binding.quizes.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.quizes.setAdapter(new QuizAdapter(quizzes));
+        binding.quizes.setAdapter(new QuizAdapter(quizzes, new HashMap<>(), true));
         binding.addQuiz.setOnClickListener(view -> showQuizDialog());
         binding.description.setOnTouchListener((view, motionEvent) -> {
             if(binding.description.hasFocus()){
@@ -312,7 +310,9 @@ public class VideoUploadFragment extends Fragment {
                 requireContext().getContentResolver().openInputStream(video),
                 requireContext().getContentResolver().getType(video));
 
-        Video newVideo = new Video(Objects.requireNonNull(binding.videoTitle.getText()).toString().trim(), Objects.requireNonNull(binding.description.getText()).toString().trim(), null, null, quizzes);
+        Video newVideo = new Video(Objects.requireNonNull(binding.videoTitle.getText()).toString().trim(), Objects.requireNonNull(binding.description.getText()).toString().trim(), null, null, new ArrayList<>(quizzes));
+
+        int notificationId = (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(requireContext());
         final NotificationCompat.Builder progressNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
@@ -322,31 +322,31 @@ public class VideoUploadFragment extends Fragment {
                 .setOngoing(true)
                 .setProgress(100, 0, true)
                 .setOnlyAlertOnce(true);
-        notificationManager.notify(1, progressNotification.build());
+        notificationManager.notify(notificationId, progressNotification.build());
 
         QUEUE.add(new MultipartUploadRequest(Request.Method.PUT, API.UPLOAD_THUMBNAIL, thumbnailUrl -> {
             progressNotification.setContentText("Uploading video...");
-            notificationManager.notify(1, progressNotification.build());
+            notificationManager.notify(notificationId, progressNotification.build());
 
             newVideo.setThumbnail(thumbnailUrl);
             QUEUE.add(new MultipartUploadRequest(Request.Method.PUT, API.UPLOAD_VIDEO, videoUrl -> {
                 progressNotification.setContentText("Adding video to course...");
-                notificationManager.notify(1, progressNotification.build());
+                notificationManager.notify(notificationId, progressNotification.build());
 
                 newVideo.setVideoUrl(videoUrl);
                 QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.VIDEO_ADD, courseId), null, response -> {
-                    notificationManager.cancel(1);
+                    notificationManager.cancel(notificationId);
                     NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("New video added successfully!");
-                    notificationManager.notify(2, completeNotification.build());
+                    notificationManager.notify(Math.abs(notificationId - 1), completeNotification.build());
                 }, error -> {
-                    notificationManager.cancel(1);
+                    notificationManager.cancel(notificationId);
                     NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
                             .setContentTitle("Could not add new video!")
                             .setContentText(API.parseVolleyError(error));
-                    notificationManager.notify(2, completeNotification.build());
+                    notificationManager.notify(Math.abs(notificationId - 1), completeNotification.build());
                 }) {
                     @Override
                     public byte[] getBody() {
@@ -354,12 +354,12 @@ public class VideoUploadFragment extends Fragment {
                     }
                 }).setRetryPolicy(new DefaultRetryPolicy());
             }, error -> {
-                notificationManager.cancel(1);
+                notificationManager.cancel(notificationId);
                 NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Could not add new video!")
                         .setContentText(API.parseVolleyError(error));
-                notificationManager.notify(2, completeNotification.build());
+                notificationManager.notify(Math.abs(notificationId - 1), completeNotification.build());
             }) {
                 @Override
                 protected Map<String, DataPart> getByteData() {
@@ -369,12 +369,12 @@ public class VideoUploadFragment extends Fragment {
                 }
             });
         }, error -> {
-            notificationManager.cancel(1);
+            notificationManager.cancel(notificationId);
             NotificationCompat.Builder completeNotification = new NotificationCompat.Builder(requireContext(), NOTIFICATION_CHANNEL_ID)
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("Could not add new video!")
                     .setContentText(API.parseVolleyError(error));
-            notificationManager.notify(2, completeNotification.build());
+            notificationManager.notify(Math.abs(notificationId - 1), completeNotification.build());
         }) {
             @Override
             protected Map<String, DataPart> getByteData() {

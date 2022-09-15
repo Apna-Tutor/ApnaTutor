@@ -7,7 +7,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -15,6 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +56,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
@@ -57,6 +66,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ActivityPlayer extends AppCompatActivity {
@@ -69,6 +79,15 @@ public class ActivityPlayer extends AppCompatActivity {
     List<Video> videos;
     List<Note> notes;
     List<Rank> ranks; List<User> rankUsers;
+
+    private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+            Rank myRank = Parcels.unwrap(result.getData().getParcelableExtra("RANK"));
+            binding.openQuiz.setVisibility(View.GONE);
+            ranks.add(0, myRank); rankUsers.add(0, ME);
+            Objects.requireNonNull(binding.leaderboard.getAdapter()).notifyItemInserted(0);
+        }
+    });
 
     @SuppressLint({"SourceLockedOrientationActivity", "NotifyDataSetChanged"})
     @Override
@@ -338,7 +357,9 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.comment.setText("");
         });
 
-        binding.openQuiz.setOnClickListener(view -> startActivity(new Intent(this, ActivityQuiz.class)));
+        binding.openQuiz.setOnClickListener(view -> {
+            if (video != null) launcher.launch(new Intent(this, ActivityQuiz.class).putExtra("VIDEO", Parcels.wrap(video)));
+        });
     }
 
     @Override
@@ -420,6 +441,7 @@ public class ActivityPlayer extends AppCompatActivity {
             binding.viewsCount.setText(String.format(Locale.getDefault(), "%d views", video.getViewedBy().size()));
             binding.likeBtn.setImageResource((video.getLikedBy().contains(ME.get_id())) ? R.drawable.ic_like_filled : R.drawable.ic_like_outlined);
             binding.videoDesciption.setText(video.getDescription());
+            if (video.getLeaderBoard().contains(new Rank(0.0))) binding.openQuiz.setVisibility(View.GONE);
 
             notes.clear();
             notes.addAll(video.getNotes().stream().filter(note -> ME.get_id().equals(note.getUserId())).collect(Collectors.toList()));

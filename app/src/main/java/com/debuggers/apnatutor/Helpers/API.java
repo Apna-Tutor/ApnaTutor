@@ -28,6 +28,7 @@ public class API {
     public static final String VIDEOS_ALL = String.format("%s/videos/all", BASE_URL);
     public static final String VIDEOS_IN = String.format("%s/videos/in", BASE_URL);
     public static final String VIDEO_ADD = String.format("%s/videos/add", BASE_URL);
+    public static final String VIDEO_ADD_RANK = String.format("%s/videos/add-rank", BASE_URL);
     public static final String VIDEO_ADD_VIEW = String.format("%s/videos/add-view", BASE_URL);
     public static final String VIDEO_ADD_LIKE = String.format("%s/videos/add-like", BASE_URL);
     public static final String VIDEO_REMOVE_LIKE = String.format("%s/videos/remove-like", BASE_URL);

@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:padding="8dp"
     tools:context=".Fragments.VideoUploadFragment">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -80,8 +80,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="Enter the video name here"
             app:boxStrokeColor="?attr/colorPrimary"
             app:boxStrokeWidth="2dp">
@@ -213,7 +213,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginBottom="8dp"
             android:hint="Add video description here"
             app:boxStrokeColor="?attr/colorPrimary"
             app:boxStrokeWidth="2dp"
