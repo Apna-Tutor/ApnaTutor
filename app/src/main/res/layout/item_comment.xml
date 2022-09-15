@@ -74,7 +74,7 @@
                 android:clickable="true"
                 android:minWidth="0dp"
                 android:padding="4dp"
-                app:srcCompat="@drawable/ic_more"
+                app:srcCompat="@drawable/ic_delete"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         </LinearLayout>

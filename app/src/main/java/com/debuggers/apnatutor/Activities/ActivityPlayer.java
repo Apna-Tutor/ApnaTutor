@@ -117,8 +117,33 @@ public class ActivityPlayer extends AppCompatActivity {
 
         binding.comments.setLayoutManager(new LinearLayoutManager(this));
         binding.comments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.comments.setAdapter(new CommentAdapter(comments, commentAuthors, (comment, position) -> {
+        binding.comments.setAdapter(new CommentAdapter(comments, commentAuthors, new CommentAdapter.setOnEventListeners() {
+            @Override
+            public void OnClickListener(Comment comment, int position) {
 
+            }
+
+            @Override
+            public void OnDeleteListener(Comment comment, int position) {
+                AlertDialog dialog = new AlertDialog.Builder(ActivityPlayer.this)
+                        .setTitle("Be sure before delete!")
+                        .setMessage("Are you sure you want to delete this comment? All the likes and replies will be deleted permanently as soon as you delete the comment!")
+                        .setCancelable(false)
+                        .setPositiveButton("DELETE", (dialogInterface, i) -> {
+                            QUEUE.add(new JsonObjectRequest(Request.Method.DELETE, String.format("%s?comment=%s", API.COMMENT_DELETE, comment.get_id()), null, newCourseRes -> {
+                                comments.remove(comment);
+                                Objects.requireNonNull(binding.comments.getAdapter()).notifyItemRemoved(position);
+                                dialogInterface.dismiss();
+                                finish();
+                            }, error -> {
+                                dialogInterface.dismiss();
+                                Toast.makeText(ActivityPlayer.this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
+                            })).setRetryPolicy(new DefaultRetryPolicy());
+                        }).setNegativeButton("CANCEL", (dialogInterface, i) -> {
+                            dialogInterface.dismiss();
+                        }).create();
+                dialog.show();
+            }
         }));
 
         binding.notes.setLayoutManager(new LinearLayoutManager(this));

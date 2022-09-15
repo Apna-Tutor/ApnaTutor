@@ -4,8 +4,8 @@ import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -30,12 +30,12 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
-    private final setOnClickListener listener;
+    private final setOnEventListeners listener;
     private final List<Comment> comments;
     private final List<User> users;
     private Context context;
 
-    public CommentAdapter(List<Comment> comments, List<User> users, setOnClickListener listener) {
+    public CommentAdapter(List<Comment> comments, List<User> users, setOnEventListeners listener) {
         this.comments = comments;
         this.users = users;
         this.listener = listener;
@@ -77,6 +77,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         }
 
+        if (comment.getUserId().equals(ME.get_id())) holder.binding.commentOptions.setVisibility(View.VISIBLE);
+        else holder.binding.commentOptions.setVisibility(View.GONE);
+
+        holder.binding.commentOptions.setOnClickListener(view -> {
+            if (comment.getUserId().equals(ME.get_id())) listener.OnDeleteListener(comment, position);
+        });
+
         holder.itemView.setOnClickListener(v-> listener.OnClickListener(comment, position));
     }
 
@@ -85,8 +92,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         return comments.size();
     }
 
-    public interface setOnClickListener {
+    public interface setOnEventListeners {
         void OnClickListener(Comment comment, int position);
+        void OnDeleteListener(Comment comment, int position);
     }
 
     public static class CommentViewHolder extends RecyclerView.ViewHolder  {

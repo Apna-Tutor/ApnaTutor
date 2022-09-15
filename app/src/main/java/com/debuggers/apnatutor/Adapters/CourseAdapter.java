@@ -5,6 +5,7 @@ import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Filter;
@@ -60,6 +61,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.binding.courseName.setText(course.getTitle());
         holder.binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
         holder.binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
+        Log.d("TAG", "onBindViewHolder: "+course.getFollowedBy() + " - " + ME.get_id());
         if (course.getAuthor().equals(ME.get_id())) {
             holder.binding.courseOptions.setImageResource(R.drawable.ic_delete);
         } else {
@@ -78,12 +80,14 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
             }
         });
 
+        holder.binding.authorName.setText(null);
+        holder.binding.authorDp.setImageDrawable(null);
         if (users.get(position) != null) {
             User user = users.get(position);
             holder.binding.authorName.setText(user.getName());
             Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
         } else {
-            if (Objects.equals(course.getAuthor(), ME.get_id())) {
+            if (course.getAuthor().equals(ME.get_id())) {
                 holder.binding.authorName.setText(ME.getName());
                 Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
                 users.set(position, ME);
@@ -92,7 +96,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
                     User user = new Gson().fromJson(response.toString(), User.class);
                     holder.binding.authorName.setText(user.getName());
                     Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.authorDp);
-                    users.set(position, ME);
+                    users.set(position, user);
                 }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
             }
         }
