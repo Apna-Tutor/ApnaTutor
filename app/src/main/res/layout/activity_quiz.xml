@@ -17,6 +17,7 @@
         android:theme="?attr/actionBarTheme"
         app:contentInsetStartWithNavigation="0dp"
         app:navigationIcon="@drawable/ic_back"
+        app:titleTextAppearance="?attr/textAppearanceHeadline6"
         app:title="Quiz" />
 
     <androidx.recyclerview.widget.RecyclerView

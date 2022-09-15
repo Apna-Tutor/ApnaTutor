@@ -27,7 +27,7 @@
             android:id="@+id/studentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name of the Student"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -40,13 +40,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:text="Score:" />
+                android:text="Score: "
+                android:textAppearance="?attr/textAppearanceBody2"
+                />
 
             <TextView
                 android:id="@+id/student_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100%"
+                android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?attr/colorPrimary" />
         </LinearLayout>
 

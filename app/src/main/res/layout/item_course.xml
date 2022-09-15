@@ -70,8 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:text="Course Name"
-                    android:textColor="@android:color/primary_text_light"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:layout_conversion_absoluteHeight="33dp"
@@ -89,7 +88,7 @@
                         android:id="@+id/authorName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Author Name"
+                        android:textAppearance="?attr/textAppearanceBody2"
                         android:textSize="12sp" />
 
                     <androidx.cardview.widget.CardView
@@ -107,7 +106,7 @@
                         android:id="@+id/videosCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100"
+                        android:textAppearance="?attr/textAppearanceBody2"
                         android:textSize="12sp" />
 
                     <androidx.cardview.widget.CardView
@@ -123,7 +122,7 @@
                         android:id="@+id/followersCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100"
+                        android:textAppearance="?attr/textAppearanceBody2"
                         android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>

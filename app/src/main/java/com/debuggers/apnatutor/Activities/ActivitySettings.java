@@ -36,7 +36,7 @@ public class ActivitySettings extends AppCompatActivity {
 
         binding.settingsToolbar.setNavigationOnClickListener(view -> finish());
 
-        binding.createrMode.setChecked(ME.getType().equals(User.TEACHER));
+        binding.creatorMode.setChecked(ME.getType().equals(User.TEACHER));
 
         binding.updateProfile.setOnClickListener(view -> {
             startActivity(new Intent(ActivitySettings.this,ActivityUpdateProfile.class));
@@ -47,7 +47,7 @@ public class ActivitySettings extends AppCompatActivity {
         });
 
         // Creator Mode Switch
-        binding.createrMode.setOnCheckedChangeListener((compoundButton, b) -> {
+        binding.creatorMode.setOnCheckedChangeListener((compoundButton, b) -> {
             compoundButton.setEnabled(false);
             String type;
             if (b) {

@@ -39,8 +39,7 @@
                 android:layout_marginBottom="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Video Name long long long long long Video Name long long long long long"
-                android:textColor="@android:color/primary_text_light"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 tools:layout_conversion_absoluteHeight="33dp"
@@ -58,7 +57,7 @@
                     android:id="@+id/viewersCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Viewers Count"
+                    android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="12sp" />
 
                 <androidx.cardview.widget.CardView
@@ -76,7 +75,7 @@
                     android:id="@+id/uploadDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Date"
+                    android:textAppearance="?attr/textAppearanceBody2"
                     android:textSize="12sp" />
 
             </LinearLayout>
