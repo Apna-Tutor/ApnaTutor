@@ -7,10 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -18,10 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -66,7 +60,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ActivityPlayer extends AppCompatActivity {
@@ -117,7 +110,7 @@ public class ActivityPlayer extends AppCompatActivity {
 
         binding.comments.setLayoutManager(new LinearLayoutManager(this));
         binding.comments.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.comments.setAdapter(new CommentAdapter(comments, commentAuthors, new CommentAdapter.setOnEventListeners() {
+        binding.comments.setAdapter(new CommentAdapter(comments, new CommentAdapter.setOnEventListeners() {
             @Override
             public void OnClickListener(Comment comment, int position) {
 
@@ -201,7 +194,7 @@ public class ActivityPlayer extends AppCompatActivity {
 
         binding.leaderboard.setLayoutManager(new LinearLayoutManager(this));
         binding.leaderboard.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        binding.leaderboard.setAdapter(new LeaderboardAdapter(ranks, rankUsers, (rank, position) -> {
+        binding.leaderboard.setAdapter(new LeaderboardAdapter(ranks, (rank, position) -> {
 
         }));
 

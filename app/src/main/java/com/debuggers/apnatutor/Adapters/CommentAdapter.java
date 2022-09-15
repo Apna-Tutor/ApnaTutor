@@ -26,20 +26,22 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private final setOnEventListeners listener;
     private final List<Comment> comments;
-    private final List<User> users;
+    private final Map<Comment, User> users;
     private Context context;
 
-    public CommentAdapter(List<Comment> comments, List<User> users, setOnEventListeners listener) {
+    public CommentAdapter(List<Comment> comments, setOnEventListeners listener) {
         this.comments = comments;
-        this.users = users;
         this.listener = listener;
+        this.users = new HashMap<>();
     }
 
     @NonNull
@@ -59,21 +61,22 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         holder.binding.commentUser.setText(null);
         holder.binding.userPicture.setImageDrawable(null);
 
-        if (users.get(position) != null) {
-            User user = users.get(position);
+        if (users.containsKey(comment)) {
+            User user = users.get(comment);
+            assert user != null;
             holder.binding.commentUser.setText(user.getName());
             Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.userPicture);
         } else {
             if (Objects.equals(comment.getUserId(), ME.get_id())) {
                 holder.binding.commentUser.setText(ME.getName());
                 Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.userPicture);
-                users.set(position, ME);
+                users.put(comment, ME);
             } else {
                 QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, comment.getUserId()), null, response -> {
                     User user = new Gson().fromJson(response.toString(), User.class);
                     holder.binding.commentUser.setText(user.getName());
                     Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.userPicture);
-                    users.set(position, user);
+                    users.put(comment, user);
                 }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
             }
         }

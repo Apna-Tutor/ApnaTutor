@@ -22,20 +22,22 @@ import com.debuggers.apnatutor.R;
 import com.debuggers.apnatutor.databinding.ItemLeaderboardBinding;
 import com.google.gson.Gson;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder> {
     private final setOnClickListener listener;
     private final List<Rank> ranks;
-    private final List<User> users;
+    private final Map<Rank, User> users;
     private Context context;
 
-    public LeaderboardAdapter(List<Rank> ranks, List<User> users, setOnClickListener listener) {
+    public LeaderboardAdapter(List<Rank> ranks, setOnClickListener listener) {
         this.ranks = ranks;
-        this.users = users;
         this.listener = listener;
+        this.users = new HashMap<>();
     }
 
     @NonNull
@@ -48,21 +50,34 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     @Override
     public void onBindViewHolder(@NonNull LeaderboardViewHolder holder, int position) {
         Rank rank = ranks.get(position);
-        if (Objects.equals(rank.getUserId(), ME.get_id())) {
-            Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
-            holder.binding.studentName.setText(ME.getName());
-            holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%.02f%%", rank.getPercentage()));
-            holder.itemView.setOnClickListener(v-> listener.OnClickListener(ME, position));
+
+        holder.binding.studentName.setText(null);
+        holder.binding.studentDp.setImageDrawable(null);
+
+        if (users.containsKey(rank)) {
+            User user = users.get(rank);
+            assert user != null;
+            Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+            holder.binding.studentName.setText(user.getName());
         } else {
-            QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, rank.getUserId()), null, response -> {
-                User user = new Gson().fromJson(response.toString(), User.class);
-                Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
-                holder.binding.studentName.setText(user.getName());
-                holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%f%%", rank.getPercentage()));
-                holder.itemView.setOnClickListener(v-> listener.OnClickListener(user, position));
-            }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
+            if (Objects.equals(rank.getUserId(), ME.get_id())) {
+                Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+                holder.binding.studentName.setText(ME.getName());
+                users.put(rank, ME);
+            } else {
+                QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, rank.getUserId()), null, response -> {
+                    User user = new Gson().fromJson(response.toString(), User.class);
+                    Glide.with(context).load(user.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
+                    holder.binding.studentName.setText(user.getName());
+                    users.put(rank, user);
+                }, error -> Toast.makeText(context, API.parseVolleyError(error), Toast.LENGTH_SHORT).show())).setRetryPolicy(new DefaultRetryPolicy());
+            }
         }
 
+        holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%.02f%%", rank.getPercentage()));
+        holder.itemView.setOnClickListener(v-> {
+            if (users.containsKey(rank)) listener.OnClickListener(users.get(rank), position);
+        });
     }
 
     @Override
