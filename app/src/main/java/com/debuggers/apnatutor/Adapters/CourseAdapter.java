@@ -33,13 +33,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> implements Filterable {
-    private final setOnClickListener listener;
+    private final setEventListeners listener;
     private final List<Course> courses;
     private final List<User> users;
     private final List<Course> allCourses;
     private Context context;
 
-    public CourseAdapter(List<Course> courses, List<User> users, setOnClickListener listener) {
+    public CourseAdapter(List<Course> courses, List<User> users, setEventListeners listener) {
         this.courses = courses;
         this.allCourses = new ArrayList<>(courses);
         this.users = users;
@@ -60,6 +60,23 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.binding.courseName.setText(course.getTitle());
         holder.binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
         holder.binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
+        if (course.getAuthor().equals(ME.get_id())) {
+            holder.binding.courseOptions.setImageResource(R.drawable.ic_delete);
+        } else {
+            if (course.getFollowedBy().contains(ME.get_id())) {
+                holder.binding.courseOptions.setImageResource(R.drawable.ic_subscriptions_filled);
+            } else {
+                holder.binding.courseOptions.setImageResource(R.drawable.ic_subscription_outline);
+            }
+        }
+
+        holder.binding.courseOptions.setOnClickListener(view -> {
+            if (course.getAuthor().equals(ME.get_id())) {
+                listener.OnDeleteListener(course, position);
+            } else {
+                listener.OnFollowListener(course, !course.getFollowedBy().contains(ME.get_id()), position);
+            }
+        });
 
         if (users.get(position) != null) {
             User user = users.get(position);
@@ -88,8 +105,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         return courses.size();
     }
 
-    public interface setOnClickListener {
+    public interface setEventListeners {
         void OnClickListener(Course course, int position);
+        void OnFollowListener(Course course, boolean follow, int position);
+        void OnDeleteListener(Course course, int position);
     }
 
     @Override

@@ -21,6 +21,8 @@ public class API {
     public static final String COURSES_FOLLOWED = String.format("%s/courses/followed", BASE_URL);
     public static final String COURSES_UPLOADED = String.format("%s/courses/uploaded", BASE_URL);
     public static final String COURSE_ADD = String.format("%s/courses/add", BASE_URL);
+    public static final String COURSE_ADD_FOLLOWER = String.format("%s/courses/add-follower", BASE_URL);
+    public static final String COURSE_REMOVE_FOLLOWER = String.format("%s/courses/remove-follower", BASE_URL);
     public static final String COURSE_UPDATE = String.format("%s/courses/update", BASE_URL);
     public static final String COURSE_DELETE = String.format("%s/courses/delete", BASE_URL);
 
