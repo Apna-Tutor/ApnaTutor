@@ -27,6 +27,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name"
                 android:layout_width="match_parent"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName|textCapWords" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -44,6 +45,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
                 android:layout_width="match_parent"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_height="wrap_content"
                 android:autofillHints="emailAddress"
                 android:inputType="textEmailAddress" />
@@ -63,6 +65,7 @@
                 android:id="@+id/pass1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,6 +82,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass2"
                 android:layout_width="match_parent"
+                android:textAppearance="?attr/textAppearanceBody1"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -88,6 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:textAppearance="?attr/textAppearanceBody2"
             android:checked="true"
             android:text="Keep me logged in"
             tools:ignore="HardcodedText" />
