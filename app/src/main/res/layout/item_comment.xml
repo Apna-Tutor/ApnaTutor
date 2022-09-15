@@ -47,8 +47,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:singleLine="true"
-                    android:text="User Name"
-                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textSize="16sp" />
 
                 <Space
@@ -61,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:text="September 12, 2002"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
                     android:textSize="10sp" />
 
             </LinearLayout>
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
             android:layout_marginBottom="4dp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam imperdiet placerat nunc non tempor." />
+            android:textAppearance="?attr/textAppearanceBody2" />
 
         <LinearLayout
             android:layout_width="wrap_content"

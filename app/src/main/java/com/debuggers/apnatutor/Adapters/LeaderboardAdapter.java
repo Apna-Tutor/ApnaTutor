@@ -51,7 +51,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         if (Objects.equals(rank.getUserId(), ME.get_id())) {
             Glide.with(context).load(ME.getAvatar()).placeholder(R.drawable.ic_profile).into(holder.binding.studentDp);
             holder.binding.studentName.setText(ME.getName());
-            holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%f%%", rank.getPercentage()));
+            holder.binding.studentScore.setText(String.format(Locale.getDefault(),"%.02f%%", rank.getPercentage()));
             holder.itemView.setOnClickListener(v-> listener.OnClickListener(ME, position));
         } else {
             QUEUE.add(new JsonObjectRequest(Request.Method.GET, String.format("%s?user=%s", API.USER_BY_ID, rank.getUserId()), null, response -> {
