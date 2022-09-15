@@ -4,6 +4,7 @@ import static com.debuggers.apnatutor.App.ME;
 import static com.debuggers.apnatutor.App.QUEUE;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,12 +78,22 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             }
         }
 
+        if (comment.getLikedBy().contains(ME.get_id())) holder.binding.commentLikeBtn.setTextColor(context.getColor(R.color.primary_color));
+        else holder.binding.commentLikeBtn.setTextColor(context.getColor(android.R.color.darker_gray));
+
+        holder.binding.likeCount.setText(String.valueOf(comment.getLikedBy().size()));
+        holder.binding.replyCount.setText(String.valueOf(comment.getReplies().size()));
+
         if (comment.getUserId().equals(ME.get_id())) holder.binding.commentOptions.setVisibility(View.VISIBLE);
         else holder.binding.commentOptions.setVisibility(View.GONE);
 
         holder.binding.commentOptions.setOnClickListener(view -> {
             if (comment.getUserId().equals(ME.get_id())) listener.OnDeleteListener(comment, position);
         });
+
+        holder.binding.commentLikeBtn.setOnClickListener(view -> listener.OnLikeListener(comment, !comment.getLikedBy().contains(ME.get_id()), position));
+
+        holder.binding.commentReplyBtn.setOnClickListener(view -> listener.OnReplyListener(comment, position));
 
         holder.itemView.setOnClickListener(v-> listener.OnClickListener(comment, position));
     }
@@ -95,6 +106,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     public interface setOnEventListeners {
         void OnClickListener(Comment comment, int position);
         void OnDeleteListener(Comment comment, int position);
+        void OnLikeListener(Comment comment, boolean like, int position);
+        void OnReplyListener(Comment comment, int position);
     }
 
     public static class CommentViewHolder extends RecyclerView.ViewHolder  {

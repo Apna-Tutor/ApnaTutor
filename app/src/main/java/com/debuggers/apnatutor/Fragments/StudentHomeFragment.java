@@ -125,7 +125,6 @@ public class StudentHomeFragment extends Fragment {
                     } else {
                         QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.COURSE_REMOVE_FOLLOWER, course.get_id()), null, courseRes -> {
                             Course newCourse = new Gson().fromJson(courseRes.toString(), Course.class);
-                            Log.d("TAG", "OnFollowListener: "+newCourse.getFollowedBy());
                             courses.set(position, newCourse);
                             Objects.requireNonNull(binding.homeRV.getAdapter()).notifyItemChanged(position);
                         }, error -> {

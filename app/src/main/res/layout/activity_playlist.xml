@@ -95,7 +95,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textAppearance="?attr/textAppearanceBody2"
-                                    android:text="Author Name"
                                     android:textSize="12sp" />
 
                                 <androidx.cardview.widget.CardView
@@ -143,7 +142,6 @@
                             android:clickable="true"
                             android:minWidth="0dp"
                             android:padding="4dp"
-                            app:srcCompat="@drawable/ic_more"
                             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
                             tools:layout_conversion_absoluteHeightbsoluteX="36dp"
                             tools:layout_conversion_absoluteWidth="40dp"

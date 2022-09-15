@@ -134,7 +134,6 @@ public class ActivityPlayer extends AppCompatActivity {
                                 comments.remove(comment);
                                 Objects.requireNonNull(binding.comments.getAdapter()).notifyItemRemoved(position);
                                 dialogInterface.dismiss();
-                                finish();
                             }, error -> {
                                 dialogInterface.dismiss();
                                 Toast.makeText(ActivityPlayer.this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
@@ -143,6 +142,54 @@ public class ActivityPlayer extends AppCompatActivity {
                             dialogInterface.dismiss();
                         }).create();
                 dialog.show();
+            }
+
+            @Override
+            public void OnLikeListener(Comment comment, boolean like, int position) {
+                if (like) {
+                    QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?comment=%s", API.COMMENT_ADD_LIKE, comment.get_id()), null, courseRes -> {
+                        Comment newComment = new Gson().fromJson(courseRes.toString(), Comment.class);
+                        comments.set(position, newComment);
+                        Objects.requireNonNull(binding.comments.getAdapter()).notifyItemChanged(position);
+                    }, error -> {
+                        Toast.makeText(ActivityPlayer.this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
+                    }) {
+                        @Override
+                        public byte[] getBody() {
+                            JSONObject object = new JSONObject();
+                            try {
+                                object.put("user", ME.get_id());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            return object.toString().getBytes(StandardCharsets.UTF_8);
+                        }
+                    }).setRetryPolicy(new DefaultRetryPolicy());
+                } else {
+                    QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?comment=%s", API.COMMENT_REMOVE_LIKE, comment.get_id()), null, courseRes -> {
+                        Comment newComment = new Gson().fromJson(courseRes.toString(), Comment.class);
+                        comments.set(position, newComment);
+                        Objects.requireNonNull(binding.comments.getAdapter()).notifyItemChanged(position);
+                    }, error -> {
+                        Toast.makeText(ActivityPlayer.this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
+                    }) {
+                        @Override
+                        public byte[] getBody() {
+                            JSONObject object = new JSONObject();
+                            try {
+                                object.put("user", ME.get_id());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            return object.toString().getBytes(StandardCharsets.UTF_8);
+                        }
+                    }).setRetryPolicy(new DefaultRetryPolicy());
+                }
+            }
+
+            @Override
+            public void OnReplyListener(Comment comment, int position) {
+
             }
         }));
 
