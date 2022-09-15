@@ -61,7 +61,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseView
         holder.binding.courseName.setText(course.getTitle());
         holder.binding.videosCount.setText(String.format(Locale.getDefault(),"%d videos", course.getVideos().size()));
         holder.binding.followersCount.setText(String.format(Locale.getDefault(),"%d followers", course.getFollowedBy().size()));
-        Log.d("TAG", "onBindViewHolder: "+course.getFollowedBy() + " - " + ME.get_id());
+        Log.d("TAG", "onBindViewHolder: "+course.getTitle() + " - " + course.getFollowedBy() + " - " + ME.get_id());
         if (course.getAuthor().equals(ME.get_id())) {
             holder.binding.courseOptions.setImageResource(R.drawable.ic_delete);
         } else {

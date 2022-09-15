@@ -147,9 +147,10 @@ public class PlaylistActivity extends AppCompatActivity {
                             }).create();
                     dialog.show();
                 } else {
-                    if (!course.getFollowedBy().contains(ME.get_id())) {
-                        QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.COURSE_ADD_FOLLOWER, course.get_id()), null, newCourseRes -> {
+                    if (course.getFollowedBy().contains(ME.get_id())) {
+                        QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.COURSE_REMOVE_FOLLOWER, course.get_id()), null, newCourseRes -> {
                             course = new Gson().fromJson(newCourseRes.toString(), Course.class);
+                            binding.courseOptions.setImageResource(R.drawable.ic_subscription_outline);
                         }, error -> {
                             Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
                         }) {
@@ -165,8 +166,9 @@ public class PlaylistActivity extends AppCompatActivity {
                             }
                         }).setRetryPolicy(new DefaultRetryPolicy());
                     } else {
-                        QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.COURSE_REMOVE_FOLLOWER, course.get_id()), null, newCourseRes -> {
+                        QUEUE.add(new JsonObjectRequest(Request.Method.POST, String.format("%s?course=%s", API.COURSE_ADD_FOLLOWER, course.get_id()), null, newCourseRes -> {
                             course = new Gson().fromJson(newCourseRes.toString(), Course.class);
+                            binding.courseOptions.setImageResource(R.drawable.ic_subscriptions_filled);
                         }, error -> {
                             Toast.makeText(this, API.parseVolleyError(error), Toast.LENGTH_SHORT).show();
                         }) {
